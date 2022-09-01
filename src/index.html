@@ -6,14 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Евгения Тарасюк">
   <title>Браузер фильмов</title>
+  
+
+  <link rel="stylesheet" href="./components/Header/Header.css">   
+  <link rel="stylesheet" href="./components/Navigation/Navigation.css">   
+  <link rel="stylesheet" href="./index.css"> 
 </head>
 
 <body >
-  <div class="App">
-    <!-- <header class="header">
-      <img class="header__logo" src="<%=require('./images/logo-mesto.svg')%>"   alt="Логотип Место Россия">
+  <div class="app">
+    <header class="header">
+      <div class = "header__container">
+          <img src="./images/logo.svg" alt="Логотип" />      
+          <nav class="navigation">
+            <ul class="navigation__list">
+              <li class="navigation__link">             
+                  Регистрация
+              </li>
+              <li class="navigation__link navigation__link_signin">
+                 Войти
+              </li>
+            </ul>
+          </nav>
+      </div>
     </header>
-    <main class="content">
+    <!-- <main class="content">
       <section class="profile">
         <div class="profile__left-block">
           <div class="profile__avatar-with-button">
@@ -49,10 +66,10 @@
         </template>
 
       </section>
-    </main>
-    <footer class="footer">
+    </main>-->
+    <!-- <footer class="footer"> 
       <p class="footer__copyright">© 2022 Mesto Russia</p>
-    </footer> -->
+    </footer>  -->
 
 
   <!-- <div class="popup popup_edit-profile">

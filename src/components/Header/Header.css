@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    width: 100%;
+    background-color: #F3C1F8;    
+}
+
+.header__container {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    max-width: 1280px;
+    width: 100%;  
+    padding: 18px 30px;
+    position: relative;
+    box-sizing: border-box;
+}
+
