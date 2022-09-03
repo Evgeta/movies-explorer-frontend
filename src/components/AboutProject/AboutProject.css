@@ -1,0 +1,113 @@
+.about-project {
+    font-family: "Inter", "Arial", sans-serif;
+    background-color: white; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .about-project__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1280px;
+    width: 100%;
+    padding: 110px 70px;
+    box-sizing: border-box;       
+  }
+  
+  .about-project__title {
+    width: 100%;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    line-height: 1.22;
+    border-bottom: 1px solid black;
+    padding-bottom: 23px;
+    margin: 0;
+  }
+  
+  .about-project__thesis-list {
+    width: 100%;
+    display: flex;
+    list-style: none;
+    box-sizing: border-box;
+    padding: 70px 0 110px;
+    gap: 40px;
+    margin: 0;
+  }
+  
+  .about-project__thesis {
+    max-width: 550px;
+  }
+  
+  .about-project__thesis-title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+  
+  .about-project__thesis-content {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.43;
+  }
+  
+  .about-project__timeline {
+    width: 100%;
+    display: flex;
+  }
+  
+  .about-project__backend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    gap: 14px;
+  }
+
+  .about-project__backend-duration {
+    width: 100%;
+    color: white;
+    background-color: black;
+    text-align: center;
+    padding: 9px 14px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+   }
+  
+   .about-project__frontend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    flex-grow: 1;
+  }
+  
+  .about-project__frontend-duration {
+    width: 100%;
+    color: black;
+    background-color: #F2F2F2;
+    text-align: center;
+    padding: 9px 14px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+  }
+  
+  .about-project__stage-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #A0A0A0;
+  }  
