@@ -21,10 +21,9 @@
   .about-project__title {
     width: 100%;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 27px;
+    font-size: 22px;    
     letter-spacing: -0.04em;
-    line-height: 1.22;
+    line-height: 1.23;
     border-bottom: 1px solid black;
     padding-bottom: 23px;
     margin: 0;
