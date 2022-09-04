@@ -43,9 +43,10 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
+    text-align: center;
     line-height: 1.42;
     letter-spacing: -0.04em;
-    margin: 90px 0 0;    
+    margin: 26px 0 0;    
   }
   
   .techs__list {
