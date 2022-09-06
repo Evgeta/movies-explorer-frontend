@@ -34,7 +34,7 @@
     font-size: 28px;
     line-height: 1.21;
     box-sizing: border-box;
-    padding: 15px 80px;  /*?*/
+    padding: 15px 80px 15px;  /*?*/
   }
   
   .search-form__input::placeholder {

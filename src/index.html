@@ -19,12 +19,15 @@
   <link rel="stylesheet" href="./components/Portfolio/Portfolio.css">   
   <link rel="stylesheet" href="./components/Footer/Footer.css">   
   <link rel="stylesheet" href="./components/SearchForm/SearchForm.css">   
+  <link rel="stylesheet" href="./components/MoviesCard/MoviesCard.css">   
+  <link rel="stylesheet" href="./components/MoviesCardList/MoviesCardList.css">   
+  <link rel="stylesheet" href="./components/Movies/Movies.css">   
   
 </head>
 
 <body >
   <div class="app">
-    <header class="header">
+    <!-- <header class="header">
       <div class="header__container">
         <img src="./images/logo.svg" alt="Логотип" />
         <nav class="navigation">
@@ -38,9 +41,9 @@
           </ul>
         </nav>
       </div>
-    </header>
+    </header> -->
 
-    <section class="promo">
+    <!-- <section class="promo">
       <div class="promo__container">
         <div class="promo__project-info">
           <h1 class="promo__title">
@@ -203,6 +206,24 @@
       </div>
     </footer>
 
+  -->
+
+   <header class="header">
+    <div class="header__container">
+      <img src="./images/logo.svg" alt="Логотип" />
+      <nav class="navigation">
+        <ul class="navigation__list">
+          <li class="navigation__link">
+            Регистрация
+          </li>
+          <li class="navigation__link navigation__link_signin">
+            Войти
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
     <section class="search-form">
       <div class="search-form__container">
         <form class="search-form__form">
@@ -216,11 +237,218 @@
           <span class="search-form__text">Короткометражки</span>
         </label>
       </div> 
-    </section>    
+    </section>     
+
+  <section class="movies">  
+    <div class="movies-cardlist">
+      <ul class="movies-cardlist__list">
+        <li class="movies-card">
+          <article class="movies-card__item">
+            <a target="_blank" href="">
+              <img
+                src="./images/movie-image.png"
+                alt="Война искусств"
+                title=`Описание: Война искусств`
+                class="movies-card__image"
+              />
+            </a>
+            <div class="movies-card__description">
+              <h2 class="movies-card__title">Война искусств</h2>
+                <button
+                  type="button"
+                  class="movies-card__button"
+                  title="Сохранить"
+                ></button>            
+            </div>
+            <span class="movies-card__duration">
+              1ч 42м
+            </span>
+          </article>
+        </li>
 
 
+        <li class="movies-card">
+          <article class="movies-card__item">
+            <a target="_blank" href="">
+              <img
+                src="./images/movie-image.png"
+                alt="Война искусств"
+                title=`Описание: Война искусств`
+                class="movies-card__image"
+              />
+            </a>
+            <div class="movies-card__description">
+              <h2 class="movies-card__title">Война искусств</h2>
+                <button
+                  type="button"
+                  class="movies-card__button"
+                  title="Сохранить"
+                ></button>            
+            </div>
+            <span class="movies-card__duration">
+              1ч 42м
+            </span>
+          </article>
+        </li>
 
-    <!-- <main class="content">
+        <li class="movies-card">
+          <article class="movies-card__item">
+            <a target="_blank" href="">
+              <img
+                src="./images/movie-image.png"
+                alt="Война искусств"
+                title=`Описание: Война искусств`
+                class="movies-card__image"
+              />
+            </a>
+            <div class="movies-card__description">
+              <h2 class="movies-card__title">Война искусств</h2>
+                <button
+                  type="button"
+                  class="movies-card__button"
+                  title="Сохранить"
+                ></button>            
+            </div>
+            <span class="movies-card__duration">
+              1ч 42м
+            </span>
+          </article>
+        </li>
+
+
+        <li class="movies-card">
+          <article class="movies-card__item">
+            <a target="_blank" href="">
+              <img
+                src="./images/movie-image.png"
+                alt="Война искусств"
+                title=`Описание: Война искусств`
+                class="movies-card__image"
+              />
+            </a>
+            <div class="movies-card__description">
+              <h2 class="movies-card__title">Война искусств</h2>
+                <button
+                  type="button"
+                  class="movies-card__button"
+                  title="Сохранить"
+                ></button>            
+            </div>
+            <span class="movies-card__duration">
+              1ч 42м
+            </span>
+          </article>
+        </li>
+
+        <li class="movies-card">
+          <article class="movies-card__item">
+            <a target="_blank" href="">
+              <img
+                src="./images/movie-image.png"
+                alt="Война искусств"
+                title=`Описание: Война искусств`
+                class="movies-card__image"
+              />
+            </a>
+            <div class="movies-card__description">
+              <h2 class="movies-card__title">Война искусств</h2>
+                <button
+                  type="button"
+                  class="movies-card__button"
+                  title="Сохранить"
+                ></button>            
+            </div>
+            <span class="movies-card__duration">
+              1ч 42м
+            </span>
+          </article>
+        </li>
+
+
+        <li class="movies-card">
+          <article class="movies-card__item">
+            <a target="_blank" href="">
+              <img
+                src="./images/movie-image.png"
+                alt="Война искусств"
+                title=`Описание: Война искусств`
+                class="movies-card__image"
+              />
+            </a>
+            <div class="movies-card__description">
+              <h2 class="movies-card__title">Война искусств</h2>
+                <button
+                  type="button"
+                  class="movies-card__button"
+                  title="Сохранить"
+                ></button>            
+            </div>
+            <span class="movies-card__duration">
+              1ч 42м
+            </span>
+          </article>
+        </li>
+
+
+        <li class="movies-card">
+          <article class="movies-card__item">
+            <a target="_blank" href="">
+              <img
+                src="./images/movie-image.png"
+                alt="Война искусств"
+                title=`Описание: Война искусств`
+                class="movies-card__image"
+              />
+            </a>
+            <div class="movies-card__description">
+              <h2 class="movies-card__title">Война искусств</h2>
+                <button
+                  type="button"
+                  class="movies-card__button"
+                  title="Сохранить"
+                ></button>            
+            </div>
+            <span class="movies-card__duration">
+              1ч 42м
+            </span>
+          </article>
+        </li>
+
+        <li class="movies-card">
+          <article class="movies-card__item">
+            <a target="_blank" href="">
+              <img
+                src="./images/movie-image.png"
+                alt="Война искусств"
+                title=`Описание: Война искусств`
+                class="movies-card__image"
+              />
+            </a>
+            <div class="movies-card__description">
+              <h2 class="movies-card__title">Война искусств</h2>
+                <button
+                  type="button"
+                  class="movies-card__button"
+                  title="Сохранить"
+                ></button>            
+            </div>
+            <span class="movies-card__duration">
+              1ч 42м
+            </span>
+          </article>
+        </li>
+    
+        
+      </ul>
+        <button class="movies-cardlist__showmore"  
+        >
+          Ещё
+        </button>    
+    </div>
+  </div>
+  </section>
+  
+  <!-- <main class="content">
       <section class="profile">
         <div class="profile__left-block">
           <div class="profile__avatar-with-button">
