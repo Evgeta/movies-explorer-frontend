@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./vendor/normalize.css"> 
   <link rel="stylesheet" href="./vendor/fonts/fonts.css"> 
   <link rel="stylesheet" href="./components/Header/Header.css">   
+  <link rel="stylesheet" href="./components/NavTab/NavTab.css">   
   <link rel="stylesheet" href="./components/Navigation/Navigation.css">   
   <link rel="stylesheet" href="./components/Promo/Promo.css">   
   <link rel="stylesheet" href="./components/AboutProject/AboutProject.css">   
@@ -28,15 +29,15 @@
 
 <body >
   <div class="app">
-    <!-- <header class="header">
+    <!-- <header class="header header_theme_pink">
       <div class="header__container">
         <img src="./images/logo.svg" alt="Логотип" />
-        <nav class="navigation">
-          <ul class="navigation__list">
-            <li class="navigation__link">
+        <nav class="nav-tab">
+          <ul class="nav-tab__list">
+            <li class="nav-tab__link">
               Регистрация
             </li>
-            <li class="navigation__link navigation__link_signin">
+            <li class="nav-tab__link nav-tab__link_signin">
               Войти
             </li>
           </ul>
@@ -209,16 +210,22 @@
 
   -->
 
-   <header class="header">
+   <header class="header header_theme_white">
     <div class="header__container">
       <img src="./images/logo.svg" alt="Логотип" />
       <nav class="navigation">
         <ul class="navigation__list">
+         <div class="navigation__films-block">
           <li class="navigation__link">
-            Регистрация
+            Фильмы
           </li>
+          <li class="navigation__link">
+            Cохранённые фильмы
+          </li>
+          </div>
           <li class="navigation__link navigation__link_signin">
-            Войти
+             Аккаунт
+             <div class="navigation__login-link-image"></div>                        
           </li>
         </ul>
       </nav>

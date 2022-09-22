@@ -1,0 +1,39 @@
+.nav-tab {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-family: "Inter", "Arial", sans-serif;
+    
+  }
+  
+  .nav-tab__list {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    gap: 30px;
+    transition: ease-in-out 0.2s;
+    padding: 0;
+    margin: 0;
+  }
+    
+  .nav-tab__link {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;    
+  }
+  
+  .nav-tab__link:hover {
+    opacity: .6;
+  }
+  
+  .nav-tab__link_signin {
+    color: white;
+    padding: 8px 20px;
+    background-color: black;
+    border-radius: 3px;
+  }
+  

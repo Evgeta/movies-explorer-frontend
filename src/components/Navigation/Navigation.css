@@ -3,19 +3,37 @@
     align-items: center;
     position: relative;
     font-family: "Inter", "Arial", sans-serif;
-    
+    justify-content: space-between; 
+    width: 100%;
+    padding-left: 44px;
   }
   
   .navigation__list {
     display: flex;
     align-items: center;
+    justify-content: space-between; 
     list-style-type: none;
     gap: 30px;
     transition: ease-in-out 0.2s;
     padding: 0;
     margin: 0;
+    z-index: 1;
+    width: 100%;
   }
     
+  .navigation__films-block {
+    display: flex;
+    align-items: center;    
+    list-style-type: none;
+    gap: 30px;
+    transition: ease-in-out 0.2s;
+    padding: 0;
+    margin: 0;
+    z-index: 1;
+  }
+    
+
+
   .navigation__link {
     font-weight: 500;
     font-size: 12px;
@@ -25,15 +43,37 @@
     display: flex;
     align-items: center;    
   }
+
+
+  .navigation__login-link-image {
+    
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;    
+
+    width: 26px;
+    height: 26px;
+    background-color: #F9F9F9;
+    border-radius: 50px; 
+    background-image: url('../../images/login_buton_image.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10px 10px; 
+    margin-left: 7px;
+
+  }
   
   .navigation__link:hover {
     opacity: .6;
   }
   
   .navigation__link_signin {
-    color: white;
-    padding: 8px 20px;
-    background-color: black;
+    
     border-radius: 3px;
+    background: white;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 40px;
+    padding: 3px 3px 3px 11px;
   }
   

@@ -1,8 +1,7 @@
 .header {
     display: flex;
     justify-content: center;
-    width: 100%;
-    background-color: #F3C1F8;    
+    width: 100%;    
 }
 
 .header__container {
@@ -16,3 +15,10 @@
     box-sizing: border-box;
 }
 
+.header_theme_pink {
+    background-color: #F3C1F8;
+  }
+  
+  .header_theme_white {
+    background-color:white;
+  }
