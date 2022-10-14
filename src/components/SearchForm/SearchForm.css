@@ -14,7 +14,7 @@
     position: relative;
     max-width: 1280px;
     width: 100%;
-    padding: 70px 70px 49px;
+    padding: 55px 70px 49px;
     box-sizing: border-box;
   }
 
@@ -100,7 +100,7 @@
     content: '';
     position: absolute;
     background-color: #EBEBEB;
-    border-radius: 10px;
+    border-radius: 20px;
     width: 36px;
     height: 20px;
   }
@@ -119,11 +119,12 @@
     background-color: #F5F5F5;
     width: 16px;
     height: 16px;
-    border: 2px solid white;
+    border: 1px solid white;
     border-radius: 10px;
-    left: 2px;
+    box-sizing: border-box;
+    left: 2px;    
     z-index: 1;
-    transition: ease-in-out 0.2s;  
+    transition: ease-in-out 0.2s;      
   }
   
   .search-form__checkbox:checked + .search-form__switcher {
