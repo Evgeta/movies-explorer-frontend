@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="./components/Movies/Movies.css">   
   <link rel="stylesheet" href="./components/MoviesCardList/MoviesCardList.css">   
   <link rel="stylesheet" href="./components/MoviesCard/MoviesCard.css">   
+  <link rel="stylesheet" href="./components/MoviesCard/MoviesCard.css">   
+  <link rel="stylesheet" href="./components/Register/Register.css">   
 
      
 </head>
@@ -209,7 +211,7 @@
     </footer>
 
   -->
-
+<!-- 
    <header class="header header_theme_white">
     <div class="header__container">
       <img src="./images/logo.svg" alt="Логотип" />
@@ -230,8 +232,41 @@
         </ul>
       </nav>
     </div>
-  </header>
+  </header> -->
 
+  <main class="register">
+    <form class="register__form" name="register">
+      <img src="./images/logo.svg" alt="Логотип" class="register__logo" />
+      <h1 class="register__title">Добро пожаловать!</h1>
+      <div class="register__input-container">
+        <label htmlFor="username" class="register__label">Имя</label>
+        <input name="username" class="register__input" />
+        <span class="register__error"></span>
+      </div>  
+      <div class="register__input-container">
+        <label htmlFor="email" class="register__label">E-mail</label>
+        <input name="email" class="register__input" />
+        <span class="register__error"></span>
+      </div>
+      <div class="register__input-container">
+        <label htmlFor="password" class="register__label">Пароль</label>
+        <input name="password" class="register__input" />
+        <span class="register__error"></span>
+      </div>
+      <button type="submit" class="register__button">
+        Зарегистрироваться
+      </button>
+      <span class="register__already">
+        Уже зарегистрированы?&nbsp;
+        <a class="register__enter-link">
+        Войти
+        </a>
+      </span>
+    </form>
+  </main>
+
+
+<!-- 
     <section class="search-form">
       <div class="search-form__container">
         <form class="search-form__form">
@@ -252,7 +287,7 @@
       <ul class="movies-cardlist__list">
         <li class="movies-card">
           <article class="movies-card__item">
-            <a target="_blank" href="">
+            <a target="_blank" href="" class="movies-card__image-link">
               <img
                 src="./images/movie-image.png"
                 alt="33 слова о дизайне"
@@ -277,7 +312,7 @@
 
         <li class="movies-card">
           <article class="movies-card__item">
-            <a target="_blank" href="">
+            <a target="_blank" href="" class="movies-card__image-link">
               <img
                 src="./images/movie-image.png"
                 alt="Война искусств"
@@ -301,7 +336,7 @@
 
         <li class="movies-card">
           <article class="movies-card__item">
-            <a target="_blank" href="">
+            <a target="_blank" href="" class="movies-card__image-link">
               <img
                 src="./images/movie-image.png"
                 alt="Война искусств"
@@ -326,7 +361,7 @@
 
         <li class="movies-card">
           <article class="movies-card__item">
-            <a target="_blank" href="">
+            <a target="_blank" href="" class="movies-card__image-link">
               <img
                 src="./images/movie-image.png"
                 alt="Война искусств"
@@ -350,32 +385,7 @@
 
         <li class="movies-card">
           <article class="movies-card__item">
-            <a target="_blank" href="">
-              <img
-                src="./images/movie-image.png"
-                alt="Война искусств"
-                title=`Описание: Война искусств`
-                class="movies-card__image"
-              />
-            </a>
-            <div class="movies-card__description">
-              <h2 class="movies-card__title">Война искусств</h2>
-                <button
-                  type="button"
-                  class="movies-card__button movies-card__button_type-saved"
-                  title="Сохранить"
-                ></button>            
-            </div>
-            <span class="movies-card__duration">
-              1ч 42м
-            </span>
-          </article>
-        </li>
-
-
-        <li class="movies-card">
-          <article class="movies-card__item">
-            <a target="_blank" href="">
+            <a target="_blank" href="" class="movies-card__image-link">
               <img
                 src="./images/movie-image.png"
                 alt="Война искусств"
@@ -400,7 +410,32 @@
 
         <li class="movies-card">
           <article class="movies-card__item">
-            <a target="_blank" href="">
+            <a target="_blank" href="" class="movies-card__image-link">
+              <img
+                src="./images/movie-image.png"
+                alt="Война искусств"
+                title=`Описание: Война искусств`
+                class="movies-card__image"
+              />
+            </a>
+            <div class="movies-card__description">
+              <h2 class="movies-card__title">Война искусств</h2>
+                <button
+                  type="button"
+                  class="movies-card__button movies-card__button_type-saved"
+                  title="Сохранить"
+                ></button>            
+            </div>
+            <span class="movies-card__duration">
+              1ч 42м
+            </span>
+          </article>
+        </li>
+
+
+        <li class="movies-card">
+          <article class="movies-card__item">
+            <a target="_blank" href="" class="movies-card__image-link">
               <img
                 src="./images/movie-image.png"
                 alt="Война искусств"
@@ -424,7 +459,7 @@
 
         <li class="movies-card">
           <article class="movies-card__item">
-            <a target="_blank" href="">
+            <a target="_blank" href="" class="movies-card__image-link">
               <img
                 src="./images/movie-image.png"
                 alt="Война искусств"
@@ -455,7 +490,9 @@
     </div>
   </div>
   </section>
-  
+   -->
+
+
   <!-- <main class="content">
       <section class="profile">
         <div class="profile__left-block">
