@@ -1,15 +1,26 @@
-import './Header.css';
+import React from 'react';
+
+import "./Header.css";
+import { Link } from "react-router-dom";
+
+import Navigation from '../Navigation/Navigation';
+
+import logo from '../../images/logo.svg';
 
 function Header() {
-      
-    return (
-      <header className="header">
-        <div className="header__container">
-          
-        </div>
-      </header>
-    );
-  }
-  
-  export default Header;
-  
+  return (
+    <header className="header">
+      <div className="header__container">
+        {/* <Link to="/" className="header__logo-link"> */}
+          <img className="header__logo" src={logo} alt="Логотип" />
+        {/* </Link> */}
+        
+
+        <Navigation />
+        
+      </div>
+    </header>
+  );
+}
+
+export default Header;
