@@ -4,6 +4,7 @@ import './App.css';
 
 import Header from '../Header/Header';
 import Promo from '../Promo/Promo';
+import AboutProject from '../AboutProject/AboutProject';
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <div className="app">
          <Header /> 
          <Promo/>
+         <AboutProject/>
 
 
       {/* <Switch> 
