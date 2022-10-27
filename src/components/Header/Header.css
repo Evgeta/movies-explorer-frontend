@@ -22,3 +22,15 @@
   .header_theme_white {
     background-color:white;
   }
+
+  @media screen and (max-width: 768px) {
+    .header__container {
+      padding: 18px 30px;
+    }
+  }
+  
+  @media screen and (max-width: 425px) {
+    .header__container {
+      padding: 18px 14px;
+    }
+ }

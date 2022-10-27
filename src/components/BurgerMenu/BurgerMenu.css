@@ -1,0 +1,17 @@
+.burger-menu {
+    display: none;
+}
+  
+@media screen and (max-width: 768px) {
+  
+    .burger-menu {
+      display: block;
+      width: 44px;
+      height: 44px;
+      background-image: url(../../images/burger-menu-icon.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      border: 0;
+      background-color: transparent;
+    }      
+  }

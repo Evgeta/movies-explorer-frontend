@@ -4,6 +4,8 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 
 import Navigation from '../Navigation/Navigation';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
+
 
 import logo from '../../images/logo.svg';
 
@@ -17,7 +19,7 @@ function Header() {
         
 
         <Navigation />
-        
+        <BurgerMenu />
       </div>
     </header>
   );
