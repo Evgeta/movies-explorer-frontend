@@ -4,35 +4,35 @@ import './Techs.css';
 
 function Techs() {
   return (
-    <section class="techs">
-      <div class="techs__container">
-        <h2 class="techs__title">Технологии</h2>
-        <h3 class="techs__quantity">7 технологий</h3>
-        <p class="techs__description">
+    <section className="techs">
+      <div className="techs__container">
+        <h2 className="techs__title">Технологии</h2>
+        <h3 className="techs__quantity">7 технологий</h3>
+        <p className="techs__description">
           На курсе веб-разработки мы освоили технологии, которые применили в
           дипломном проекте.
         </p>
-        <ul class="techs__list">
-          <li class="techs__list-item">
-            <p class="techs__name">HTML</p>
+        <ul className="techs__list">
+          <li className="techs__list-item">
+            <p className="techs__name">HTML</p>
           </li>
-          <li class="techs__list-item">
-            <p class="techs__name">CSS</p>
+          <li className="techs__list-item">
+            <p className="techs__name">CSS</p>
           </li>
-          <li class="techs__list-item">
-            <p class="techs__name">JS</p>
+          <li className="techs__list-item">
+            <p className="techs__name">JS</p>
           </li>
-          <li class="techs__list-item">
-            <p class="techs__name">React</p>
+          <li className="techs__list-item">
+            <p className="techs__name">React</p>
           </li>
-          <li class="techs__list-item">
-            <p class="techs__name">Git</p>
+          <li className="techs__list-item">
+            <p className="techs__name">Git</p>
           </li>
-          <li class="techs__list-item">
-            <p class="techs__name">Express.js</p>
+          <li className="techs__list-item">
+            <p className="techs__name">Express.js</p>
           </li>
-          <li class="techs__list-item">
-            <p class="techs__name">mongoDB</p>
+          <li className="techs__list-item">
+            <p className="techs__name">mongoDB</p>
           </li>
         </ul>
       </div>

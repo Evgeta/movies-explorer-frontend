@@ -6,15 +6,15 @@ import './AboutMe.css';
 
 function AboutMe() {
   return (
-    <section class="about-me">
-    <div class="about-me__container">
-        <h2 class="about-me__title">Студент</h2>
+    <section className="about-me">
+    <div className="about-me__container">
+        <h2 className="about-me__title">Студент</h2>
       
-      <div class="about-me__text-container">
-        <div class="about-me__content">
-          <h3 class="about-me__name">Евгения</h3>
-          <p class="about-me__specialization">Фронтенд-разработчик</p>
-          <p class="about-me__text">
+      <div className="about-me__text-container">
+        <div className="about-me__content">
+          <h3 className="about-me__name">Евгения</h3>
+          <p className="about-me__specialization">Фронтенд-разработчик</p>
+          <p className="about-me__text">
             Я обожаю IT-технологии!
             Закончила университет по специальности "Прикладной математик, системный программист", но судьба занесла в
             "админку" и "обучение".
@@ -25,20 +25,18 @@ function AboutMe() {
             Спасибо команде Яндекса за интересное обучение! Они - молодцы.
             </p>
           
-            <ul class="about-me__socials">
+            <ul className="about-me__socials">
               <li>
-                <a href="https://github.com/Evgeta" target="_blank" class="about-me__social-link">
+                <a href="https://github.com/Evgeta" target="_blank" className="about-me__social-link">
                   Github
                 </a>
               </li>
             </ul>
         </div>
-        <img class="about-me__avatar" src={avatar} alt="Фотография Евгении Тарасюк" />
+        <img className="about-me__avatar" src={avatar} alt="Фотография Евгении Тарасюк" />
       </div>
     </div>
   </section>
-
-    
   );
 }
 

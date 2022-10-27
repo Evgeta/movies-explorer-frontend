@@ -4,21 +4,21 @@ import './Footer.css';
 
 function Footer() {
   return (
-    <footer class="footer">
-    <div class="footer__container">
-      <h2 class="footer__title">
+    <footer className="footer">
+    <div className="footer__container">
+      <h2 className="footer__title">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h2>
-      <div class="footer__info">
-        <p class="footer__copyright">&copy; {(new Date()).getFullYear()}</p>
-        <ul class="footer__links-list">
+      <div className="footer__info">
+        <p className="footer__copyright">&copy; {(new Date()).getFullYear()}</p>
+        <ul className="footer__links-list">
           <li>
-            <a href="https://practicum.yandex.ru/" target="_blank" class="footer__link">
+            <a href="https://practicum.yandex.ru/" target="_blank" className="footer__link">
               Яндекс.Практикум
             </a>
           </li>
           <li>
-            <a href="https://github.com/evgeta" target="_blank" class="footer__link">
+            <a href="https://github.com/evgeta" target="_blank" className="footer__link">
               Github
             </a>
           </li>
