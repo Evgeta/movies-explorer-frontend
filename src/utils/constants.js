@@ -1,5 +1,6 @@
-//настройка доступа к API
- //export const baseUrl = 'http://localhost:3000';
+ //общий бекэнд, не требующий аутентификации
+ export const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
- export const baseUrl = 'https://api.mesto.evgeta.nomoredomains.sbs';
+
+ 
 
