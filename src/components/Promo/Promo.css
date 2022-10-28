@@ -1,7 +1,8 @@
 .promo {
     display: flex;
     justify-content: center;
-    width: 100%;
+    position: relative;
+    width: 100%;    
     background-color: #F3C1F8;    
     font-family: "Inter", "Arial", sans-serif;
   }

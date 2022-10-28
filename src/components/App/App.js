@@ -1,14 +1,16 @@
 import React from 'react';
 
+import {
+  Route,
+  Switch,
+} from 'react-router-dom';
+
 import './App.css';
 
 import Header from '../Header/Header';
-import Promo from '../Promo/Promo';
-import AboutProject from '../AboutProject/AboutProject';
-import Techs from '../Techs/Techs';
-import AboutMe from '../AboutMe/AboutMe';
-import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
 
 function App() {
 
@@ -16,11 +18,10 @@ function App() {
     return (
       <div className="app">
          <Header /> 
-         <Promo/>
-         <AboutProject/>
-         <Techs/>
-         <AboutMe/>
-         <Portfolio/>
+         <Switch>
+           <Route exact path="/" component={Main}/>
+           <Route exact path="/movies" component={Movies}/> 
+         </Switch>
          <Footer/>
 
 
