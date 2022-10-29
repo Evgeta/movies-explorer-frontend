@@ -13,18 +13,16 @@ function Register() {
           <h1 className="register__form-title">Добро пожаловать!</h1>
           <div className="register__form-fieldset">          
             <label className="register__form-label" htmlFor="name">Имя</label>
-            <input className="register__form-input" name="username" type="text" value=""/>
-            <span className="register__error"></span>            
+            <input className="register__form-input" name="username" type="text"/>           
           </div>
-          <div classNameName="register__form-fieldset">
+          <div className="register__form-fieldset">
             <label className="register__form-label" htmlFor="email">E-mail</label>
-            <input className="register__form-input" name="email" type="text" value=""/>
-            <span className="register__error"></span>            
+            <input className="register__form-input" name="email" type="text"/>
           </div>        
           <div className="register__form-fieldset">
             <label className="register__form-label" htmlFor="password">Пароль</label>
-            <input className="register__form-input" name="password" type="text" value=""/>
-            <span className="register__error"></span>            
+            <input className="register__form-input" name="password" type="text"/>
+            <span className="register__error">Что-то пошло не так...</span>            
           </div>        
          <div className="register__form-footer">
            <button type="submit" className="register__button">Зарегистрироваться</button>

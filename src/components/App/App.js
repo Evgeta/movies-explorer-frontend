@@ -28,8 +28,7 @@ function App() {
 
 return (
       <div className="app">
-         {/* <Header loggedIn={loggedIn}/> */}
-         <Route exact path={headerShowRoutes}>
+          <Route exact path={headerShowRoutes}>
             <Header
               loggedIn={loggedIn}              
             />
@@ -39,13 +38,13 @@ return (
            <Route exact path="/movies" component={Movies}/> 
            <Route exact path="/signup">
                 <Register
-                  // isLoggedIn={loggedIn}                  
+                  // loggedIn={loggedIn}                  
                 />
                 </Route>
          </Switch>
          <Route exact path={footerShowRoutes}>
             <Footer/>
-          </Route>
+         </Route>
          
 
 
