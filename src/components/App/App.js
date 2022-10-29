@@ -3,6 +3,7 @@ import React,  { useState } from 'react';
 import {
   Route,
   Switch,
+  Redirect,
 } from 'react-router-dom';
 
 import './App.css';
@@ -12,6 +13,7 @@ import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import Register from '../Register/Register';
+import Login from '../Login/Login';
 
 import {
   headerShowRoutes,
@@ -41,6 +43,13 @@ return (
                   // loggedIn={loggedIn}                  
                 />
                 </Route>
+           <Route exact path="/signin">
+              {!loggedIn ? (
+                <Login/>
+              ) : (
+                <Redirect to='/' />
+              )}
+           </Route>
          </Switch>
          <Route exact path={footerShowRoutes}>
             <Footer/>

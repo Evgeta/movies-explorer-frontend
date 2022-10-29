@@ -13,7 +13,12 @@ function NavTab() {
               >Регистрация
               </Link>
               </li>
-              <li className="nav-tab__link nav-tab__link_signin">Войти</li>
+              <li>
+              <Link className="nav-tab__link nav-tab__link_signin"
+                to="/signin">
+                Войти
+              </Link>
+              </li>
             </ul>
           </nav>   
     );
