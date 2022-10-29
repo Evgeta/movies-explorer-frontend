@@ -11,22 +11,42 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
+import Register from '../Register/Register';
+
+import {
+  headerShowRoutes,
+  footerShowRoutes   
+} from '../../utils/constants.js';
 
 function App() {
 
-// const [loggedIn, setLoggedIn] = useState(false);  //имитация того, что пользователь не прошел аутентификацию
- const [loggedIn, setLoggedIn] = useState(true);   //имитация того, что пользователь прошел аутентификацию
-console.log('loggedIn в App');
-console.log(loggedIn);
+ const [loggedIn, setLoggedIn] = useState(false);  //имитация того, что пользователь не прошел аутентификацию
+// const [loggedIn, setLoggedIn] = useState(true);   //имитация того, что пользователь прошел аутентификацию
+
+// console.log('loggedIn в App');
+// console.log(loggedIn);
 
 return (
       <div className="app">
-         <Header loggedIn={loggedIn}/> 
+         {/* <Header loggedIn={loggedIn}/> */}
+         <Route exact path={headerShowRoutes}>
+            <Header
+              loggedIn={loggedIn}              
+            />
+          </Route>
          <Switch>
            <Route exact path="/" component={Main}/>
            <Route exact path="/movies" component={Movies}/> 
+           <Route exact path="/signup">
+                <Register
+                  // isLoggedIn={loggedIn}                  
+                />
+                </Route>
          </Switch>
-         <Footer/>
+         <Route exact path={footerShowRoutes}>
+            <Footer/>
+          </Route>
+         
 
 
       {/* <Switch> 
