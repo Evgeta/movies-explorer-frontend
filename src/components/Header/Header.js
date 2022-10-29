@@ -15,8 +15,8 @@ function Header({
 }) {
 
   const location = useLocation().pathname;
-  console.log('loggedIn');
-  console.log(loggedIn);
+  // console.log('loggedIn');
+  // console.log(loggedIn);
   
   return (
     <header className={`header ${location === '/' ? 'header_theme_pink' : ''}`}>

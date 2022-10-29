@@ -14,8 +14,8 @@ import Movies from '../Movies/Movies';
 
 function App() {
 
- const [loggedIn, setLoggedIn] = useState(false);  //имитация того, что пользователь не прошел аутентификацию
-//const [loggedIn, setLoggedIn] = useState(true);   //имитация того, что пользователь прошел аутентификацию
+// const [loggedIn, setLoggedIn] = useState(false);  //имитация того, что пользователь не прошел аутентификацию
+ const [loggedIn, setLoggedIn] = useState(true);   //имитация того, что пользователь прошел аутентификацию
 console.log('loggedIn в App');
 console.log(loggedIn);
 
