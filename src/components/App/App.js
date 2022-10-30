@@ -14,6 +14,7 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
 
 import {
   headerShowRoutes,
@@ -22,8 +23,8 @@ import {
 
 function App() {
 
- const [loggedIn, setLoggedIn] = useState(false);  //имитация того, что пользователь не прошел аутентификацию
-// const [loggedIn, setLoggedIn] = useState(true);   //имитация того, что пользователь прошел аутентификацию
+// const [loggedIn, setLoggedIn] = useState(false);  //имитация того, что пользователь не прошел аутентификацию
+ const [loggedIn, setLoggedIn] = useState(true);   //имитация того, что пользователь прошел аутентификацию
 
 // console.log('loggedIn в App');
 // console.log(loggedIn);
@@ -50,6 +51,9 @@ return (
                 <Redirect to='/' />
               )}
            </Route>
+           <Route path="/profile">
+              <Profile/>
+            </Route>
          </Switch>
          <Route exact path={footerShowRoutes}>
             <Footer/>

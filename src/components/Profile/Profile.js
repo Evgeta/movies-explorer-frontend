@@ -1,5 +1,4 @@
 import React from "react";
-import { useForm } from 'react-hook-form';
 
 import './Profile.css';
 
@@ -14,7 +13,7 @@ function Profile() {
             <input className="profile__form-input"  name="username" type="text" value="Виталий"/>
             <span class="profile__error"></span>            
           </div>
-          <div className="profile__form-fieldset">
+          <div className="profile__form-fieldset profile__form-fieldset_no_border">
             <label className="profile__form-label" htmlFor="email">E-mail</label>
             <input className="profile__form-input" name="email" type="text" value="pochta@yandex.ru"/>
             <span class="profile__error"></span>            

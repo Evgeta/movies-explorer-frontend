@@ -8,7 +8,8 @@
     align-items: center;
     padding: 74px 30px 30px;
     box-sizing: border-box;
-    min-height: calc(100vh - 74px);
+    min-height: calc(100vh - 74px);    
+    justify-content: space-between;
   }
   
   .profile__form {
@@ -23,38 +24,46 @@
     font-weight: 500;
     font-size: 24px;
     line-height: 1.21;
-    margin: 0;
+    margin: 0 0 113px;
+    text-align: center;    
   }
   
   .profile__form-fieldset {
     display: flex;
-    flex-direction: column;
-    width: 100%;        
+    flex-direction: row;
+    justify-content: space-between;    
+    width: 100%;     
+    border-bottom: 1px solid #E8E8E8;
   }
   
-  .profile__profile__form-label {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    position: relative;
+  .profile__form-fieldset_no_border {
+    border-bottom: none;
+  }
+  
+  .profile__form-label {
+    padding: 6px 0;
     font-weight: 500;
     font-size: 11px;
-    line-height: 1.21;
+    line-height: 1.18;
     color: black;
+    text-align: left;
+    flex-basis: 15%;
+    flex-grow: .2; 
+    margin-top: 10px;
   }
 
   .profile__form-input {
-    /* padding: 6px 0;
+    padding: 6px 0;
     box-sizing: border-box;
     border-style: none;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 1.21;
-    background-color: #F9F9F9;
+    font-size: 11px;
+    line-height: 1.18;    
     color: black;
-    border-radius: 8px;*/
     margin-top: 10px;
+    outline: none;
+    text-align: right;
+    flex-grow: .8;
   }
       
   .profile__error {
@@ -65,21 +74,29 @@
     left: 0;
   }
   
+  .profile__form-footer{
+    margin: 220px 0 0; 
+  }
+
   .profile__button {
     border-style: none;
-    background-color: black;
-    border-radius: 3px;
-    font-weight: 500;
-    color: white;
-    font-size: 14px;
-    line-height: 1.21;
-    width: 396px;
-    height: 45px;
-    padding: 14px 0;
+    background-color:white;;
+    font-weight: 400;
+    color: black;
+    font-size: 13px;
+    line-height: 1.23;
+    width: 410px;
+    height: 16px;    
     box-sizing: border-box;
     cursor: pointer;   
-    margin-top: 69px;
+    padding: 0;
   }
+
+  .profile__button-logout {
+    color: #FF4062;
+    margin: 16px 0 0;       
+  }
+
   
   .profile__button:hover {
     opacity: .7;

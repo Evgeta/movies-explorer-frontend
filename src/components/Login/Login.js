@@ -28,7 +28,7 @@ function Login() {
            <button type="submit" className="login__button">Войти</button>
            <span className="login__already">
            Ещё не зарегистрированы?&nbsp;
-           <Link to='/signup' className="login__link">
+            <Link to='/signup' className="login__register-link">
                 Регистрация
             </Link>
             </span>
