@@ -5,13 +5,11 @@ import { Link, useLocation } from "react-router-dom";
 
 import Navigation from '../Navigation/Navigation';
 import NavTab from '../NavTab/NavTab';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
-
 
 import logo from '../../images/logo.svg';
 
 function Header({
-  loggedIn,
+  loggedIn, onClickBurger, isBurgerMenuOpened 
 }) {
 
   const location = useLocation().pathname;
@@ -31,11 +29,16 @@ function Header({
        )}
       {!loggedIn &&
        <>
-        <NavTab />
-        <BurgerMenu />
+        <NavTab
+          
+           onClickBurger={onClickBurger}
+           isBurgerMenuOpened={isBurgerMenuOpened}
+        />        
        </>}
-
-      {loggedIn && <Navigation />  }
+      {loggedIn && <Navigation
+         onClickBurger={onClickBurger}
+         isBurgerMenuOpened={isBurgerMenuOpened}
+      />  }
       </div>
     </header>
   );

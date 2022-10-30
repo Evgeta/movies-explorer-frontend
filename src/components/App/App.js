@@ -28,6 +28,13 @@ function App() {
  const [loggedIn, setLoggedIn] = useState(true);   //имитация того, что пользователь прошел аутентификацию
  const [isLoading, setIsLoading] = React.useState(true); //состояние прелоадера
 
+ const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false);  //контроль состояния окна бургер-меню
+
+ // нажатие на иконку бургер-меню
+ function handleBurgerMenuClick() {
+  setIsBurgerOpened(!isBurgerMenuOpened);
+}
+
 // console.log('loggedIn в App');
 // console.log(loggedIn);
 
@@ -35,7 +42,9 @@ return (
       <div className="app">
           <Route exact path={headerShowRoutes}>
             <Header
-              loggedIn={loggedIn}              
+              loggedIn={loggedIn}
+              onClickBurger={handleBurgerMenuClick}              
+              isBurgerMenuOpened={isBurgerMenuOpened}
             />
           </Route>
          <Switch>

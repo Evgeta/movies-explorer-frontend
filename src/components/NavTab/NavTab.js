@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 
 import './NavTab.css';
 
-function NavTab() {
+function NavTab( {loggedIn} ) {
     return (
+      !loggedIn &&
           <nav className="nav-tab">
             <ul className="nav-tab__list">
               <li>
