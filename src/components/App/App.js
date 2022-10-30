@@ -26,6 +26,7 @@ function App() {
 
 // const [loggedIn, setLoggedIn] = useState(false);  //имитация того, что пользователь не прошел аутентификацию
  const [loggedIn, setLoggedIn] = useState(true);   //имитация того, что пользователь прошел аутентификацию
+ const [isLoading, setIsLoading] = React.useState(true); //состояние прелоадера
 
 // console.log('loggedIn в App');
 // console.log(loggedIn);
@@ -39,7 +40,9 @@ return (
           </Route>
          <Switch>
            <Route exact path="/" component={Main}/>
-           <Route exact path="/movies" component={Movies}/> 
+           <Route exact path="/movies" 
+               component={Movies}
+               isLoading={isLoading}/> 
            <Route exact path="/signup">
                 <Register
                   // loggedIn={loggedIn}                  
