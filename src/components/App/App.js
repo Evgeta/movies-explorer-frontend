@@ -15,6 +15,7 @@ import Movies from '../Movies/Movies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
 
 import {
   headerShowRoutes,
@@ -54,6 +55,9 @@ return (
            <Route path="/profile">
               <Profile/>
             </Route>
+            <Route path="*">
+              <NotFoundPage/>
+            </Route>             
          </Switch>
          <Route exact path={footerShowRoutes}>
             <Footer/>
