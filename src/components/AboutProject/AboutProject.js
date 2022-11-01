@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import './AboutProject.css';
+import "./AboutProject.css";
 
 function AboutProject() {
   return (
@@ -17,7 +17,6 @@ function AboutProject() {
               функциональности и финальные доработки.
             </p>
           </li>
-
           <li className="about-project__thesis">
             <h3 className="about-project__thesis-title">
               На выполнение диплома ушло 5 недель
