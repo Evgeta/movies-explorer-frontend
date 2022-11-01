@@ -171,7 +171,7 @@
     .about-me__title {
       font-size: 18px;
       line-height: 1.22;
-      padding-bottom: 28px;
+      padding-bottom: 28px;      
     }
 
     .about-me__specialization {
@@ -186,6 +186,10 @@
     }
   
     .about-me__socials {
+      margin-top: 40px;
+    }
+
+    .about-me__name {
       margin-top: 40px;
     }
 
