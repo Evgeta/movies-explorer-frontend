@@ -15,7 +15,7 @@ function Promo() {
           <p className="promo__description">
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </p>
-          <a href="https://practicum.yandex.ru/web/" target="_blank" className="promo__learn-more-button">
+          <a href="https://practicum.yandex.ru/web/" target="_blank" rel="noopener noreferrer" className="promo__learn-more-button">
             Узнать больше
           </a>
         </div>

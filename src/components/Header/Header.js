@@ -28,7 +28,7 @@ function Header({
         <Navigation
          onClickBurger={onClickBurger}
          isBurgerMenuOpened={isBurgerMenuOpened}
-         isLanding = {(location == '/')}
+         isLanding = {(location === '/')}
       />  
         
         </>
