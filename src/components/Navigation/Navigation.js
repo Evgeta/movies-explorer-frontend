@@ -6,7 +6,7 @@ import './Navigation.css';
 
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
-function Navigation({ isBurgerMenuOpened, onClickBurger }) {
+function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
 
   const activeLink = `navigation__link_active_${isBurgerMenuOpened ? 'mobile' : 'desktop'}`;
 
@@ -17,8 +17,9 @@ function Navigation({ isBurgerMenuOpened, onClickBurger }) {
   return (
       <nav className={`navigation navigation_state_${isBurgerMenuOpened ? 'opened' : 'closed'}`}
            onClick={isBurgerMenuOpened ? onClickBurger : undefined}>
-      <ul className={`navigation__list 
-                      navigation__list_state_${isBurgerMenuOpened ? 'opened' : 'closed'}`} 
+      {!isLanding && <BurgerMenu isBurgerMenuOpened={isBurgerMenuOpened} onClickBurger={onClickBurger}/>}
+      <ul className={`navigation__list  navigation__list_logged
+                      navigation__list_state_${isBurgerMenuOpened ? 'opened' : 'closed'}`                    } 
           onClick={handleOverlayClick}>
        <div className="navigation__films-block">
        {isBurgerMenuOpened && (

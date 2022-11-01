@@ -51,14 +51,12 @@
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    transition: ease-in-out 0.2s;
-    /* padding: 0; */
     margin: 10px 0 0;
     padding: 0;
     cursor: pointer;
+    transition: ease-in-out 0.2s;    
   }
-  
-    
+      
   .movies-card__duration {
     font-weight: 400;
     font-size: 11px;
@@ -76,6 +74,29 @@
   .movies-card__button_type_saved {
     background-image: url('../../images/saved.svg');    
   }
+    
   
-  
-  
+@media screen and (max-width: 768px) {
+
+  .movies-card__image-link {
+    max-height: 190px;    
+  }
+
+  .movies-card__title {  
+    max-width: 295px;    
+  }
+}
+
+ 
+@media screen and (max-width: 320px) {
+
+  .movies-card__image-link {
+    max-height: 168px;    
+  }
+
+  .movies-card__title {  
+    max-width: 240px;    
+  }
+
+}
+

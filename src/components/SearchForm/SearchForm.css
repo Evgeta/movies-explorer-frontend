@@ -35,6 +35,7 @@
     line-height: 1.21;
     box-sizing: border-box;
     padding: 15px 80px 15px;  /*?*/
+    outline: none;
   }
   
   .search-form__input::placeholder {
