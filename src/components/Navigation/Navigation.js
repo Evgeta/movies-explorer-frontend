@@ -54,7 +54,7 @@ function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
         <li>
         <NavLink
           exact to="/profile"
-          className="navigation__link navigation__link_profile"
+          className="navigation__link navigation__link_type_profile"
           activeClassName={activeLink}>
            Аккаунт
            <div className="navigation__profile-link-image"></div>     
