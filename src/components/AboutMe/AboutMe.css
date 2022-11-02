@@ -109,6 +109,7 @@
     letter-spacing: -0.04em;
     max-width: 348px;
   }
+
   .about-me__specialization {
     font-size: 12px;
     line-height: 1.5;
@@ -174,7 +175,7 @@
     font-size: 40px;
     font-weight: 400;
     line-height: 1;
-    letter-spacing: -0.04em;    
+    letter-spacing: -0.04em;
   }
 
   .about-me__specialization {
@@ -200,6 +201,5 @@
     width: 255px;
     height: 307px;
   }
-
 
 }

@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import './Promo.css';
-import landinglogo from '../../images/landing-logo.svg';
-
+import "./Promo.css";
+import landinglogo from "../../images/landing-logo.svg";
 
 function Promo() {
   return (
@@ -15,11 +14,20 @@ function Promo() {
           <p className="promo__description">
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </p>
-          <a href="https://practicum.yandex.ru/web/" target="_blank" rel="noopener noreferrer" className="promo__learn-more-button">
+          <a
+            href="https://practicum.yandex.ru/web/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="promo__learn-more-button"
+          >
             Узнать больше
           </a>
         </div>
-        <img src={landinglogo} alt="логотип - Воды земного шара из надписей WEB" className="promo__logo" />
+        <img
+          src={landinglogo}
+          alt="логотип - Воды земного шара из надписей WEB"
+          className="promo__logo"
+        />
       </div>
     </section>
   );
