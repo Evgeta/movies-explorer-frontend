@@ -82,7 +82,7 @@
     padding-bottom: 21px;
   }
 
-  .footer__navigation {
+  .footer__info {
     flex-direction: column-reverse;
     align-items: center;
     gap: 30px;
