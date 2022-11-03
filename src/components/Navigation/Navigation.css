@@ -117,12 +117,10 @@
   }
 
   .navigation__list_state_opened {
-    right: 0;
-    visibility: visible;
+      visibility: visible;
   }
 
-  .navigation__list_state_closed {
-    right: -100%;
+  .navigation__list_state_closed {  
     visibility: hidden;
   }
 

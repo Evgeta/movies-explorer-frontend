@@ -25,7 +25,6 @@
 .burger-menu_on {
   background-image: url(../../images/burger-menu-close-icon.svg);
   transition: ease-in-out 0.2s;
-
   top: 20px;
   right: 66px;
 }
@@ -37,8 +36,10 @@
 }
 
 @media screen and (max-width: 320px) {
+
   .burger-menu {
-    right: 23px;
-    width: 22px;
+    right: 0px;    
+    width: 38px;
+    height: 38px;
   }
 }
