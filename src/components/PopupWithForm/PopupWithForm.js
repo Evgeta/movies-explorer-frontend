@@ -1,5 +1,7 @@
 import React from 'react';
 
+import "./PopupWithForm.css";
+
 function PopupWithForm({title='', name, isOpen, children, buttonText='', onClose, onSubmit}) { 
 
   function handleMouseDownOnOverlayAndCrossButton(evt) {

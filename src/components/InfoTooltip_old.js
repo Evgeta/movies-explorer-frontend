@@ -1,5 +1,5 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
+import PopupWithForm from '../components/PopupWithForm/PopupWithForm';
 
 import successIcon from './../images/success_registration.svg';
 import errorIcon from './../images/registration_error.svg';

@@ -127,3 +127,83 @@
 .popup__button_disabled:hover {
     background-color: #FFFFFF;
 }
+
+.popup__error {
+    width: 238px;
+    font-size: 12px;
+    line-height: 1.25;
+    color: #FF0000;
+    padding: 5px 0 0 0;
+    height: 30px;
+    opacity: 0;
+}
+
+@media (min-width: 768px) {
+    .popup__error {
+        width: 358px;
+    }
+}
+
+.popup__error_visible {
+    opacity: 1;
+}
+
+.popup__fieldset {
+    padding: 0;
+    margin: 0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup__figure {
+    margin: 0;
+}
+
+.popup__icon {
+    margin: 60px auto 0 auto;
+}
+
+.popup__big-image {
+    max-width: 75vw;
+    max-height: 75vh;
+}
+
+.popup__image-container {
+    display: flex;
+    position: relative;
+}
+
+
+.popup__input {
+    width: 238px;
+    height: 27px;
+    font-size: 14px;
+    line-height: 1.21;
+    color: black;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+    .popup__input {
+        width: 358px;
+    }
+}
+
+.popup__input_type_error {
+    border-bottom-color: red;
+}
+
+.popup__text {
+    width: 358px;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.2;
+    color: black;
+    margin: 32px 0 60px 0;
+    text-align: center;
+}
