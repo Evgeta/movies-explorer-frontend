@@ -89,6 +89,7 @@
   object-fit: cover;
   border-radius: 10px;
   box-sizing: border-box;
+  margin-left: 15px;
 }
 
 @media screen and (max-width: 800px) {
@@ -200,6 +201,7 @@
   .about-me__avatar {
     width: 255px;
     height: 307px;
+    margin-left: 0;
   }
 
 }
