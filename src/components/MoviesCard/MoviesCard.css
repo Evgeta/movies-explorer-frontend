@@ -85,6 +85,12 @@
   }
 }
 
+@media screen and (max-width: 425px) {
+    .movies-card__image-link {
+      max-height: 200px;
+    }  
+}
+
 @media screen and (max-width: 320px) {
   
   .movies-card__image-link {
