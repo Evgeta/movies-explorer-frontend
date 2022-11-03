@@ -36,7 +36,7 @@ function Login() {
             Войти
           </button>
           <span className="login__already">
-            Ещё не зарегистрированы?&nbsp;
+            Ещё не зарегистрированы?&nbsp;&nbsp;
             <Link to="/signup" className="login__register-link">
               Регистрация
             </Link>

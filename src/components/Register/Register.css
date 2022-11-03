@@ -145,7 +145,7 @@
     padding-bottom: 60px;
   }
 
-  .register__footer {
+  .register__form-footer {
     margin: 157px 0 0;
   }
 
@@ -153,7 +153,6 @@
     width: 260px;
     font-size: 12px;
     line-height: 1.25;
-    margin-top: 157px;
   }
 
   .register__enter-link {

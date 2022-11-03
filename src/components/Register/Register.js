@@ -9,11 +9,13 @@ function Register() {
   return (
     <main className="register">
       <form className="register__form" name="register">
-        <img
-          src={logo}
-          alt="Логотип Movies Explorer"
-          className="register__logo"
-        />
+        <Link to="/" className="register__link">
+          <img
+            src={logo}
+            alt="Логотип Movies Explorer"
+            className="register__logo"
+          />
+        </Link>
         <h1 className="register__form-title">Добро пожаловать!</h1>
         <div className="register__form-fieldset">
           <label className="register__form-label" htmlFor="name">
