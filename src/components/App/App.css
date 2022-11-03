@@ -10,7 +10,7 @@
     align-items: center;
     flex-direction: column;    
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 
     font-family: "Inter", "Arial", sans-serif;
     -moz-osx-font-smoothing: grayscale;

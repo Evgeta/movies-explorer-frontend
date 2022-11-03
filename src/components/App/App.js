@@ -8,6 +8,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
@@ -27,9 +28,6 @@ function App() {
     setIsBurgerOpened(!isBurgerMenuOpened);
   }
 
-  // console.log('loggedIn в App');
-  // console.log(loggedIn);
-
   return (
     <div className="app">
       <Route exact path={headerShowRoutes}>
@@ -42,6 +40,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/movies" component={Movies} isLoading={isLoading} />
+        <Route exact path="/saved-movies" component={SavedMovies} isLoading={isLoading} />
         <Route exact path="/signup">
           <Register
           // loggedIn={loggedIn}
@@ -59,21 +58,7 @@ function App() {
       </Switch>
       <Route exact path={footerShowRoutes}>
         <Footer />
-      </Route>
-
-      {/* <Switch> 
-      <ProtectedRoute
-              exact path="/"
-              component={Main}
-            >
-        </ProtectedRoute>
-        <Route path="/sign-in">
-          <Login handleLogin={handleLogin}/>
-        </Route>
-        <Route path="/sign-up">
-          <Register handleRegistration={handleRegistration}/>
-        </Route>
-     </Switch>    */}
+      </Route>   
     </div>
   );
 }

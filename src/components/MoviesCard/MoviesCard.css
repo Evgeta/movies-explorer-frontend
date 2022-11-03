@@ -83,11 +83,6 @@
   .movies-card__title {
     max-width: 295px;
   }
-  
-  /* .movies-card__image {
-    min-height: 190px;
-  } */
-
 }
 
 @media screen and (max-width: 320px) {
@@ -101,9 +96,5 @@
     font-size: 12px;
     line-height: 1.25;
   }
-/* 
-  .movies-card__image {
-    min-height: 168px;
-  } */
 
 }

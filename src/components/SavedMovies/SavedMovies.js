@@ -4,11 +4,11 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 
-import "./Movies.css";
+import "./SavedMovies.css";
 
-function Movies(isLoading) {
+function SavedMovies(isLoading) {
   return (
-    <main className="movies">
+    <main className="saved-movies">
       <SearchForm />
       {/* {isLoading && <Preloader />} */}  
 
@@ -17,4 +17,4 @@ function Movies(isLoading) {
   );
 }
 
-export default Movies;
+export default SavedMovies;
