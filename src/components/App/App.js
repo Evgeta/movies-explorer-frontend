@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 
 import "./App.css";
 
@@ -17,6 +17,8 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import { headerShowRoutes, footerShowRoutes } from "../../utils/constants.js";
 
 function App() {
+
+  const history = useHistory();
   const [loggedIn, setLoggedIn] = useState(false);  //имитация того, что пользователь не прошел аутентификацию
   //const [loggedIn, setLoggedIn] = useState(false); //имитация того, что пользователь прошел аутентификацию
   const [isLoading, setIsLoading] = React.useState(false); //состояние прелоадера
