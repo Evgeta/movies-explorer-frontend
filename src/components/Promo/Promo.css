@@ -3,35 +3,48 @@
   justify-content: center;
   position: relative;
   width: 100%;
-  background-color: #F3C1F8;
+  background-color: white;
   font-family: "Inter", "Arial", sans-serif;
   margin: 0;
 }
 
 .promo__container {
   display: flex;
+  flex-direction: column;
   position: relative;
   justify-content: space-between;
   max-width: 1280px;
+  min-height: 496px;
   width: 100%;
-  padding: 75px 70px;
-  position: relative;
+  margin: 20px 40px 0;  
   box-sizing: border-box;
-  align-items: flex-start;
+  align-items: center;
+  background-color: #F5F5F5;
+  border-radius: 10px;  
+  padding-bottom: 30px;
 }
 
-.promo__project-info {
+/* .promo__project-info {
   display: flex;
   flex-direction: column;
-  max-width: 640px;
-  gap: 36px;
-}
+  min-width: 292px;  
+} */
 
 .promo__title {
+  display: flex;  
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  /* flex-direction: column; */
+  min-width: 292px;  
+  max-width: 730px;
+  min-height: 420px;
   font-weight: 400;
   font-size: 50px;
   line-height: 1.16;
   margin: 0;
+  letter-spacing: -0.04em;
+  margin-top: 10px;
 }
 
 .promo__description {

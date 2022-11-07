@@ -3,20 +3,24 @@ import { Link } from "react-router-dom";
 
 import "./NavTab.css";
 
-function NavTab({ loggedIn }) {
+function NavTab() {
   return (
-    !loggedIn && (
-      <nav className="nav-tab">
+     (<nav className="nav-tab">
         <ul className="nav-tab__list">
           <li>
-            <Link className="nav-tab__link" to="/signup">
-              Регистрация
-            </Link>
+          <a href="#about-project" className="nav-tab__link">
+            О проекте
+           </a>
           </li>
           <li>
-            <Link className="nav-tab__link nav-tab__link_signin" to="/signin">
-              Войти
-            </Link>
+          <a href="#techs" className="nav-tab__link">
+          Технологии
+          </a>
+          </li>
+          <li>
+          <a href="#about-me" className="nav-tab__link">
+          Студент
+          </a>
           </li>
         </ul>
       </nav>

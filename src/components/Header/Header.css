@@ -21,7 +21,7 @@
   height: 38px;
 }
 
-.header__navigation{
+.header__navigation {
   display: flex;
   align-items: center;
   position: relative;
@@ -52,11 +52,11 @@
 }
 
 .header__link_signin {
-  color: black;  
+  color: black;
   background-color: #2BE080;
   border-radius: 3px;
   width: 76px;
-  height: 32px;  
+  height: 32px;
   justify-content: center;
 }
 
@@ -78,12 +78,10 @@
 
   .header__link_signin {
     width: 54px;
-    height: 26px;   
+    height: 26px;
   }
 
   .header__link-list {
-    gap: 14px; 
+    gap: 14px;
   }
-  
-
 }
