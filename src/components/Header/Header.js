@@ -4,17 +4,14 @@ import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 
 import Navigation from "../Navigation/Navigation";
-import NavTab from "../NavTab/NavTab";
 
 import logo from "../../images/logo.svg";
 
 function Header({ loggedIn, onClickBurger, isBurgerMenuOpened }) {
   const location = useLocation().pathname;
-  console.log("loggedIn");
-  console.log(loggedIn);
 
   return (
-    <header className={`header ${location === "/" ? "header_theme_pink" : ""}`}>
+    <header className="header">
       <div className="header__container">
         {location !== "/" ? (
           <>
@@ -37,16 +34,28 @@ function Header({ loggedIn, onClickBurger, isBurgerMenuOpened }) {
               className="header__logo"
               src={logo}
               alt="Логотип Movies Explorer"
-            />
-            <NavTab />
+            />            
+            {!loggedIn && (
+              <nav className="header__navigation">
+                <ul className="header__link-list">
+                  <li>
+                    <Link className="header__link" to="/signup">
+                      Регистрация
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="header__link header__link_signin"
+                      to="/signin"
+                    >
+                      Войти
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+            )}
           </>
-        )}
-        {/* {!loggedIn && <NavTab/>}       
-            
-      {loggedIn && <Navigation
-         onClickBurger={onClickBurger}
-         isBurgerMenuOpened={isBurgerMenuOpened}
-      />  } */}
+        )}        
       </div>
     </header>
   );
