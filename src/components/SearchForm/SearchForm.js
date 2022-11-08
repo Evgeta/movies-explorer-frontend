@@ -15,7 +15,7 @@ function SearchForm() {
           />
           <button className="search-form__button" type="submit"></button>
         </form>
-
+        <div className="search-form__decorline">
         <label className="search-form__filter">
           <input
             className="search-form__checkbox"
@@ -25,6 +25,7 @@ function SearchForm() {
           <span className="search-form__switcher"></span>
           <span className="search-form__text">Короткометражки</span>
         </label>
+        </div>
       </div>
     </section>
   );
