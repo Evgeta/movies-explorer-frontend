@@ -4,20 +4,21 @@
   align-items: center;
   width: 100%;
   max-width: 1280px;
-  padding: 70px 70px 80px;
+  padding: 0 70px 80px;
   box-sizing: border-box;
 }
 
 .movies-cardlist__list {
+  padding: 70px 0 0;
+  border-top: 1px solid #E8E8E8;
   justify-items: center;
   list-style: none;
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  grid-auto-rows: 229px;
-  row-gap: 38px;
-  column-gap: 20px;
-  padding: 0;
+  grid-template-columns: repeat(auto-fill, minmax(364px, 1fr));
+  grid-auto-rows: 271px;
+  row-gap: 30px;
+  column-gap: 24px;  
   margin: 0 0 12px;
 }
 
