@@ -76,8 +76,7 @@ function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
             className="navigation__link navigation__link_type_profile"
             activeClassName={activeLink}
           >
-            Аккаунт
-            <div className="navigation__profile-link-image"></div>
+            Аккаунт          
           </NavLink>
         </li>
       </ul>
