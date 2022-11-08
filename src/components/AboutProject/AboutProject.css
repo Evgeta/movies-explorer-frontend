@@ -25,7 +25,7 @@
   letter-spacing: -0.04em;
   line-height: 1.23;
   border-bottom: 1px solid black;
-  padding-bottom: 23px;
+  padding-bottom: 22px;
   margin: 0;
 }
 
@@ -75,8 +75,8 @@
 
 .about-project__backend-duration {
   width: 100%;
-  color: white;
-  background-color: black;
+  color: black;
+  background-color: #2BE080;;
   text-align: center;
   padding: 9px 14px;
   box-sizing: border-box;
