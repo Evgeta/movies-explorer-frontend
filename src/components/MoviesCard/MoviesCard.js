@@ -11,8 +11,10 @@ function MoviesCard({ saved = false, title }) {
     <li className="movies-card">
       <article className="movies-card__item">
         <div className="movies-card__description">
-          <h2 className="movies-card__title">{title}</h2>
-          <span className="movies-card__duration">1ч 42м</span>
+          <div className="movies-card__info-box">
+            <h2 className="movies-card__title">{title}</h2>
+            <span className="movies-card__duration">1ч 42м</span>
+          </div>
           {location === "/movies" && saved ? ( //если отображаем все фильмы
             <button
               type="button"
