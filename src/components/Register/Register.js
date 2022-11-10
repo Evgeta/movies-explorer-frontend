@@ -17,19 +17,19 @@ function Register() {
           />
         </Link>
         <h1 className="register__form-title">Добро пожаловать!</h1>
-        <div className="register__form-fieldset">
+        <div className="register__input-block">
           <label className="register__form-label" htmlFor="name">
             Имя
           </label>
           <input className="register__form-input" name="username" type="text" />
         </div>
-        <div className="register__form-fieldset">
+        <div className="register__input-block">
           <label className="register__form-label" htmlFor="email">
             E-mail
           </label>
           <input className="register__form-input" name="email" type="text" />
         </div>
-        <div className="register__form-fieldset">
+        <div className="register__input-block">
           <label className="register__form-label" htmlFor="password">
             Пароль
           </label>

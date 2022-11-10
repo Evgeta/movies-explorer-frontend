@@ -70,6 +70,7 @@
 }
 
 .search-form__form::before {
+  box-sizing: border-box;  
   content: '';
   width: 34px;
   height: 34px;
@@ -80,8 +81,7 @@
   position: absolute;
   top: 47%;
   left: 19px;
-  transform: translateY(-50%);
-  box-sizing: border-box;  
+  transform: translateY(-50%);  
 }
 
 .search-form__decorline {
