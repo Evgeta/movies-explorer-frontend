@@ -10,8 +10,7 @@ function Movies(isLoading) {
   return (
     <main className="movies">
       <SearchForm />
-      {isLoading && <Preloader />}  
-
+      {/* {isLoading && <Preloader />}   */}
       <MoviesCardList />
     </main>
   );

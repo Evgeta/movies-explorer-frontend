@@ -10,7 +10,7 @@ function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
   const activeLink = `navigation__link_type_active-${
     isBurgerMenuOpened ? "mobile" : "desktop"
   }`;
-
+  
   return (
     <nav
       className={`navigation navigation_state_${
@@ -23,10 +23,10 @@ function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
           isBurgerMenuOpened={isBurgerMenuOpened}
           onClickBurger={onClickBurger}
         />
-      )}
+      )}        
       <ul
-        className={`navigation__list  navigation__list_logged
-                      navigation__list_state_${
+        className={`navigation__list navigation__list_pane 
+                              navigation__list_state_${
                         isBurgerMenuOpened ? "opened" : "closed"
                       }`}      >
         <div className="navigation__films-block">

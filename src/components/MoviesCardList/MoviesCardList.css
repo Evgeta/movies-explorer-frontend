@@ -48,7 +48,7 @@
   .movies-cardlist__list {
     grid-auto-rows: 258px;  
     column-gap: 30px;
-    row-gap: 30px;     
+    row-gap: 36px;     
   }
 }
 

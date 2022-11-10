@@ -6,6 +6,7 @@ import movieimage from "../../images/movie-image.png";
 
 function MoviesCard({ saved = false, title }) {
   const location = useLocation().pathname;
+  console.log(location);
 
   return (
     <li className="movies-card">
@@ -15,11 +16,14 @@ function MoviesCard({ saved = false, title }) {
             <h2 className="movies-card__title">{title}</h2>
             <span className="movies-card__duration">1ч 42м</span>
           </div>
-          {location === "/movies" && saved ? ( //если отображаем все фильмы
+          
+          {
+           (location === "/movies" )
+           && saved ? ( //если отображаем все фильмы
             <button
               type="button"
               className="movies-card__button movies-card__button_type_saved"
-              title="Сохранить"
+              title="Отменить сохранение"
             ></button>
           ) : (
             <button
@@ -28,7 +32,8 @@ function MoviesCard({ saved = false, title }) {
               title="Сохранить"
             ></button>
           )}
-          {location === "/saved-movies" && ( //если отображаем сохраненные фильмы
+
+          { (location === "/saved-movies") && ( //если отображаем сохраненные фильмы
             <button
               type="button"
               className="movies-card__button movies-card__button_type_delete-icon"
@@ -36,6 +41,7 @@ function MoviesCard({ saved = false, title }) {
             ></button>
           )}
         </div>
+
         <a target="_blank" href="" rel="noopener noreferrer" className="movies-card__image-link">
           <img
             src={movieimage}

@@ -8,7 +8,9 @@ import Navigation from "../Navigation/Navigation";
 import logo from "../../images/logo.svg";
 
 function Header({ loggedIn, onClickBurger, isBurgerMenuOpened }) {
+
   const location = useLocation().pathname;
+  
 
   return (
     <header className="header">

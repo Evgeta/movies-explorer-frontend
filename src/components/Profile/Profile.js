@@ -7,7 +7,7 @@ function Profile() {
     <main className="profile">
       <form className="profile__form" name="profile">
         <h1 className="profile__form-title">Привет, Виталий!</h1>
-        <div className="profile__form-fieldset">
+        <div className="profile__control-box">
           <label className="profile__form-label" htmlFor="name">
             Имя
           </label>
@@ -16,10 +16,9 @@ function Profile() {
             name="username"
             type="text"
             value="Виталий"
-          />
-          <span class="profile__error"></span>
+          />          
         </div>
-        <div className="profile__form-fieldset profile__form-fieldset_no_border">
+        <div className="profile__control-box profile__control-box_no_border">
           <label className="profile__form-label" htmlFor="email">
             E-mail
           </label>
@@ -28,8 +27,7 @@ function Profile() {
             name="email"
             type="text"
             value="pochta@yandex.ru"
-          />
-          <span class="profile__error"></span>
+          />          
         </div>
         <div className="profile__form-footer">
           <button type="submit" class="profile__button">
