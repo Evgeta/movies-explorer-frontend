@@ -9,8 +9,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;    
-    position: relative;
-    /* overflow: hidden; */
+    position: relative;    
 
     font-family: "Inter", "Arial", sans-serif;
     -moz-osx-font-smoothing: grayscale;

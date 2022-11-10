@@ -7,13 +7,9 @@ import "./Navigation.css";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
 function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
-  const activeLink = `navigation__link_active_${
+  const activeLink = `navigation__link_type_active-${
     isBurgerMenuOpened ? "mobile" : "desktop"
   }`;
-
-  function handleOverlayClick(e) {
-    e.stopPropagation();
-  }
 
   return (
     <nav
@@ -32,9 +28,7 @@ function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
         className={`navigation__list  navigation__list_logged
                       navigation__list_state_${
                         isBurgerMenuOpened ? "opened" : "closed"
-                      }`}
-        onClick={handleOverlayClick}
-      >
+                      }`}      >
         <div className="navigation__films-block">
           {isBurgerMenuOpened && (
             <li className="navigation__item">

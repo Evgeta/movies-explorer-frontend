@@ -19,7 +19,7 @@
   margin: 0;
   width: 100%;
   list-style-type: none;
-  z-index: 5;
+  z-index: 15;
 }
 
 .navigation__films-block {
@@ -30,7 +30,7 @@
   transition: ease-in-out 0.2s;
   padding: 0;
   margin: 0;
-  z-index: 5;
+  z-index: 15;
 }
 
 .navigation__link {
@@ -48,16 +48,15 @@
   opacity: .7;
 }
 
-.navigation__link_active_desktop {
+.navigation__link_type_active-desktop {
   font-weight: 500;
 }
 
-.navigation__link_active_mobile {
+.navigation__link_type_active-mobile {
   border-bottom: 2px solid black;
 }
 
-.navigation__link_type_profile {
-  border-radius: 3px;
+.navigation__link_type_profile {  
   background: #F9F9F9;
   border-radius: 20px;  
   width: 100px;
@@ -121,7 +120,7 @@
     background-color: rgba(0, 0, 0, .3);
     justify-content: flex-end;
     transition: ease-in-out 0.2s;
-    z-index: 3;
+    z-index: 15;
   }
 
   .navigation_state_closed {

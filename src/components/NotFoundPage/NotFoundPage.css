@@ -1,25 +1,30 @@
 .not-found-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
 }
 
 .not-found-page__texts-container {
   display: flex;
   flex-direction: column;
+  height: 100%;
   align-items: center;
+  justify-content: center;
   margin: 0;
+  padding-top: 65px;
 }
 
 .not-found-page__title {
   font-weight: 400;
   font-size: 140px;
-  line-height: 1.2;
-  margin: 0 0 2px;
+  line-height: 1.2;  
+  margin: 0;
 }
 
 .not-found-page__subtitle {
+  font-weight: 400;
   font-size: 16px;
   line-height: 1.19;
   margin: 5px 0 0;
@@ -28,20 +33,30 @@
 .not-found-page__back-button {
   font-size: 14px;
   line-height: 1.21;
-  color: black;
+  color: #2BE080;
   background-color: transparent;
   border: 0;
-  margin: 0;
+  margin: 0 0 60px;
+  padding: 0;  
   cursor: pointer;
-  padding: 0;
-  position: absolute;
-  left: 48%;
-  bottom: 60px;
 }
 
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 768px) {
+   
+  .not-found-page__back-button {
+    margin-bottom: 222px;
+  }
+
+  .not-found-page__texts-container {
+    margin-top: 160px;
+  }
+}
+
+@media screen and (max-width: 320px) {
   .not-found-page__texts-container {
     width: 300px;
+    margin-top: 0px;
+    margin-bottom: 15px;
   }
 
   .not-found-page__title {
@@ -56,10 +71,10 @@
     margin: 0;
   }
 
-  .not-found-page__go-back-button {
+  .not-found-page__back-button {
     font-size: 12px;
     line-height: 1.25;
-    bottom: 30px;
+    margin-bottom: 30px;
   }
 
 }

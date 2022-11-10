@@ -3,7 +3,6 @@ import React from "react";
 import "./MoviesCardList.css";
 import "../MoviesCard/MoviesCard.css";
 
-// import movieimage from "../../images/movie-image.png";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList() {
