@@ -8,6 +8,7 @@
 }
 
 .movies-card__item {
+  position: relative;
   display: flex;
   flex-direction: column;      
 }
@@ -18,7 +19,7 @@
 }
 
 .movies-card__image-link {
-  max-height: 151px;
+  max-height: 203px;
   margin: 0;
 }
 
@@ -90,8 +91,7 @@
   }
 
   .movies-card__image-link {
-    max-height: 190px;
-    max-width: 339px;
+    max-height: 190px;    
   }
 
   .movies-card__title {

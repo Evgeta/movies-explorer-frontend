@@ -25,8 +25,9 @@ function SearchForm() {
           <span className="search-form__switcher"></span>
           <span className="search-form__text">Короткометражки</span>
         </label>
-        </div>
+        </div>        
       </div>
+      <div className="search-form__horizontal-decor-line"></div>
     </section>
   );
 }
