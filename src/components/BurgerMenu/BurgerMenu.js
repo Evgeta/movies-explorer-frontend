@@ -21,7 +21,7 @@ function BurgerMenu({ isBurgerMenuOpened, onClickBurger}) {
   return (
     <button
       type="button"
-      className={`burger-menu burger-menu_type_${isBurgerMenuOpened ? "close" : "show"}`}
+      className={`burger-menu burger-menu_type_${isBurgerMenuOpened ? "opened" : "closed"}`}
       onClick={handleOnClickBurger}
     />
   );

@@ -7,29 +7,33 @@ import "./Navigation.css";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
 function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
-  const activeLink = `navigation__link_type_active-${
+  // вид активной ссылки отличается, в зависимости от того, открыто
+  //бургер меню или нет
+
+  const activeLink = `navigation__link_type_active-${  
     isBurgerMenuOpened ? "mobile" : "desktop"
   }`;
   
   return (
     <nav
       className={`navigation navigation_state_${
-        isBurgerMenuOpened ? "opened" : "closed"
-      }`}
-      onClick={isBurgerMenuOpened ? onClickBurger : undefined}
+        isBurgerMenuOpened ? "opened-pane" : "closed-pane"
+      }`}      
     >
-      {!isLanding && (
+      {!isLanding && (  // на лэндинге по макету бугер меню не отображается
         <BurgerMenu
           isBurgerMenuOpened={isBurgerMenuOpened}
           onClickBurger={onClickBurger}
         />
       )}        
       <ul
-        className={`navigation__list navigation__list_pane 
+        className={`navigation__list navigation__list-pane 
                               navigation__list_state_${
                         isBurgerMenuOpened ? "opened" : "closed"
                       }`}      >
-        <div className="navigation__films-block">
+        <div className={`navigation__films-block navigation__films-block_state_${
+        isBurgerMenuOpened ? "opened-pane" : "closed-pane"
+        }`}>
           {isBurgerMenuOpened && (
             <li className="navigation__item">
               <NavLink
