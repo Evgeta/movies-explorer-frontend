@@ -27,7 +27,7 @@ function SearchForm() {
         </label>
         </div>                
       </div>
-      {/* <hr className="search-form__horizontal-decor-line"></hr> */}
+      <hr className="search-form__horizontal-decor-line"></hr>
     </section>
   );
 }
