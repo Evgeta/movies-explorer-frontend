@@ -77,7 +77,7 @@
   margin: 0;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
   .techs__container {
     padding: 90px 50px;
   }
@@ -103,9 +103,14 @@
     line-height: 1.25;
     letter-spacing: -0.04em;
   }
+
+  .techs__name {
+    font-size: 12px;
+    line-height: 1.25;   
+  }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 320px) {
   .techs__container {
     padding: 70px 18px;
   }
@@ -135,4 +140,7 @@
     margin-top: 49px;
     max-width: 180px;
   }
+
+
+
 }
