@@ -34,4 +34,17 @@
   opacity: .7;
 }
 
+@media screen and (max-width: 320px) {
 
+  .nav-tab__list {
+    gap: 6px;  
+  }
+  
+  .nav-tab__link {
+    border-radius: 6px;
+    font-size: 10px;
+    line-height: 1.6;
+    width: 82px;
+    height: 26px;
+  }
+}

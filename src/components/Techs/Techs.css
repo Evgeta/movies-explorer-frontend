@@ -106,7 +106,7 @@
 
   .techs__name {
     font-size: 12px;
-    line-height: 1.25;   
+    line-height: 1.25;
   }
 }
 
@@ -117,7 +117,7 @@
 
   .techs__title {
     font-size: 18px;
-    line-height: 1.54;
+    line-height: 1.22;
     letter-spacing: -0.04em;
     padding-bottom: 27px;
   }
@@ -126,6 +126,13 @@
     margin-top: 60px;
     font-size: 30px;
     line-height: 1.2;
+  }
+
+  .techs__description {
+    font-size: 11px;
+    line-height: 1.45;
+    letter-spacing: -0.04em;
+    margin-top: 24px;
   }
 
   .techs__about {
@@ -140,7 +147,4 @@
     margin-top: 49px;
     max-width: 180px;
   }
-
-
-
 }
