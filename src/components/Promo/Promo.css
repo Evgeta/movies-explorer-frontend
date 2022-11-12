@@ -72,7 +72,13 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 600px) {
+  .promo__title {
+    min-width: 500px;  
+  }
+}
+
+@media screen and (max-width: 420px) {
   .promo__container {
     margin: 14px 14px 0;
     padding: 220px 0 17px;
