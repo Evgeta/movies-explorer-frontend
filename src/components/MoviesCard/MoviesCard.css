@@ -83,6 +83,20 @@
   background-image: url('../../images/remove-from-saved-icon.svg');
 }
 
+
+@media screen and (max-width: 1150px) {
+
+  .movies-card__title {
+    max-width: 240px;
+  }
+
+  .movies-card__info-box {
+    max-width: 240px;
+  }
+  
+
+}
+
 @media screen and (max-width: 768px) {
 
   .movies-card {
@@ -99,16 +113,14 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 640px) {
   
   .movies-card__image-link {
     max-height: 168px;
   }
 
   .movies-card__title {
-    max-width: 240px;
-    font-size: 12px;
-    line-height: 1.25;
+    max-width: 240px;    
   }
 
 }
