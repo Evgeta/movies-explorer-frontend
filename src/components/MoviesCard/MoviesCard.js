@@ -6,8 +6,7 @@ import movieimage from "../../images/movie-image.png";
 
 function MoviesCard({ saved = false, title }) {
   const location = useLocation().pathname;
-  console.log(location);
-
+  
   return (
     <li className="movies-card">
       <article className="movies-card__item">
@@ -16,33 +15,40 @@ function MoviesCard({ saved = false, title }) {
             <h2 className="movies-card__title">{title}</h2>
             <span className="movies-card__duration">1ч 42м</span>
           </div>
-          
-          {
-           (location === "/movies" )
-           && saved ? ( //если отображаем все фильмы
-            <button
-              type="button"
-              className="movies-card__button movies-card__button_type_saved"
-              title="Отменить сохранение"
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__button movies-card__button_type_not-saved"
-              title="Сохранить"
-            ></button>
-          )}
 
-          { (location === "/saved-movies") && ( //если отображаем сохраненные фильмы
+          {location === "/movies" &&
+          saved && ( //если отображаем все фильмы + иконка для сохрененного
+              <button
+                type="button"
+                className="movies-card__button movies-card__button_type_saved"
+                title="Отменить сохранение"
+              ></button>
+            )}
+
+          {location === "/movies" &&
+          !saved && ( //если отображаем все фильмы + иконка для несохрененного
+              <button
+                type="button"
+                className="movies-card__button movies-card__button_type_not-saved"
+                title="Сохранить"
+              ></button>
+            )}
+
+          {location === "/saved-movies" && ( //если отображаем сохраненные фильмы
             <button
               type="button"
               className="movies-card__button movies-card__button_type_delete-icon"
-              title="Сохранить"
+              title="Удалить из сохрененных"
             ></button>
           )}
         </div>
 
-        <a target="_blank" href="" rel="noopener noreferrer" className="movies-card__image-link">
+        <a
+          target="_blank"
+          href=""
+          rel="noopener noreferrer"
+          className="movies-card__image-link"
+        >
           <img
             src={movieimage}
             alt={title}
