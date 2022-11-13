@@ -27,10 +27,11 @@ function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
         />
       )}        
       <ul
-        className={`navigation__list navigation__list-pane 
+        className={`navigation__list navigation__list-pane_state_${
+          isBurgerMenuOpened ? "opened" : "closed"} 
                               navigation__list_state_${
                         isBurgerMenuOpened ? "opened" : "closed"
-                      }`}      >
+                      }`} >
         <div className={`navigation__films-block navigation__films-block_state_${
         isBurgerMenuOpened ? "opened-pane" : "closed-pane"
         }`}>

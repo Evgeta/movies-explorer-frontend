@@ -20,8 +20,8 @@
 .burger-menu_type_opened {
   background-image: url(../../images/burger-menu-close-icon.svg);  
   position: absolute;  
-  top: 23px;
-  right: 23px;
+  top: 17px;
+  right: 17px;
   z-index: 16;
 }
 
@@ -29,18 +29,23 @@
   background-image: url(../../images/burger-menu-icon.svg);  
 }
 
-
 @media screen and (max-width: 768px) {
   .burger-menu {
-    display: block;
-    
+    display: block;    
   }
 }
 
-@media screen and (max-width: 320px) {
-
+@media screen and (max-width: 460px) {
   .burger-menu {
     width: 40px;
     height: 43px;
   }
+
+  .burger-menu_type_opened {
+    top: 10px;
+    right: 10px;
+
+  }
+  
+
 }
