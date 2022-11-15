@@ -12,6 +12,7 @@ function SearchForm() {
             type="text"
             placeholder="Фильм"
             aria-label="Поле для ввода критериев поиска фильмов"
+            required
           />
           <button className="search-form__button" type="submit"></button>
         </form>

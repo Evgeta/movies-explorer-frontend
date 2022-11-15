@@ -21,13 +21,13 @@ function Login() {
           <label className="login__form-label" htmlFor="email">
             E-mail
           </label>
-          <input className="login__form-input" name="email" type="email" />          
+          <input className="login__form-input" name="email" type="email" required />          
         </div>
         <div className="login__labels-block">
           <label className="login__form-label" htmlFor="password">
             Пароль
           </label>
-          <input className="login__form-input" name="password" type="text" />          
+          <input className="login__form-input" name="password" type="text" required />          
         </div>
         <span className="login__error">При авторизации произошла ошибка. Токен не передан или передан не в том формате.</span>
         <div className="login__form-footer">

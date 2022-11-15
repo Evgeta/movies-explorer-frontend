@@ -21,19 +21,19 @@ function Register() {
           <label className="register__form-label" htmlFor="name">
             Имя
           </label>
-          <input className="register__form-input" name="username" type="text" />
+          <input className="register__form-input" name="username" type="text" required/>
         </div>
         <div className="register__input-block">
           <label className="register__form-label" htmlFor="email">
             E-mail
           </label>
-          <input className="register__form-input" name="email" type="text" />
+          <input className="register__form-input" name="email" type="text" required/>
         </div>
         <div className="register__input-block">
           <label className="register__form-label" htmlFor="password">
             Пароль
           </label>
-          <input className="register__form-input" name="password" type="text" />
+          <input className="register__form-input" name="password" type="text" required/>
           <span className="register__error">Что-то пошло не так...</span>
         </div>
         <div className="register__form-footer">
