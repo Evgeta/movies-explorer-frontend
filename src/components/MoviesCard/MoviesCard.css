@@ -63,6 +63,14 @@
   transition: ease-in-out 0.2s;
 }
 
+.movies-card__button:hover {
+  opacity: .8;
+} 
+
+.movies-card__button:focus {
+  opacity: .8;
+} 
+
 .movies-card__duration {
   font-weight: 400;
   font-size: 11px;

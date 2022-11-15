@@ -179,12 +179,10 @@
 }
 
 
-
-
 @media screen and (max-width: 768px) {
 
   .search-form {
-    padding: 75px 30px 0;
+    padding: 79px 30px 0;
     width: calc(100% - 60px);
   }
 
@@ -193,7 +191,7 @@
   }
 
   .search-form__horizontal-decor-line {
-    width: calc(100% - 60px);
+    width: 100%;
     margin: 109px 0 10px;
   }
 
