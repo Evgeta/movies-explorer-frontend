@@ -14,12 +14,15 @@
 .login__form {
   width: 100%;
   max-width: 396px;
+  min-width: 260px;
+  min-height: 500px;  
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
 .login__logo-link {
+  margin: 0;
   height: 38px;
   width: 38px;
 }
@@ -41,7 +44,7 @@
 .login__labels-block {
   display: flex;
   flex-direction: column;  
-  width: 100%;  
+  width: 100%;    
 }
 
 .login__form-label {
