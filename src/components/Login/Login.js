@@ -9,7 +9,7 @@ function Login() {
   return (
     <main className="login">
       <form className="login__form" name="login">
-        <Link to="/" className="login__link">
+        <Link to="/" className="login__logo-link">
           <img
             src={logo}
             alt="Логотип Movies Explorer"

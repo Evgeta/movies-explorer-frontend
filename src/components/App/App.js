@@ -19,8 +19,8 @@ import { headerShowRoutes, footerShowRoutes } from "../../utils/constants.js";
 function App() {
 
   const history = useHistory();
-  const [loggedIn, setLoggedIn] = useState(true);  //имитация того, что пользователь не прошел аутентификацию
-  // const [loggedIn, setLoggedIn] = useState(false); //имитация того, что пользователь прошел аутентификацию
+  // const [loggedIn, setLoggedIn] = useState(true);  //имитация того, что пользователь не прошел аутентификацию
+  const [loggedIn, setLoggedIn] = useState(false); //имитация того, что пользователь прошел аутентификацию
   const [isLoading, setIsLoading] = React.useState(false); //состояние прелоадера
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню

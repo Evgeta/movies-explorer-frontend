@@ -19,8 +19,9 @@
   position: relative;
 }
 
-.login__link {
+.login__logo-link {
   height: 38px;
+  width: 38px;
 }
 
 .login__logo {

@@ -21,9 +21,10 @@
   position: relative;  
 }
 
-.register__link {
+.register__logo-link {
   margin: 0;
   height: 38px;
+  width: 38px;
 }
 
 .register__logo {
