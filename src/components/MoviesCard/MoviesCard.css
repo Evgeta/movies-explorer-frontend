@@ -30,6 +30,10 @@
   object-fit: cover;
 }
 
+.movies-card__image:focus {
+  border-bottom: 1px solid #2BE080;   
+} 
+
 .movies-card__description {
   display: flex;
   align-items: center;
@@ -62,6 +66,10 @@
   cursor: pointer;
   transition: ease-in-out 0.2s;
 }
+
+.movies-card__button:focus {
+  border-bottom: 1px solid #2BE080;   
+} 
 
 .movies-card__button:hover {
   opacity: .8;
