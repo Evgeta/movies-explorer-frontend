@@ -123,9 +123,9 @@
     margin-top: 22px;
   }
 
-  .about-project__thesis {
+  /* .about-project__thesis {
     max-width: 319px;
-  }
+  } */
 
   .about-project__thesis-list {
     padding-bottom: 81px;
@@ -147,8 +147,7 @@
     font-size: 18px;
     line-height: 1.22;
     letter-spacing: -0.04em;
-    padding-bottom: 28px;
-    max-width: 284px;
+    padding-bottom: 28px;  
   }
 
   .about-project__thesis-list {
@@ -197,5 +196,12 @@
 
   .about-project__frontend {
     gap: 10px;
+  }
+}
+
+@media screen and (max-width: 320px) 
+{
+  .about-project__title {
+     max-width: 284px;
   }
 }
