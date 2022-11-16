@@ -11,12 +11,12 @@ import "./Main.css";
 function Main() {
   return (
     <main className="main">
-      {/* <Promo /> */}
-       <AboutProject />    
-     {/* <Techs />
+      <Promo />
+      <AboutProject />    
+      <Techs />
       <AboutMe />
-      <Portfolio />  */}
-   </main>
+      <Portfolio /> 
+    </main>
   );
 }
 
