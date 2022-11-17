@@ -1,0 +1,150 @@
+.techs {
+  font-family: "Inter", "Arial", sans-serif;
+  background-color: #F5F5F5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.techs__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1280px;
+  width: 100%;
+  padding: 100px 70px;
+  box-sizing: border-box;
+}
+
+.techs__title {
+  width: 100%;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.23;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid black;
+  padding-bottom: 23px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.techs__quantity {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 1.16;
+  letter-spacing: -0.04em;
+  margin: 90px 0 0;
+}
+
+.techs__description {
+  max-width: 460px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  line-height: 1.42;
+  letter-spacing: -0.04em;
+  margin: 26px 0 0;
+}
+
+.techs__list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 90px);
+  justify-content: center;
+  max-width: 690px;
+  list-style: none;
+  padding: 0;
+  margin: 100px 0 0;
+  gap: 10px;
+}
+
+.techs__list-item {
+  background-color: #E8E8E8;
+  border-radius: 10px;
+}
+
+.techs__name {
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  letter-spacing: -0.04em;
+  padding: 21px 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .techs__container {
+    padding: 90px 50px;
+  }
+
+  .techs__quantity {
+    margin-top: 80px;
+  }
+
+  .techs__description {
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 22px 0 0;
+    letter-spacing: -0.04em;
+  }
+
+  .techs__list {
+    margin-top: 83px;
+    grid-template-columns: repeat(auto-fill, 84px);
+  }
+
+  .techs__list-item {
+    font-size: 12px;
+    line-height: 1.25;
+    letter-spacing: -0.04em;
+  }
+
+  .techs__name {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .techs__container {
+    padding: 70px 18px;
+  }
+
+  .techs__title {
+    font-size: 18px;
+    line-height: 1.22;
+    letter-spacing: -0.04em;
+    padding-bottom: 27px;
+  }
+
+  .techs__quantity {
+    margin-top: 60px;
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .techs__description {
+    font-size: 11px;
+    line-height: 1.45;
+    letter-spacing: -0.04em;
+    margin-top: 24px;
+  }
+
+  .techs__about {
+    font-size: 11px;
+    line-height: 1.45;
+    letter-spacing: -0.04em;
+    margin-top: 25px;
+    max-width: 292px;
+  }
+
+  .techs__list {
+    margin-top: 49px;
+    max-width: 180px;
+  }
+}

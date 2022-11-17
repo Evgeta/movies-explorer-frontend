@@ -1,0 +1,15 @@
+body {
+  background-color: white;
+  margin: 0;
+ }
+
+@import url(./vendor/normalize.css);
+@import url(./vendor/fonts/fonts.css);
+
+
+@import url(./components/App/App.css);
+@import url(./components/Header/Header.css);
+@import url(./components/Navigation/Navigation.css);
+@import url(./components/Promo/Promo.css);
+@import url(./components/AboutProject/AboutProject.css);
+
