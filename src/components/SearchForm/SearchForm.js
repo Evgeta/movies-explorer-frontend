@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState }  from "react";
 
 import "./SearchForm.css";
 
 function SearchForm() {
+
+  const [searchString, setSearchString] = useState("");
+  
+  function handleSearchStringChange(e) {
+    setSearchString(e.target.value);
+  }
+
   return (
     <section className="search-form">
       <div className="search-form__container">
@@ -13,6 +20,8 @@ function SearchForm() {
             placeholder="Фильм"
             aria-label="Поле для ввода критериев поиска фильмов"
             required
+            onChange={handleSearchStringChange}
+            value={searchString}
           />
           <button className="search-form__button" type="submit"></button>
         </form>
