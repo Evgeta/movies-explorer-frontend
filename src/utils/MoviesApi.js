@@ -31,5 +31,5 @@ import {
     baseUrl: MOVIES_URL,    
   });
   
-  
+  export default moviesApi;
   

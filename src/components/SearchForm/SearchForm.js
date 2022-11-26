@@ -2,9 +2,15 @@ import React, { useState }  from "react";
 
 import "./SearchForm.css";
 
-function SearchForm() {
+function SearchForm({
+    handleSearchFormSubmit,  
+    handleShowShortMovies,
+    showShortMovies,
+  }
+) {
 
   const [searchString, setSearchString] = useState("");
+  
   
   function handleSearchStringChange(e) {
     setSearchString(e.target.value);
@@ -13,7 +19,7 @@ function SearchForm() {
   return (
     <section className="search-form">
       <div className="search-form__container">
-        <form className="search-form__form">
+        <form className="search-form__form" onSubmit={handleSearchFormSubmit}>
           <input
             className="search-form__input"
             type="text"
@@ -30,7 +36,9 @@ function SearchForm() {
           <input
             className="search-form__checkbox"
             type="checkbox"
-            checked={true}
+            onChange={handleShowShortMovies}
+            // checked={showShortMovies ? true : false}            
+            checked={showShortMovies}
           />
           <span className="search-form__switcher"></span>
           <span className="search-form__text">Короткометражки</span>

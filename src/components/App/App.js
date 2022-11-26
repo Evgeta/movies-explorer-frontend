@@ -42,7 +42,12 @@ function App() {
       </Route>
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route exact path="/movies" component={Movies} isLoading={isLoading} />
+        <Route 
+          exact path="/movies"
+          component={Movies}
+          isLoading={isLoading}
+          
+        />
         <Route exact path="/saved-movies" component={SavedMovies} isLoading={isLoading} />
         <Route exact path="/signup">
           <Register
