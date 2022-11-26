@@ -23,6 +23,7 @@ function Movies({
 
 
   function handleSearchFormSubmit(){
+    console.log("handleSearchFormSubmit");
     moviesApi.getMovies()
     .then(movies => {
       setPublicServerMovies(movies)
@@ -36,7 +37,7 @@ function Movies({
   return (
     <main className="movies">
       <SearchForm 
-        onSubmit={handleSearchFormSubmit}
+        handleSearchFormSubmit={handleSearchFormSubmit}
         handleShowShortMovies={handleShowShortMovies}
         showShortMovies={showShortMovies}
       />

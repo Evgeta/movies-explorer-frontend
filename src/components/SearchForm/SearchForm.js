@@ -16,10 +16,15 @@ function SearchForm({
     setSearchString(e.target.value);
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleSearchFormSubmit();
+  };
+
   return (
     <section className="search-form">
       <div className="search-form__container">
-        <form className="search-form__form" onSubmit={handleSearchFormSubmit}>
+        <form className="search-form__form" onSubmit={handleSubmit}>
           <input
             className="search-form__input"
             type="text"
@@ -36,8 +41,7 @@ function SearchForm({
           <input
             className="search-form__checkbox"
             type="checkbox"
-            onChange={handleShowShortMovies}
-            // checked={showShortMovies ? true : false}            
+            onChange={handleShowShortMovies}            
             checked={showShortMovies}
           />
           <span className="search-form__switcher"></span>
