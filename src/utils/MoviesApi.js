@@ -17,6 +17,8 @@ import {
   
     //получение списка фильмов с сервера
     getMovies() {
+      console.log("getMovies");
+      console.log(this._baseUrl);
       return fetch(`${this._baseUrl}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },

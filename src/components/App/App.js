@@ -22,7 +22,7 @@ function App() {
   
   const [loggedIn, setLoggedIn] = useState(true);  //имитация того, что пользователь не прошел аутентификацию
   // const [loggedIn, setLoggedIn] = useState(false); //имитация того, что пользователь прошел аутентификацию
-  const [isLoading, setIsLoading] = React.useState(false); //состояние прелоадера
+  
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню
 
@@ -45,10 +45,9 @@ function App() {
         <Route 
           exact path="/movies"
           component={Movies}
-          isLoading={isLoading}
-          
+          // setIsLoading={setIsLoading}          
         />
-        <Route exact path="/saved-movies" component={SavedMovies} isLoading={isLoading} />
+        <Route exact path="/saved-movies" component={SavedMovies} />
         <Route exact path="/signup">
           <Register
           // loggedIn={loggedIn}

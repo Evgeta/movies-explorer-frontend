@@ -4,7 +4,9 @@ import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
 import movieimage from "../../images/movie-image.png";
 
-function MoviesCard({ saved = false, title }) {
+import { formatDuration } from '../../utils/utils.js';
+
+function MoviesCard({movie, saved = false}) {
   const location = useLocation().pathname;
   
   return (
@@ -12,8 +14,8 @@ function MoviesCard({ saved = false, title }) {
       <article className="movies-card__item">
         <div className="movies-card__description">
           <div className="movies-card__info-box">
-            <h2 className="movies-card__title">{title}</h2>
-            <span className="movies-card__duration">1ч 42м</span>
+            <h2 className="movies-card__title">{movie.nameRU}</h2>
+            <span className="movies-card__duration">{formatDuration(movie.duration)}</span>
           </div>
 
           {location === "/movies" &&
@@ -50,9 +52,9 @@ function MoviesCard({ saved = false, title }) {
           className="movies-card__image-link"
         >
           <img
-            src={movieimage}
-            alt={title}
-            title={title}
+            src={`https://api.nomoreparties.co${movie.image.url}`}
+            alt={movie.nameRU}
+            title={movie.description}
             className="movies-card__image"
           />
         </a>
