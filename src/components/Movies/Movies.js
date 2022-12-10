@@ -20,18 +20,24 @@ function Movies({
   const [publicServerMovies, setPublicServerMovies] = useState([]); //фильмы, которые пришли через запрос на публичный сервер
   const [showShortMovies, setShowShortMovies] = useState(false); 
 
+  //изменение состояние чекбокса
   function handleShowShortMovies() {
     setShowShortMovies(!showShortMovies);    
   }
 
 
-  function handleSearchFormSubmit(){
+  function handleSearchFormSubmit(searchStringValue){
     console.log("handleSearchFormSubmit");
+
+    localStorage.setItem('SearchString', searchStringValue);
+    localStorage.setItem('showShortMovies', showShortMovies);
+
     // setIsLoading(true);
     moviesApi.getMovies()
     .then(movies => {
       setPublicServerMovies(movies)
       console.log(publicServerMovies);
+
       localStorage.setItem(
         'movies-from-public-server',
         JSON.stringify(movies)
@@ -44,7 +50,6 @@ function Movies({
       // () => setIsLoading(false)
       );
   }
-
   
   useEffect(() => {
     if (localStorage.getItem('movies-from-public-server')) {

@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 import "./MoviesCard.css";
-import movieimage from "../../images/movie-image.png";
+// import movieimage from "../../images/movie-image.png";
 
 import { formatDuration } from '../../utils/utils.js';
 
