@@ -5,15 +5,14 @@ import "./SearchForm.css";
 function SearchForm({
     handleSearchFormSubmit,  
     handleShowShortMovies,
-    showShortMovies,
+    showShortMovies = true,
+    searchString,
+    handleSearchStringChange,
   }
 ) {
-
-  const [searchString, setSearchString] = useState("");
-  
-  
-  function handleSearchStringChange(e) {
-    setSearchString(e.target.value);
+     
+  function onSearchStringChange(e) {
+    handleSearchStringChange(e.target.value); 
   }
 
   function handleSubmit(e) {
@@ -31,7 +30,7 @@ function SearchForm({
             placeholder="Фильм"
             aria-label="Поле для ввода критериев поиска фильмов"
             required
-            onChange={handleSearchStringChange}
+            onChange={onSearchStringChange}
             value={searchString}
           />
           <button className="search-form__button" type="submit"></button>
