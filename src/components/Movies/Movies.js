@@ -28,6 +28,9 @@ const [filteredMovies, setFilteredMovies] = useState([]);
 const [showShortMovies, setShowShortMovies] = useState(false); 
 const [searchString, setSearchString] = useState(""); //строка поиска
 
+
+const [isLoading, setIsLoading] = useState(false); 
+
   //изменение состояния чекбокса
   function handleShowShortMovies() {
     setShowShortMovies(!showShortMovies);    
@@ -81,7 +84,7 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
 
     if (publicServerMovies.length === 0) {
 
-    // setIsLoading(true);
+    setIsLoading(true);
     moviesApi.getMovies()
     .then(movies => {
       setPublicServerMovies(movies)
@@ -110,7 +113,7 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
       console.log(`Ошибка: ${err.status}`)
     })
     .finally(
-      // () => setIsLoading(false)
+         setIsLoading(false)
       );
     }   
 }
@@ -134,10 +137,10 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
         searchString={searchString}
         handleSearchStringChange={handleSearchStringChange}
       />
-      {/* {isLoading && <Preloader />}   */}
+      {isLoading && <Preloader />}  
       <MoviesCardList 
         moviesList={filteredMovies}
-        
+        // isLoading = {isLoading}        
       />
     </main>
   );
