@@ -23,9 +23,7 @@ const [publicServerMovies, setPublicServerMovies] = useState([]);
   
 // отфильтрованные фильмы (по чекбоксу короткометражек и строке поиска)
 const [filteredMovies, setFilteredMovies] = useState([]); 
-  
-//фильмы, которые отфильтрованы с учетом чекбокса короткометражек
-const [filteredPublicServerMovies, setFilteredPublicServerMovies] = useState([]); 
+ 
 
 const [showShortMovies, setShowShortMovies] = useState(false); 
 const [searchString, setSearchString] = useState(""); //строка поиска
@@ -37,14 +35,28 @@ const [searchString, setSearchString] = useState(""); //строка поиск�
 
   //изменение записи в строке поиска
   function handleSearchStringChange(value) {   
+    console.log(value);
     setSearchString(value); 
   }
 
 // поиск по массиву и установка состояния
 function handleFilterMovies(movies, searchString, showShortMovies) {
 
+  console.log('внутри handleFilterMovies');
+  console.log('movies');
+  console.log(movies);
+  console.log('searchString');
+  console.log(searchString);
+  console.log('showShortMovies');
+  console.log(showShortMovies);
+
+
   //фильтруем фильмы по короткометражкам и строке 
   const moviesList = filterMovies(movies, searchString, showShortMovies);
+
+  console.log('moviesList - после фильтрации');
+  console.log(moviesList);
+
 
   if (moviesList.length === 0) {
         //если не нашли фильмов - отображаем ошибку    
@@ -79,6 +91,14 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
         'movies-from-public-server',
         JSON.stringify(movies)
       );
+
+      console.log('перед фильтрацией');
+      console.log('movies');
+      console.log(movies);
+      console.log('searchString');
+      console.log(searchString);
+      console.log('showShortMovies');
+      console.log(showShortMovies);
 
       handleFilterMovies(
          movies,
@@ -116,7 +136,7 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
       />
       {/* {isLoading && <Preloader />}   */}
       <MoviesCardList 
-        moviesList={publicServerMovies}
+        moviesList={filteredMovies}
         
       />
     </main>
