@@ -14,6 +14,8 @@ import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
+import mainApi from '../../utils/MainApi.js';
+
 import { headerShowRoutes, footerShowRoutes } from "../../utils/constants.js";
 
 function App() {
@@ -26,10 +28,59 @@ function App() {
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню
 
+
+
   // нажатие на иконку бургер-меню
   function handleBurgerMenuClick() {
     setIsBurgerOpened(!isBurgerMenuOpened);
   }
+
+
+  function handleRegistration(username, password, email) {
+    mainApi.register(username, password, email).then(
+      (res) => {
+         if (res) {
+          // setPopupInfo({
+          //   status: 'success',
+          //   popupMessage: 'Вы успешно зарегистрировались!'
+          // })
+        //  setIsInfoTooltipOpen(true);
+         history.push("/sign-in");
+        }
+      })
+      .catch((err) => {
+          //   setPopupInfo({
+          //   status: 'error',
+          //   popupMessage: 'Что-то пошло не так! Попробуйте ещё раз.'
+          // })
+          // setIsInfoTooltipOpen(true);
+        })
+      }
+  
+
+    function handleLogin(password, email) {
+      mainApi.authorize(password, email)
+     .then ((data) => {
+          localStorage.setItem("jwt", data.token);
+          // setLoggedIn(true);
+          // setUserEmail(email);
+          // setPopupInfo({
+          //   status: 'success',
+          //   popupMessage: 'Вы успешно вошли на закрытую часть сайта!'
+          // })
+          // setIsInfoTooltipOpen(true);
+          history.push("/");
+         })
+        .catch((err) => {
+          //  setPopupInfo({
+          //   status: 'error',
+          //   popupMessage: 'Что-то пошло не так! Попробуйте ещё раз.'
+          // })
+          // setIsInfoTooltipOpen(true);
+        })
+    }
+    
+  
 
   return (
     <div className="app">

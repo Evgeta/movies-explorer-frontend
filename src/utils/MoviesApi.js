@@ -28,7 +28,7 @@ import {
     }
   }
   
-  //инициализация API
+  //инициализация moviesAPI
   export const moviesApi = new MoviesApi({
     baseUrl: MOVIES_URL,    
   });

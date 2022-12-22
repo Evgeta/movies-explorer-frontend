@@ -2,7 +2,7 @@ import {
     SAVED_MOVIES_URL,
   } from './constants.js';
    
-  class Api {
+  class MainApi {
     constructor({
       baseUrl,
       headers
@@ -121,8 +121,8 @@ import {
 //   }
  }
   
-  //инициализация API
-  export const api = new Api({
+  //инициализация mainAPI
+  const mainApi = new MainApi({
     baseUrl: SAVED_MOVIES_URL,
     headers: {
     //  authorization: token,
@@ -130,5 +130,4 @@ import {
     }
   });
   
-  
-  
+export default mainApi;
