@@ -15,6 +15,9 @@ import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 import mainApi from '../../utils/MainApi.js';
+import {
+  CurrentUserContext
+} from '../../contexts/CurrentUserContext.js';
 
 import { headerShowRoutes, footerShowRoutes } from "../../utils/constants.js";
 
@@ -22,8 +25,9 @@ function App() {
 
   const history = useHistory();
   
-  const [loggedIn, setLoggedIn] = useState(true);  //имитация того, что пользователь не прошел аутентификацию
-  // const [loggedIn, setLoggedIn] = useState(false); //имитация того, что пользователь прошел аутентификацию
+  //const [loggedIn, setLoggedIn] = useState(true);  //имитация того, что пользователь не прошел аутентификацию
+  const [loggedIn, setLoggedIn] = useState(false); 
+  const [currentUser, setCurrentUser] = useState({});
   
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню
@@ -35,11 +39,13 @@ function App() {
     setIsBurgerOpened(!isBurgerMenuOpened);
   }
 
-
   function handleRegistration(username, password, email) {
-    mainApi.register(username, password, email).then(
+    // setIsLoader(true);
+    console.log(username, email, password);
+    mainApi.register(username, email, password,).then(
       (res) => {
-         if (res) {
+         if (res._id) {
+           handleLogin(email, password);
           // setPopupInfo({
           //   status: 'success',
           //   popupMessage: 'Вы успешно зарегистрировались!'
@@ -55,13 +61,18 @@ function App() {
           // })
           // setIsInfoTooltipOpen(true);
         })
+        // .finally(() => setIsLoader(false));
       }
   
 
-    function handleLogin(password, email) {
-      mainApi.authorize(password, email)
+    function handleLogin(email, password) {
+      console.log(email, password);
+      mainApi.authorize(email, password)
      .then ((data) => {
+          console.log(data);
           localStorage.setItem("jwt", data.token);
+          setLoggedIn(true);
+          history.push('/movies');
           // setLoggedIn(true);
           // setUserEmail(email);
           // setPopupInfo({
@@ -69,7 +80,7 @@ function App() {
           //   popupMessage: 'Вы успешно вошли на закрытую часть сайта!'
           // })
           // setIsInfoTooltipOpen(true);
-          history.push("/");
+          // history.push("/");
          })
         .catch((err) => {
           //  setPopupInfo({
@@ -84,6 +95,7 @@ function App() {
 
   return (
     <div className="app">
+      <CurrentUserContext.Provider value={currentUser}>
       <Route exact path={headerShowRoutes}>
         <Header
           loggedIn={loggedIn}
@@ -93,20 +105,32 @@ function App() {
       </Route>
       <Switch>
         <Route exact path="/" component={Main} />
+        
+        <Route exact path="/signup">
+          {!loggedIn ? (
+             <Register
+          // loggedIn={loggedIn}
+           handleRegistration={handleRegistration}
+          />
+          ) : (
+            <Redirect to='/' />
+          )}
+        </Route>
+        <Route exact path="/signin">
+           {!loggedIn ? (
+              <Login  handleLogin={handleLogin}/> 
+           ) : 
+             ( <Redirect to="/" />
+             )}
+        </Route>
+
         <Route 
           exact path="/movies"
           component={Movies}
           // setIsLoading={setIsLoading}          
         />
         <Route exact path="/saved-movies" component={SavedMovies} />
-        <Route exact path="/signup">
-          <Register
-          // loggedIn={loggedIn}
-          />
-        </Route>
-        <Route exact path="/signin">
-          {!loggedIn ? <Login /> : <Redirect to="/" />}
-        </Route>
+
         <Route path="/profile">
           <Profile />
         </Route>
@@ -117,6 +141,7 @@ function App() {
       <Route exact path={footerShowRoutes}>
         <Footer />
       </Route>   
+      </CurrentUserContext.Provider>
     </div>
   );
 }

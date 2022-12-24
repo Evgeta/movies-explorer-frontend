@@ -5,7 +5,9 @@ import "./Register.css";
 
 import logo from "../../images/logo.svg";
 
-function Register() {
+function Register({
+  handleRegistration
+}) {
 
   const [username, setUserName] = React.useState('');
   const [email, setEmail] = useState("");
@@ -25,13 +27,13 @@ function Register() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // handleRegistration(username, password, email);
+    handleRegistration(username, password, email);
   }
 
 
   return (
     <main className="register">
-      <form className="register__form" name="register">
+      <form className="register__form" name="register" onSubmit={handleSubmit}>
         <Link to="/" className="register__logo-link">
           <img
             src={logo}
