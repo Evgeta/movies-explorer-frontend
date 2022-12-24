@@ -13,6 +13,7 @@ import {
 } from '../../utils/utils.js';
 
 function Movies({
+  loggedIn,
   // setIsLoading,
   }) {
 
@@ -77,6 +78,11 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
 
 
   function handleSearchFormSubmit(searchStringValue){
+
+    console.log('выводим loggedIn');
+    console.log(loggedIn);
+
+
     console.log("handleSearchFormSubmit");
 
     localStorage.setItem('SearchString', searchStringValue);

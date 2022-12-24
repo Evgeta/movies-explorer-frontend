@@ -20,6 +20,7 @@ import {
 } from '../../contexts/CurrentUserContext.js';
 
 import { headerShowRoutes, footerShowRoutes } from "../../utils/constants.js";
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
 
 function App() {
 
@@ -69,9 +70,17 @@ function App() {
       console.log(email, password);
       mainApi.authorize(email, password)
      .then ((data) => {
+          console.log('выводим data');
           console.log(data);
           localStorage.setItem("jwt", data.token);
+          console.log('выводим loggedIn');
+          console.log(loggedIn);
+
           setLoggedIn(true);
+
+          console.log('выводим loggedIn');
+          console.log(loggedIn);
+
           history.push('/movies');
           // setLoggedIn(true);
           // setUserEmail(email);
@@ -90,8 +99,7 @@ function App() {
           // setIsInfoTooltipOpen(true);
         })
     }
-    
-  
+     
 
   return (
     <div className="app">
@@ -124,16 +132,25 @@ function App() {
              )}
         </Route>
 
-        <Route 
-          exact path="/movies"
+        <ProtectedRoute 
+          path="/movies"
           component={Movies}
+          loggedIn={loggedIn}
           // setIsLoading={setIsLoading}          
         />
-        <Route exact path="/saved-movies" component={SavedMovies} />
+        <ProtectedRoute 
+          path="/saved-movies"
+          component={SavedMovies}
+          loggedIn={loggedIn}
+        />
 
-        <Route path="/profile">
-          <Profile />
-        </Route>
+        <ProtectedRoute 
+           path="/profile"
+           component={Profile}
+           loggedIn={loggedIn}
+        />
+          
+      
         <Route path="*">
           <NotFoundPage />
         </Route>
