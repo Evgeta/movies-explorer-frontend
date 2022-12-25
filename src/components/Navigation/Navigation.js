@@ -20,7 +20,9 @@ function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
         isBurgerMenuOpened ? "opened-pane" : "closed-pane"
       }`}      
     >
-      {!isLanding && (  // на лэндинге по макету бугер меню не отображается
+      {
+      // !isLanding &&
+       (  // ??? на лэндинге по макету бугер меню не отображается ?
         <BurgerMenu
           isBurgerMenuOpened={isBurgerMenuOpened}
           onClickBurger={onClickBurger}

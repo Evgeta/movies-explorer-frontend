@@ -16,7 +16,7 @@ function Header({ loggedIn, onClickBurger, isBurgerMenuOpened }) {
     <header className="header">
       <div className="header__container">
         {location !== "/" ? (
-          <>
+          
             <Link to="/" className="header__logo-link">
               <img
                 className="header__logo"
@@ -24,19 +24,24 @@ function Header({ loggedIn, onClickBurger, isBurgerMenuOpened }) {
                 alt="Логотип Movies Explorer"
               />
             </Link>
-            <Navigation
-              onClickBurger={onClickBurger}
-              isBurgerMenuOpened={isBurgerMenuOpened}
-              isLanding={location === "/"}
-            />
-          </>
+           
+          
         ) : (
-          <>
+          
             <img
               className="header__logo"
               src={logo}
               alt="Логотип Movies Explorer"
-            />            
+            />)}      
+
+
+            {
+              loggedIn && (<Navigation
+              onClickBurger={onClickBurger}
+              isBurgerMenuOpened={isBurgerMenuOpened}
+              isLanding={location === "/"}
+            />)} 
+
             {!loggedIn && (
               <nav className="header__navigation">
                 <ul className="header__link-list">
@@ -56,8 +61,8 @@ function Header({ loggedIn, onClickBurger, isBurgerMenuOpened }) {
                 </ul>
               </nav>
             )}
-          </>
-        )}        
+          
+                
       </div>
     </header>
   );

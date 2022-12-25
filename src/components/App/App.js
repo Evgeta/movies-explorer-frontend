@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 
@@ -100,6 +100,24 @@ function App() {
         })
     }
      
+//проверка токена пользователя при монтировании App
+useEffect(() => {
+  const jwt = localStorage.getItem('jwt');
+  if (jwt) {
+    mainApi.checkToken(jwt)
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);   
+          setCurrentUser(res);                 
+          history.push('/');
+        }
+      })
+      .catch(err => console.log(err));
+  }
+}, [history]);
+
+
+
 
   return (
     <div className="app">

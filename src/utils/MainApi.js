@@ -60,7 +60,7 @@ import {
   };
 
 //проверки валидности токена и получениe email
- _checkToken (token) {
+ checkToken (token) {
   return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
@@ -68,7 +68,7 @@ import {
         'Authorization': `Bearer ${token}`,
       }
     })
-    .then(res => this.checkResponse(res))
+    .then(res => this._checkResponse(res))
     .then(data => data)
 }
 
