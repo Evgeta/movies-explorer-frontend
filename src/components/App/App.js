@@ -22,6 +22,9 @@ import {
 import { headerShowRoutes, footerShowRoutes } from "../../utils/constants.js";
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
 
+const [savedMoviesList, setSavedMoviesList] = useState([]); //сохраняем отмеченные фильмы
+
+
 function App() {
 
   const history = useHistory();
@@ -32,8 +35,6 @@ function App() {
   
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню
-
-
 
   // нажатие на иконку бургер-меню
   function handleBurgerMenuClick() {
@@ -117,6 +118,43 @@ useEffect(() => {
 }, [history]);
 
 
+// нажатие на лайк - cохранение фильма
+function handleFilmLike(movie) {
+  mainApi
+    .addNewMovie(movie)
+    .then(newMovie => setSavedMoviesList([newMovie, ...savedMoviesList]))
+    .catch(err => console.log(err))
+}
+
+// нажатие на иконку удаления
+function handleDeleteIconClick(movie) {
+  const movieToDelete = savedMoviesList.find(
+    (item) => item.movieId === movie.id || item.movieId === movie.movieId
+  );
+  mainApi
+    .deleteMovie(movieToDelete._id)
+    .then(() => {
+      // const newMoviesList = savedMoviesList.filter(m => {
+      //   if (movie.id === m.movieId || movie.movieId === m.movieId) {
+      //     return false;
+      //   } else {
+      //     return true;
+      //   }
+      // });
+      setSavedMoviesList(
+        // newMoviesList
+        savedMoviesList.filter(m => {
+          if (movie.id === m.movieId || movie.movieId === m.movieId) {
+            return false;
+          } else {
+            return true;
+          }
+        })
+        );
+    })
+    .catch(err => console.log(err))
+}
+
 
 
   return (
@@ -154,12 +192,15 @@ useEffect(() => {
           path="/movies"
           component={Movies}
           loggedIn={loggedIn}
-          // setIsLoading={setIsLoading}          
+          // setIsLoading={setIsLoading}     
+          onFilmLikeClick={handleFilmLike}
+          // onDeleteIconClick={handleDeleteIconClick}    
         />
         <ProtectedRoute 
           path="/saved-movies"
           component={SavedMovies}
           loggedIn={loggedIn}
+          onDeleteIconClick={handleDeleteIconClick}    
         />
 
         <ProtectedRoute 

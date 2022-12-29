@@ -59,7 +59,6 @@ export function filterMovies(movies, searchString, showShortMovies) {
     }
   })
 
-
 // //фильтруем по поисковой строке
 // const filteredMovies = filteredMovies.filter((movie) => {
 //   //усекаем и приводим к нижнему регистру русское и английское название фильма
@@ -86,7 +85,13 @@ export function filterMovies(movies, searchString, showShortMovies) {
 //     return filterShortMovies(filteredMovies);
 //   } else {
 //     return filteredMovies;
-//   }
-   
+//   }   
+}
+
+// проверка, сохранялся ли фильм
+export function findSavedMovie (savedMovies, movie) {
+  return savedMovies.find((item) => {
+    return item.movieId === (movie.id || movie.movieId);
+  });
 }
 

@@ -6,9 +6,20 @@ import "./MoviesCard.css";
 
 import { formatDuration } from '../../utils/utils.js';
 
-function MoviesCard({movie, saved = false}) {
+function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
   const location = useLocation().pathname;
-  
+ 
+  //  нажатие по кнопке лайк - сохраниение фильма
+  function handleFilmLikeClick() {
+    onFilmLikeClick(movie);
+  }
+
+  // удаление фильма из сохраненных
+  function handleDeleteIconClick() {
+    onDeleteIconClick(movie);
+  }
+
+
   return (
     <li className="movies-card">
       <article className="movies-card__item">
@@ -24,6 +35,7 @@ function MoviesCard({movie, saved = false}) {
                 type="button"
                 className="movies-card__button movies-card__button_type_saved"
                 title="Отменить сохранение"
+                onClick={handleFilmLikeClick}
               ></button>
             )}
 
@@ -33,6 +45,7 @@ function MoviesCard({movie, saved = false}) {
                 type="button"
                 className="movies-card__button movies-card__button_type_not-saved"
                 title="Сохранить"
+                onClick={handleFilmLikeClick}
               ></button>
             )}
 
@@ -41,6 +54,7 @@ function MoviesCard({movie, saved = false}) {
               type="button"
               className="movies-card__button movies-card__button_type_delete-icon"
               title="Удалить из сохрененных"
+              onClick={handleDeleteIconClick}
             ></button>
           )}
         </div>

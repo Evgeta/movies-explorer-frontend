@@ -108,15 +108,32 @@ import {
           headers: this._getHeaders(),
           body: JSON.stringify({
             country: data.country,
-            description: data.description,
             director: data.director,
             duration: data.duration,
-            image: data.image,
-            movieId: data.id,
-            nameRU: data.nameRU,
-            nameEN: data.nameEN,
-            trailerLink: data.trailerLink,
             year: data.year,
+            description: data.description,
+            image: data.image,
+            trailerLink: data.trailerLink,
+            // thumbnail: data.trailerLink,
+            movieId: data.id,
+            nameEN: data.nameEN,
+            nameRU: data.nameRU,
+
+/*
+country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    thumbnail,
+    movieId,
+    nameEN,
+    nameRU,
+*/
+
+
           })
         })
         .then((res) => this._checkResponse(res))

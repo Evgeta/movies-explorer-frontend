@@ -1,8 +1,12 @@
-import React, { useState, useEffect }  from "react";
+import React, { useState, useEffect, useContext,}  from "react";
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
+
+import {
+  CurrentUserContext
+} from '../../contexts/CurrentUserContext.js';
 
 import "./Movies.css";
 
@@ -15,6 +19,9 @@ import {
 function Movies({
   loggedIn,
   // setIsLoading,
+  onFilmLikeClick, 
+  onDeleteIconClick,
+  savedMoviesList,
   }) {
 
   // const [isLoading, setIsLoading] = useState(false); //состояние прелоадера
@@ -29,6 +36,7 @@ const [filteredMovies, setFilteredMovies] = useState([]);
 const [showShortMovies, setShowShortMovies] = useState(false); 
 const [searchString, setSearchString] = useState(""); //строка поиска
 
+const currentUser = useContext(CurrentUserContext);
 
 const [isLoading, setIsLoading] = useState(false); 
 
@@ -70,14 +78,18 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
 
   //сохранаяем отфильтрованные фильмы в локальном хранилище
   localStorage.setItem(
-    `movies`,
-    JSON.stringify(moviesList)
-  );
-
+      `${currentUser.email} - filtered_movies`,
+      JSON.stringify(moviesList)
+    );
 }
 
 
   function handleSearchFormSubmit(searchStringValue){
+
+
+    localStorage.setItem(`${currentUser.email} - searchString`, searchStringValue);
+    localStorage.setItem(`${currentUser.email} - showShortMovies`, showShortMovies);
+
 
     console.log('выводим loggedIn');
     console.log(loggedIn);
@@ -85,8 +97,8 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
 
     console.log("handleSearchFormSubmit");
 
-    localStorage.setItem('SearchString', searchStringValue);
-    localStorage.setItem('showShortMovies', showShortMovies);
+    // localStorage.setItem('SearchString', searchStringValue);
+    // localStorage.setItem('showShortMovies', showShortMovies);
 
     if (publicServerMovies.length === 0) {
 
@@ -123,7 +135,8 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
       );
     }   
 }
-  
+ 
+// нужно ли сохранять фильмы с общего хранилища?
   useEffect(() => {
     if (localStorage.getItem('movies-from-public-server')) {
       const movies = JSON.parse(
@@ -132,6 +145,26 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
     }
   }
   );
+
+  // извлекаем состояние чекбокса короткометражек из локального хранилища для текущего пользователя
+  useEffect(() => {
+    if (localStorage.getItem(`${currentUser.email} - showShortMovies`) === 'true') {
+      setShowShortMovies(true);
+    } else {
+      setShowShortMovies(false);
+    }
+  }, [currentUser]);
+
+  // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
+  
+useEffect(() => {
+  if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
+    const movies = JSON.parse(
+      localStorage.getItem(`${currentUser.email} - filtered_movies`)
+    );
+    setFilteredMovies(movies);    
+  }
+}, [currentUser]);
 
 
   return (
@@ -146,7 +179,10 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
       {isLoading && <Preloader />}  
       <MoviesCardList 
         moviesList={filteredMovies}
-        // isLoading = {isLoading}        
+        // isLoading = {isLoading}     
+        onFilmLikeClick={onFilmLikeClick}   
+        onDeleteIconClick={onDeleteIconClick} 
+        savedMoviesList={savedMoviesList}
       />
     </main>
   );

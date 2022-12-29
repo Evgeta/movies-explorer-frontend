@@ -7,9 +7,11 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 
 import { WIDTH_TO_COLUMS_NUMBER, CARDS_NUMBER } from '../../utils/constants';
 import { useScreenWidth } from '../../hooks/useScreenWidth';
+import { findSavedMovie } from '../../utils/utils.js';
+
 
 function MoviesCardList(
-  { moviesList,}
+  { moviesList, onFilmLikeClick, onDeleteIconClick, savedMoviesList}
 
 ) {
 
@@ -57,7 +59,9 @@ function MoviesCardList(
           <MoviesCard
             key={movie.id || movie._id}
             movie={movie}
-            saved={false}                        
+            saved={findSavedMovie(savedMoviesList, movie)}       
+            onFilmLikeClick={onFilmLikeClick}
+            onDeleteIconClick={onDeleteIconClick}                  
           />
         ))}
        </ul>

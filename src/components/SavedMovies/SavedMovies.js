@@ -6,13 +6,16 @@ import Preloader from "../Preloader/Preloader";
 
 import "./SavedMovies.css";
 
-function SavedMovies(isLoading) {
+function SavedMovies(isLoading, handleFilmLikeClick, handleDeleteIconClick) {
   return (
     <main className="saved-movies">
       <SearchForm />
       {/* {isLoading && <Preloader />} */}  
 
-      <MoviesCardList />
+      <MoviesCardList 
+        onFilmLikeClick={handleFilmLikeClick}   
+        onDeleteIconClick={handleDeleteIconClick} 
+      />
     </main>
   );
 }
