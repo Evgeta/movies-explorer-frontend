@@ -90,8 +90,56 @@ export function filterMovies(movies, searchString, showShortMovies) {
 
 // проверка, сохранялся ли фильм
 export function findSavedMovie (savedMovies, movie) {
-  return savedMovies.find((item) => {
-    return item.movieId === (movie.id || movie.movieId);
-  });
+
+  console.log('saved - внутри findSavedMovie');
+
+        // console.log('savedMovies');
+        // console.log(savedMovies);
+
+        // console.log('movie');
+        // console.log(movie);
+        // console.log(movie.id);
+  
+
+  if(savedMovies.length === 0) return false;
+  
+  const savedFilms = savedMovies.filter((item) => {
+
+      // console.log('item');
+      // console.log(item);
+      
+      // console.log('item.movie');
+      // console.log(item.movie);
+
+            // console.log('item.movie.movieId');
+            // console.log(item.movie.movieId);
+      
+      // console.log('item.movieId');
+      // console.log(item.movieId);
+
+              // console.log('movie.id');
+              // console.log(movie.id);
+
+       return item.movie.movieId === (movie.id || movie.movieId);
+     });
+
+          
+        // console.log('savedFilms.length');
+        // console.log(savedFilms.length);
+   
+  if(savedFilms.length > 0) console.log(true);
+  if(savedFilms.length === 0) console.log(false);
+
+  if(savedFilms.length > 0) return true
+  else return false;  
+  
+     
+  // console.log('saved - внутри findSavedMovie');
+  // console.log(saved);
+  
+  // return saved;
+  // return savedMovies.find((item) => {
+  //   return item.movieId === (movie.id || movie.movieId);
+  // });
 }
 

@@ -22,8 +22,6 @@ import {
 import { headerShowRoutes, footerShowRoutes } from "../../utils/constants.js";
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
 
-const [savedMoviesList, setSavedMoviesList] = useState([]); //сохраняем отмеченные фильмы
-
 
 function App() {
 
@@ -35,6 +33,8 @@ function App() {
   
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню
+
+  const [savedMoviesList, setSavedMoviesList] = useState([]); //массив для сохранения фильмов
 
   // нажатие на иконку бургер-меню
   function handleBurgerMenuClick() {
@@ -98,6 +98,7 @@ function App() {
           //   popupMessage: 'Что-то пошло не так! Попробуйте ещё раз.'
           // })
           // setIsInfoTooltipOpen(true);
+          console.log(err)
         })
     }
      
@@ -120,19 +121,51 @@ useEffect(() => {
 
 // нажатие на лайк - cохранение фильма
 function handleFilmLike(movie) {
+
+  console.log('movie внутри handleFilmLike');
+  console.log(movie);
+
+
   mainApi
     .addNewMovie(movie)
     .then(newMovie => setSavedMoviesList([newMovie, ...savedMoviesList]))
     .catch(err => console.log(err))
-}
+
+    console.log('savedMoviesList внутри handleFilmLike');
+    console.log(savedMoviesList);
+  }
 
 // нажатие на иконку удаления
 function handleDeleteIconClick(movie) {
+  
+  console.log('внутри handleDeleteIconClick');
+
+  console.log('movie');
+  console.log(movie);
+
+  console.log('movie');
+  console.log(movie);
+
   const movieToDelete = savedMoviesList.find(
-    (item) => item.movieId === movie.id || item.movieId === movie.movieId
+   
+    (item) => {
+      console.log('item');
+      console.log(item);
+
+      
+      return item.movie.movieId === movie.id || item.movie.movieId === movie.movieId}
   );
+
+  console.log('movieToDelete');
+
+  console.log(movieToDelete);
+  console.log(movieToDelete.movie._id);
+  // ?console.log(movieToDelete._id);
+
+
+
   mainApi
-    .deleteMovie(movieToDelete._id)
+    .deleteMovie(movieToDelete.movie._id)
     .then(() => {
       // const newMoviesList = savedMoviesList.filter(m => {
       //   if (movie.id === m.movieId || movie.movieId === m.movieId) {
@@ -143,8 +176,14 @@ function handleDeleteIconClick(movie) {
       // });
       setSavedMoviesList(
         // newMoviesList
-        savedMoviesList.filter(m => {
-          if (movie.id === m.movieId || movie.movieId === m.movieId) {
+        savedMoviesList.filter(item => {
+
+          console.log('item.movie.movieId');
+          console.log(item.movie.movieId);
+          
+
+
+          if (movie.id === item.movie.movieId || movie.movieId === item.movie.movieId) {
             return false;
           } else {
             return true;
@@ -194,13 +233,15 @@ function handleDeleteIconClick(movie) {
           loggedIn={loggedIn}
           // setIsLoading={setIsLoading}     
           onFilmLikeClick={handleFilmLike}
-          // onDeleteIconClick={handleDeleteIconClick}    
+          onDeleteIconClick={handleDeleteIconClick}    
+          savedMoviesList = {savedMoviesList}
         />
         <ProtectedRoute 
           path="/saved-movies"
           component={SavedMovies}
-          loggedIn={loggedIn}
+          loggedIn={loggedIn}          
           onDeleteIconClick={handleDeleteIconClick}    
+          savedMoviesList = {savedMoviesList}
         />
 
         <ProtectedRoute 

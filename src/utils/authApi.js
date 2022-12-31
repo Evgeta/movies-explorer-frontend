@@ -74,4 +74,14 @@ class authApi {
   }
 }
 
+//инициализация authAPI
+const mainApi = new MainApi({
+  baseUrl: SAVED_MOVIES_URL,
+  headers: {
+  //  authorization: token,
+    'Content-Type': 'application/json'
+  }
+});
+
+
 export default authApi;

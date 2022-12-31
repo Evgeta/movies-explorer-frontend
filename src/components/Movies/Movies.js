@@ -38,6 +38,10 @@ const [searchString, setSearchString] = useState(""); //строка поиск�
 
 const currentUser = useContext(CurrentUserContext);
 
+console.log('savedMoviesList - in Movies');
+console.log(savedMoviesList);
+
+
 const [isLoading, setIsLoading] = useState(false); 
 
   //изменение состояния чекбокса

@@ -8,6 +8,9 @@ import { formatDuration } from '../../utils/utils.js';
 
 function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
   const location = useLocation().pathname;
+
+  console.log("saved внутри MoviesCard");
+  console.log(saved);
  
   //  нажатие по кнопке лайк - сохраниение фильма
   function handleFilmLikeClick() {
@@ -35,7 +38,7 @@ function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
                 type="button"
                 className="movies-card__button movies-card__button_type_saved"
                 title="Отменить сохранение"
-                onClick={handleFilmLikeClick}
+                onClick={handleDeleteIconClick}
               ></button>
             )}
 
