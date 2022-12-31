@@ -64,7 +64,7 @@ function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
 
         <a
           target="_blank"
-          href=""
+          href={movie.trailerLink}
           rel="noopener noreferrer"
           className="movies-card__image-link"
         >
