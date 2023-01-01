@@ -7,11 +7,15 @@ import "./MoviesCard.css";
 import { formatDuration } from '../../utils/utils.js';
 
 function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
-  const location = useLocation().pathname;
+   const location = useLocation().pathname;
 
   console.log("saved внутри MoviesCard");
   console.log(saved);
  
+  console.log("movie внутри MoviesCard");
+  console.log(movie);
+ 
+
   //  нажатие по кнопке лайк - сохраниение фильма
   function handleFilmLikeClick() {
     onFilmLikeClick(movie);
@@ -22,15 +26,25 @@ function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
     onDeleteIconClick(movie);
   }
 
-
+  
   return (
     <li className="movies-card">
       <article className="movies-card__item">
         <div className="movies-card__description">
-          <div className="movies-card__info-box">
+
+        {location === "/movies" &&
+
+          (<div className="movies-card__info-box">
             <h2 className="movies-card__title">{movie.nameRU}</h2>
             <span className="movies-card__duration">{formatDuration(movie.duration)}</span>
-          </div>
+          </div>)
+        }
+        {location === "/saved-movies" &&
+          (<div className="movies-card__info-box">
+            <h2 className="movies-card__title">{movie.movie.nameRU}</h2>
+            <span className="movies-card__duration">{formatDuration(movie.duration)}</span>
+          </div>)
+          }
 
           {location === "/movies" &&
           saved && ( //если отображаем все фильмы + иконка для сохрененного
@@ -60,9 +74,10 @@ function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
               onClick={handleDeleteIconClick}
             ></button>
           )}
-        </div>
 
-        <a
+        </div>
+        {location === "/movies" &&   
+        (<a
           target="_blank"
           href={movie.trailerLink}
           rel="noopener noreferrer"
@@ -74,7 +89,26 @@ function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
             title={movie.description}
             className="movies-card__image"
           />
-        </a>
+        </a>)
+        }
+
+          {location === "/saved-movies" &&   
+            (<a
+              target="_blank"
+              href={movie.movie.trailerLink}
+              rel="noopener noreferrer"
+              className="movies-card__image-link"
+            >
+              <img
+                src={movie.movie.image}
+                alt={movie.movie.nameRU}
+                title={movie.movie.description}
+                className="movies-card__image"
+              />
+            </a>)
+        }
+
+
       </article>
     </li>
   );

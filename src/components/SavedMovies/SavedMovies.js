@@ -17,23 +17,43 @@ import {
 } from '../../utils/utils.js';
 
 
-function SavedMovies(
+function SavedMovies({
   loggedIn,
- // isLoading, 
-  //handleFilmLikeClick,
-  handleDeleteIconClick,
+  onDeleteIconClick,
   savedMoviesList,
-  ) {
+}) {
 
-// отфильтрованные фильмы (по чекбоксу короткометражек и строке поиска)
-const [filteredMovies, setFilteredMovies] = useState([]); 
 
-const [showShortMovies, setShowShortMovies] = useState(false); 
-const [searchString, setSearchString] = useState(""); //строка поиска
+  const currentUser = useContext(CurrentUserContext);
 
-const [displayMovies, setDisplayMovies] = useState(savedMoviesList); // фильмы, которые мы отобразим на странице
+  //состояние чек-бокса. Если сохранено - берем из локального хранилища
+  const [showShortMovies, setShowShortMovies] = useState(false);
+  //   localStorage.getItem(`${currentUser.email} - showShortMovies`) ?
+  //   localStorage.getItem(`${currentUser.email} - showShortMovies`) : false
+  // ); 
 
-const currentUser = useContext(CurrentUserContext);
+  // //строка поиска. Если сохранена - берем из локального хранилища
+  // const [searchString, setSearchString] = useState(
+  //   localStorage.getItem(`${currentUser.email} - searchString`) ?
+  //   localStorage.getItem(`${currentUser.email} - searchString`) : 
+  //   ''); 
+  
+  const [searchString, setSearchString] = useState('');
+
+
+// отфильтрованные сохраненные фильмы (по чекбоксу короткометражек и строке поиска)
+const [filteredMovies, setFilteredMovies] = useState(
+  (savedMoviesList.length > 0) ? 
+  filterMovies(savedMoviesList, searchString, showShortMovies)
+  :[]); 
+
+// фильмы, которые мы отобразим на странице
+const [displayMovies, setDisplayMovies] = useState(filteredMovies); 
+
+
+console.log('внутри SavedMovies');
+console.log('savedMoviesList');
+console.log(savedMoviesList);
 
 
 //изменение состояния чекбокса
@@ -41,7 +61,6 @@ function handleShowShortMovies() {
   setShowShortMovies(!showShortMovies);   
   localStorage.setItem(`${currentUser.email} - showShortMovies`, showShortMovies);
   setDisplayMovies(filterMovies(filteredMovies));
-
 }
 
 //изменение записи в строке поиска
@@ -49,7 +68,6 @@ function handleSearchStringChange(value) {
   console.log(value);
   setSearchString(value); 
 }
-
 
 // поиск по массиву и установка состояния
 function handleFilterMovies(movies, searchString, showShortMovies) {
@@ -76,16 +94,15 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
 
   setFilteredMovies(moviesList);
   setDisplayMovies(moviesList);
-  
-  
+    
 }
 
 
 function handleSearchFormSubmit(searchStringValue){
 
-
-  // localStorage.setItem(`${currentUser.email} - searchString`, searchStringValue);
-  // localStorage.setItem(`${currentUser.email} - showShortMovies`, showShortMovies);
+  //сохраняем текущие значения строки поиска и положение чек-бокса 
+  localStorage.setItem(`${currentUser.email} - searchString`, searchStringValue);
+  localStorage.setItem(`${currentUser.email} - showShortMovies`, showShortMovies);
 
 
   // console.log('выводим loggedIn');
@@ -105,12 +122,8 @@ function handleSearchFormSubmit(searchStringValue){
   } else {
     setFilteredMovies(moviesList);
     setDisplayMovies(moviesList);
-
   }    
 }
-
-
-
 
 // извлекаем состояние чекбокса короткометражек из локального хранилища для текущего пользователя
 useEffect(() => {
@@ -121,23 +134,23 @@ useEffect(() => {
   }
 }, [currentUser]);
 
-// извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
 
-useEffect(() => {
-if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
-  const movies = JSON.parse(
-    localStorage.getItem(`${currentUser.email} - filtered_movies`)
-  );
-  setFilteredMovies(movies);    
-}
-}, [currentUser]);
+// // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
+// useEffect(() => {
+// if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
+//   const movies = JSON.parse(
+//     localStorage.getItem(`${currentUser.email} - filtered_movies`)
+//   );
+//   setFilteredMovies(movies);    
+// }
+// }, [currentUser]);
 
 
 
   return (
     <main className="saved-movies">
       <SearchForm 
-      // handleSearchFormSubmit={handleSearchFormSubmit}
+      handleSearchFormSubmit={handleSearchFormSubmit}
       handleShowShortMovies={handleShowShortMovies}
       showShortMovies={showShortMovies}
       searchString={searchString}
@@ -147,11 +160,11 @@ if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
       {/* {isLoading && <Preloader />} */}  
 
       <MoviesCardList 
-        moviesList={filteredMovies}
+        moviesList={displayMovies}
         // isLoading = {isLoading}     
         // onFilmLikeClick={onFilmLikeClick}   
-        // onDeleteIconClick={onDeleteIconClick} 
-        // savedMoviesList={savedMoviesList}
+        onDeleteIconClick={onDeleteIconClick} 
+        savedMoviesList={savedMoviesList}
       />
     </main>
   );

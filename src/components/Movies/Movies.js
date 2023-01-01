@@ -17,8 +17,7 @@ import {
 } from '../../utils/utils.js';
 
 function Movies({
-  loggedIn,
-  // setIsLoading,
+  loggedIn,  
   onFilmLikeClick, 
   onDeleteIconClick,
   savedMoviesList,
@@ -47,6 +46,7 @@ const [isLoading, setIsLoading] = useState(false);
   //изменение состояния чекбокса
   function handleShowShortMovies() {
     setShowShortMovies(!showShortMovies);    
+    localStorage.setItem(`${currentUser.email} - showShortMovies`, showShortMovies);
   }
 
   //изменение записи в строке поиска

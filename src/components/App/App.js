@@ -34,7 +34,13 @@ function App() {
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню
 
-  const [savedMoviesList, setSavedMoviesList] = useState([]); //массив для сохранения фильмов
+  
+  //массив для сохранения фильмов
+  const [savedMoviesList, setSavedMoviesList] = useState([]);
+  //   localStorage.getItem(`${currentUser.email} - savedMovies`) ?
+  //   JSON.parse(localStorage.getItem(`${currentUser.email} - savedMovies`, savedMoviesList)) :
+  //   []   
+  // );
 
   // нажатие на иконку бургер-меню
   function handleBurgerMenuClick() {
@@ -133,6 +139,8 @@ function handleFilmLike(movie) {
 
     console.log('savedMoviesList внутри handleFilmLike');
     console.log(savedMoviesList);
+
+    localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);    
   }
 
 // нажатие на иконку удаления
@@ -190,11 +198,18 @@ function handleDeleteIconClick(movie) {
           }
         })
         );
+
+        localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);    
     })
     .catch(err => console.log(err))
 }
 
 
+//const [savedMoviesList, setSavedMoviesList] = useState([]);
+//   localStorage.getItem(`${currentUser.email} - savedMovies`) ?
+//   localStorage.getItem(`${currentUser.email} - savedMovies`, savedMoviesList):
+//   []   
+// );
 
   return (
     <div className="app">
