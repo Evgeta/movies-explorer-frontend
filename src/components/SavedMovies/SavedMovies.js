@@ -10,7 +10,7 @@ import {
 
 import "./SavedMovies.css";
 
-import moviesApi from '../../utils/MoviesApi.js';
+// import moviesApi from '../../utils/MoviesApi.js';
 
 import { 
   filterMovies, // фильтрация фльмов по короткометражкам и строке поиска
@@ -133,6 +133,39 @@ useEffect(() => {
     setShowShortMovies(false);
   }
 }, [currentUser]);
+
+
+// извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
+useEffect(() => {
+if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
+  const movies = JSON.parse(
+    localStorage.getItem(`${currentUser.email}  - savedMovies`)
+  );
+  setDisplayMovies(movies);
+  setFilteredMovies(movies);    
+}
+}, [currentUser]);
+
+
+// обновление списка фильмов после удаления из сохраненных
+useEffect(() => {
+    
+  const moviesList = filterMovies(savedMoviesList, searchString, showShortMovies);
+
+
+  // localStorage.setItem('SearchString', searchStringValue);
+  // localStorage.setItem('showShortMovies', showShortMovies);
+  if (moviesList.length === 0) {
+    //отображаем ошибку
+  } else {
+    setFilteredMovies(moviesList);
+    setDisplayMovies(moviesList);
+  }    
+
+     //setDisplayMovies(movies);  
+  
+  }, [savedMoviesList.length]);
+  
 
 
 // // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя

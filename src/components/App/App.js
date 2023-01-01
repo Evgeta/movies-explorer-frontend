@@ -144,36 +144,78 @@ function handleFilmLike(movie) {
   }
 
 // нажатие на иконку удаления
-function handleDeleteIconClick(movie) {
+function handleDeleteIconClick(movie, fromSaved) {
   
   console.log('внутри handleDeleteIconClick');
 
   console.log('movie');
   console.log(movie);
 
-  console.log('movie');
-  console.log(movie);
-
-  const movieToDelete = savedMoviesList.find(
+  
+  // const movieToDelete = savedMoviesList.find(
    
-    (item) => {
-      console.log('item');
-      console.log(item);
-
+  //   (item) => {
+  //     console.log('item');
+  //     console.log(item);
+   
       
-      return item.movie.movieId === movie.id || item.movie.movieId === movie.movieId}
-  );
+  //     // return item.movie.movieId === movie.id || item.movie.movieId === movie.movieId}
+  //     return item.movie.movieId === movie.movie.movieId || item.movie.movieId === movie.movieId}
+  // );
 
-  console.log('movieToDelete');
+  // console.log('movieToDelete');
 
-  console.log(movieToDelete);
-  console.log(movieToDelete.movie._id);
+  // console.log(movieToDelete);
+  //console.log(movieToDelete.movie._id);
   // ?console.log(movieToDelete._id);
+    
 
+  console.log('fromSaved');
+  console.log(fromSaved);
+  //console.log(movieToDelete.movie.movieId);
 
+  let idToDeleteOnServer = 0;  
+  let idToDeleteOnLocalArray = 0;  
+
+  if(fromSaved) 
+  {
+    const movieToDelete = savedMoviesList.find(
+      (item) => {
+       console.log('item');
+       console.log(item);
+       return item.movie.movieId === movie.movie.movieId || item.movie.movieId === movie.movieId}
+ );
+    console.log('movieToDelete');
+    console.log(movieToDelete);
+    
+    idToDeleteOnServer = movieToDelete.movie._id; 
+    console.log('idToDeleteOnServer - from saved');
+    console.log(idToDeleteOnServer);
+    idToDeleteOnLocalArray = movieToDelete.movie.movieId;  
+    console.log('idToDeleteLocalArray - from saved');
+    console.log(idToDeleteOnLocalArray);
+    
+  }
+  else 
+  { 
+    const movieToDelete = savedMoviesList.find(
+         (item) => {
+          console.log('item');
+          console.log(item);
+          return item.movie.movieId === movie.id || item.movie.movieId === movie.movieId}
+    );
+    console.log('movieToDelete');
+    console.log(movieToDelete);
+    idToDeleteOnServer = movieToDelete.movie._id;   
+    console.log('idToDeleteOnServer - from not-saved');
+    console.log(idToDeleteOnServer);
+    idToDeleteOnLocalArray = movieToDelete.movie.movieId;  
+    console.log('idToDeleteLocalArray - from not-saved');
+    console.log(idToDeleteOnLocalArray);
+  }
 
   mainApi
-    .deleteMovie(movieToDelete.movie._id)
+    .deleteMovie(idToDeleteOnServer)
     .then(() => {
       // const newMoviesList = savedMoviesList.filter(m => {
       //   if (movie.id === m.movieId || movie.movieId === m.movieId) {
@@ -188,10 +230,23 @@ function handleDeleteIconClick(movie) {
 
           console.log('item.movie.movieId');
           console.log(item.movie.movieId);
+
+          console.log('item.movie._id');
+          console.log(item.movie._id);
           
 
 
-          if (movie.id === item.movie.movieId || movie.movieId === item.movie.movieId) {
+          if (
+
+            //idToDeleteOnLocalArray === item.movie.movieId     //работает
+
+            idToDeleteOnServer === item.movie._id
+
+            // movie.id === item.movie.movieId 
+            //             || 
+            // movie.movieId === item.movie.movieId
+
+            ) {
             return false;
           } else {
             return true;
@@ -199,6 +254,9 @@ function handleDeleteIconClick(movie) {
         })
         );
 
+        console.log('savedMoviesList');
+        console.log(savedMoviesList);
+           
         localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);    
     })
     .catch(err => console.log(err))

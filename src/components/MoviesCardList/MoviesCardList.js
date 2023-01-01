@@ -38,6 +38,7 @@ function MoviesCardList(
     }
   }, [screenWidth, cardListLength, additionalCardsNumber]);
 
+  
   useEffect(() => {
       setMoviesCardsList(moviesList.slice(0, cardListLength));
       if (moviesList.length <= cardListLength) {

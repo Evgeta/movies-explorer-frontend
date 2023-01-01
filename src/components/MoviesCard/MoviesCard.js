@@ -23,7 +23,8 @@ function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
 
   // удаление фильма из сохраненных
   function handleDeleteIconClick() {
-    onDeleteIconClick(movie);
+    if (location === "/saved-movies") onDeleteIconClick(movie, true);
+    else onDeleteIconClick(movie, false);
   }
 
   
