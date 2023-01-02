@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext,}  from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
+import SearchErrorMessage from "../SearchErrorMessage/SearchErrorMessage";
 
 import {
   CurrentUserContext
@@ -12,9 +13,15 @@ import "./Movies.css";
 
 import moviesApi from '../../utils/MoviesApi.js';
 
+
 import { 
   filterMovies, // фильтрация фльмов по короткометражкам и строке поиска
 } from '../../utils/utils.js';
+
+import { 
+  NOT_FOUND_MESSAGE,
+  ERROR_DURING_REQUEST_MESSAGE
+}  from '../../utils/constants.js';
 
 function Movies({
   loggedIn,  
@@ -42,6 +49,9 @@ console.log(savedMoviesList);
 
 
 const [isLoading, setIsLoading] = useState(false); 
+
+const [searchError, setSearchError] = useState(false); 
+const [searchErrorMessage, setSearchErrorMessage] = useState(NOT_FOUND_MESSAGE); 
 
   //изменение состояния чекбокса
   function handleShowShortMovies() {
@@ -76,7 +86,20 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
 
   if (moviesList.length === 0) {
         //если не нашли фильмов - отображаем ошибку    
+        console.log('Ошибка - не найдено');
+        setSearchError(true); 
+        console.log('searchError');
+        console.log(searchError);
+        setSearchErrorMessage(NOT_FOUND_MESSAGE); 
+        console.log('searchErrorMessage');
+        console.log(searchErrorMessage);
+        console.log('searchError');
+        console.log(searchError);
   } 
+  else
+  {
+    setSearchError(false); 
+  }
 
   setFilteredMovies(moviesList);
 
@@ -86,7 +109,6 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
       JSON.stringify(moviesList)
     );
 }
-
 
   function handleSearchFormSubmit(searchStringValue){
 
@@ -180,6 +202,13 @@ useEffect(() => {
         searchString={searchString}
         handleSearchStringChange={handleSearchStringChange}
       />
+
+       {searchError && 
+        <SearchErrorMessage
+          searchErrorMessage={searchErrorMessage}
+        />
+       } 
+
       {isLoading && <Preloader />}  
       <MoviesCardList 
         moviesList={filteredMovies}
