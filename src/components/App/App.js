@@ -34,7 +34,8 @@ function App() {
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню
 
-  
+  const [isLoading, setIsLoading] = useState(false); 
+
   //массив для сохранения фильмов
   const [savedMoviesList, setSavedMoviesList] = useState([]);
   //   localStorage.getItem(`${currentUser.email} - savedMovies`) ?
@@ -48,7 +49,7 @@ function App() {
   }
 
   function handleRegistration(username, password, email) {
-    // setIsLoader(true);
+    setIsLoading(true);
     console.log(username, email, password);
     mainApi.register(username, email, password,).then(
       (res) => {
@@ -304,7 +305,8 @@ function handleDeleteIconClick(movie, fromSaved) {
           path="/movies"
           component={Movies}
           loggedIn={loggedIn}
-          // setIsLoading={setIsLoading}     
+          setIsLoading={setIsLoading}     
+          isLoading={isLoading}
           onFilmLikeClick={handleFilmLike}
           onDeleteIconClick={handleDeleteIconClick}    
           savedMoviesList = {savedMoviesList}

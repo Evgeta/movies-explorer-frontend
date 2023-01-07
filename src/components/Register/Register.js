@@ -1,35 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "./Register.css";
 
 import logo from "../../images/logo.svg";
+import useFormWithValidation from '../../hooks/useFormWithValidation.js';
 
 function Register({
   handleRegistration
 }) {
 
-  const [username, setUserName] = React.useState('');
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
 
-  function handleUserNameChange(e) {
-    setUserName(e.target.value);  
-  }
+  // const [username, setUserName] = React.useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+
+  // function handleUserNameChange(e) {
+  //   setUserName(e.target.value);  
+  // }
   
-  function handleEmailChange(e) {
-    setEmail(e.target.value);  
-  }
+  // function handleEmailChange(e) {
+  //   setEmail(e.target.value);  
+  // }
 
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
+  // function handlePasswordChange(e) {
+  //   setPassword(e.target.value);
+  // }
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleRegistration(username, password, email);
+    handleRegistration(values.username, values.password, values.email);
   }
 
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
     <main className="register">
@@ -47,27 +53,33 @@ function Register({
             Имя
           </label>
           <input 
-            className="register__form-input"
+            className={`register__form-input ${errors.name && 'register__input_error'}`}
             name="username"
             type="text"
             required
-            value={username}
-            onChange={handleUserNameChange}     
+            value={values.username || ""}
+            // onChange={handleUserNameChange}     
+            onChange={handleChange}     
+            minLength="2"
+            maxLength="30"
             />
+           <span className="register__error">{errors.username || ''}</span>
         </div>
         <div className="register__input-block">
           <label className="register__form-label" htmlFor="email">
             E-mail
           </label>
           <input 
-            className="register__form-input" 
+            className={`register__form-input ${errors.email && 'register__input_error'}`}
             name="email" 
             type="text"
             required
-            value={email}
-            onChange={handleEmailChange}     
+            value={values.email || ""}
+            onChange={handleChange}     
+            pattern='[a-z0-9]+@[a-z]+\.[a-z]{2,3}'  
             // placeholder="Email"       
             />
+           <span className="register__error">{errors.email || ''}</span>
         </div>
         <div className="register__input-block">
           <label className="register__form-label" htmlFor="password">
@@ -78,13 +90,17 @@ function Register({
             name="password"
             type="text"
             required
-            value={password}
-            onChange={handlePasswordChange}
+            value={values.password || ""}
+            onChange={handleChange}
           />
-          <span className="register__error">Что-то пошло не так...</span>
+          <span className="register__error">{errors.passsword || ''}</span>
         </div>
         <div className="register__form-footer">
-          <button type="submit" className="register__button">
+          <button 
+           type="submit" 
+           className={`register__button ${!isValid && 'register__button_disabled'}`}
+           disabled={!isValid}
+           >
             Зарегистрироваться
           </button>
           <span className="register__already">

@@ -25,6 +25,8 @@ import {
 
 function Movies({
   loggedIn,  
+  setIsLoading,
+  isLoading,
   onFilmLikeClick, 
   onDeleteIconClick,
   savedMoviesList,
@@ -48,7 +50,7 @@ console.log('savedMoviesList - in Movies');
 console.log(savedMoviesList);
 
 
-const [isLoading, setIsLoading] = useState(false); 
+//const [isLoading, setIsLoading] = useState(false); 
 
 const [searchError, setSearchError] = useState(false); 
 const [searchErrorMessage, setSearchErrorMessage] = useState(NOT_FOUND_MESSAGE); 
