@@ -11,6 +11,8 @@ function Header({ loggedIn, onClickBurger, isBurgerMenuOpened }) {
 
   const location = useLocation().pathname;
   
+  console.log('loggedIn внутри Header');  
+  console.log(loggedIn);  
 
   return (
     <header className="header">

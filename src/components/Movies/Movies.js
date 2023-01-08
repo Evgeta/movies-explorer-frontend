@@ -45,6 +45,8 @@ const [showShortMovies, setShowShortMovies] = useState(false);
 const [searchString, setSearchString] = useState(""); //строка поиска
 
 const currentUser = useContext(CurrentUserContext);
+console.log('currentUser в Movies');
+console.log(currentUser);
 
 console.log('savedMoviesList - in Movies');
 console.log(savedMoviesList);

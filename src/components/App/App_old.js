@@ -15,10 +15,9 @@ import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 import mainApi from '../../utils/MainApi.js';
-
 import {
   CurrentUserContext
-} from '../../contexts/CurrentUserContext';
+} from '../../contexts/CurrentUserContext.js';
 
 import { headerShowRoutes, footerShowRoutes } from "../../utils/constants.js";
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
@@ -30,14 +29,7 @@ function App() {
   
   //const [loggedIn, setLoggedIn] = useState(true);  //имитация того, что пользователь не прошел аутентификацию
   const [loggedIn, setLoggedIn] = useState(false); 
-  
-
-  //const currentUser = useContext(CurrentUserContext); 
-  
   const [currentUser, setCurrentUser] = useState({});
-    // {_id: '', 
-    //  name: '',
-    //  email: ''});
   
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню
@@ -128,15 +120,7 @@ useEffect(() => {
       .then((res) => {
         if (res) {
           setLoggedIn(true);   
-          console.log('res - внутри проверки тоекена при монтировании');
-          console.log(res);                  
-          console.log(res._id);                  
-          console.log(res.name);                  
-          console.log(res.email);                  
-
-          setCurrentUser({_id:res._id, name:res.name, email:res.email}); 
-          console.log('currentUser после присвоения res');
-          console.log(currentUser);                  
+          setCurrentUser(res);                 
           history.push('/');
         }
       })
@@ -283,53 +267,6 @@ function handleDeleteIconClick(movie, fromSaved) {
 }
 
 
-//получение информации о пользователе с сервера 
-
-useEffect(() => {
-  console.log('loggedIn - внутри useEffect');
-  console.log(loggedIn);
-  if (loggedIn) {
-    setIsLoading(true);
-    mainApi
-      .getUserInfo()
-      .then(res => 
-        {
-          console.log('res');
-          console.log(res);          
-          setCurrentUser(res)
-          console.log('currentUser');
-          console.log(currentUser);
-          
-          
-        })
-      .catch(err =>console.log(err))
-      .finally(() => setIsLoading(false));
-  
-      console.log(currentUser);
-    }
-}, [loggedIn]);
-
-
-function  handleUpdateProfile ({ name, email }) {
-  setIsLoading(true);
-  mainApi
-    .setUserInfo({ name, email })
-    .then(newUser => {
-      setCurrentUser(newUser);      
-    })
-    .catch(err =>console.log(err))
-    .finally(() => setIsLoading(true));
-}
-
-
-function handleLogOut() {
-  setCurrentUser({});
-  setLoggedIn(false);
-  localStorage.clear();
-  history.push('/');
-}
-
-
 //const [savedMoviesList, setSavedMoviesList] = useState([]);
 //   localStorage.getItem(`${currentUser.email} - savedMovies`) ?
 //   localStorage.getItem(`${currentUser.email} - savedMovies`, savedMoviesList):
@@ -355,26 +292,18 @@ function handleLogOut() {
           // loggedIn={loggedIn}
            handleRegistration={handleRegistration}
           />
-           ) : (
+          ) : (
             <Redirect to='/' />
-          )} 
+          )}
         </Route>
         <Route exact path="/signin">
            {!loggedIn ? (
               <Login  handleLogin={handleLogin}/> 
-             ) : 
+           ) : 
              ( <Redirect to="/" />
-             )} 
+             )}
         </Route>
 
-        <ProtectedRoute 
-           path="/profile"
-           component={Profile}       
-           loggedIn={loggedIn}    
-           handleUpdateProfile={handleUpdateProfile}           
-           handleLogOut={handleLogOut}
-        />
-        
         <ProtectedRoute 
           path="/movies"
           component={Movies}
@@ -392,7 +321,13 @@ function handleLogOut() {
           onDeleteIconClick={handleDeleteIconClick}    
           savedMoviesList = {savedMoviesList}
         />
-       
+
+        <ProtectedRoute 
+           path="/profile"
+           component={Profile}
+           loggedIn={loggedIn}
+        />
+          
       
         <Route path="*">
           <NotFoundPage />
