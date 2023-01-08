@@ -36,6 +36,9 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false); 
 
+
+  const [isRegisterError, setRegisterError] = useState(false); 
+
   //массив для сохранения фильмов
   const [savedMoviesList, setSavedMoviesList] = useState([]);
   //   localStorage.getItem(`${currentUser.email} - savedMovies`) ?
@@ -70,7 +73,7 @@ function App() {
           // })
           // setIsInfoTooltipOpen(true);
         })
-        // .finally(() => setIsLoader(false));
+       .finally(() => setIsLoading(false));
       }
   
 

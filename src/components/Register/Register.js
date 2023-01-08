@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "./Register.css";
@@ -53,7 +53,7 @@ function Register({
             Имя
           </label>
           <input 
-            className={`register__form-input ${errors.name && 'register__input_error'}`}
+            className={`register__form-input ${errors.username && 'register__form-input_error'}`}
             name="username"
             type="text"
             required
@@ -70,7 +70,7 @@ function Register({
             E-mail
           </label>
           <input 
-            className={`register__form-input ${errors.email && 'register__input_error'}`}
+            className={`register__form-input ${errors.email && 'register__form-input_error'}`}
             name="email" 
             type="text"
             required
@@ -95,6 +95,7 @@ function Register({
           />
           <span className="register__error">{errors.passsword || ''}</span>
         </div>
+        <span className="register__error"></span>
         <div className="register__form-footer">
           <button 
            type="submit" 

@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "./Login.css";
 
 import logo from "../../images/logo.svg";
+import useFormWithValidation from '../../hooks/useFormWithValidation.js';
 
-function Login() {
+function Login({
+  handleLogin
+}
+) {
+  
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleLogin(values.email, values.password);
+  }
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
+
   return (
     <main className="login">
-      <form className="login__form" name="login">
+      <form className="login__form" name="login" onSubmit={handleSubmit}>
         <Link to="/" className="login__logo-link">
           <img
             src={logo}
@@ -21,17 +37,37 @@ function Login() {
           <label className="login__form-label" htmlFor="email">
             E-mail
           </label>
-          <input className="login__form-input" name="email" type="email" required />          
+          <input 
+           className= {`login__form-input ${errors.email && 'login__form-input_error'}`}
+           name="email" 
+           type="email"
+           required            
+           value={values.email || ""}
+           onChange={handleChange}     
+           pattern='[a-z0-9]+@[a-z]+\.[a-z]{2,3}'
+          />          
+          <span className="register__error">{errors.email || ''}</span>
         </div>
         <div className="login__labels-block">
           <label className="login__form-label" htmlFor="password">
             Пароль
           </label>
-          <input className="login__form-input" name="password" type="text" required />          
+          <input 
+             className={`login__form-input ${errors.email && 'login__form-input_error'}`}
+             name="password"
+             type="text"
+             required 
+             value={values.password || ""}
+             onChange={handleChange}
+          />          
+          <span className="login__error">{errors.passsword || ''}</span>
         </div>
-        <span className="login__error">При авторизации произошла ошибка. Токен не передан или передан не в том формате.</span>
+        <span className="login__error"></span>
         <div className="login__form-footer">
-          <button type="submit" className="login__button">
+          <button 
+           type="submit"
+           className={`login__button ${!isValid && 'login__button_disabled'}`}
+           >
             Войти
           </button>
           <span className="login__already">
