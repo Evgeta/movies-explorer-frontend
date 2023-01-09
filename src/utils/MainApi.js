@@ -20,11 +20,13 @@ import {
     }
   
     //проверка ответа
-    _checkResponse(res) {
+    checkResponse(res) {
+      console.log('res внутри checkResponse');
+      console.log(res);
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return Promise.reject(res);
     }
   
   //запрос на регистрацию
@@ -40,7 +42,7 @@ import {
           password,          
         })
       })
-      .then((response) => this._checkResponse(response));
+      .then((response) => this.checkResponse(response));
   }
 
   //запрос на авторизацию
@@ -59,8 +61,8 @@ import {
            password
         })
       })
-      .then((response => this._checkResponse(response)))
-      .catch(err => console.log(err))
+      .then((response => this.checkResponse(response)))
+    //  .catch(err => console.log(err))
   };
 
 //проверки валидности токена и получениe email
@@ -72,7 +74,7 @@ import {
         'Authorization': `Bearer ${token}`,
       }
     })
-    .then(res => this._checkResponse(res))
+    .then(res => this.checkResponse(res))
     .then(data => data)
 }
 
@@ -82,7 +84,7 @@ import {
           method: 'GET',
           headers: this._getHeaders()
         })
-        .then((res) => this._checkResponse(res)
+        .then((res) => this.checkResponse(res)
         )
     }
   
@@ -90,7 +92,7 @@ import {
       return fetch(`${this._baseUrl}/users/me`, {
           headers: this._getHeaders()
         })
-        .then((res) => this._checkResponse(res)
+        .then((res) => this.checkResponse(res)
         )
     }
   
@@ -107,7 +109,7 @@ import {
             email: email
           })
         })
-        .then((res) => this._checkResponse(res))
+        .then((res) => this.checkResponse(res))
     }
   
 //      movie.thumbnail = `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`
@@ -174,7 +176,6 @@ country,
     nameRU,
 */
 
-
           }
           
           
@@ -203,7 +204,7 @@ country,
           method: 'DELETE',
           headers: this._getHeaders(),
         })
-        .then((res) => this._checkResponse(res))
+        .then((res) => this.checkResponse(res))
     }
   
 //     setLike(data) {

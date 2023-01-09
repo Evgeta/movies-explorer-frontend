@@ -7,7 +7,8 @@ import logo from "../../images/logo.svg";
 import useFormWithValidation from '../../hooks/useFormWithValidation.js';
 
 function Register({
-  handleRegistration
+  handleRegistration,
+  formErrorMessage
 }) {
 
   const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
@@ -95,7 +96,7 @@ function Register({
           />
           <span className="register__error">{errors.passsword || ''}</span>
         </div>
-        <span className="register__error"></span>
+        <span className="register__error">{formErrorMessage}</span>
         <div className="register__form-footer">
           <button 
            type="submit" 

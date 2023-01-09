@@ -20,7 +20,7 @@ import {
   CurrentUserContext
 } from '../../contexts/CurrentUserContext';
 
-import { headerShowRoutes, footerShowRoutes } from "../../utils/constants.js";
+import { headerShowRoutes, footerShowRoutes, ERROR_MESSAGES } from "../../utils/constants.js";
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
 
 
@@ -45,7 +45,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false); 
 
 
-  const [isRegisterError, setRegisterError] = useState(false); 
+  // const [isRegisterError, setRegisterError] = useState(false); 
 
   //массив для сохранения фильмов
   const [savedMoviesList, setSavedMoviesList] = useState([]);
@@ -53,6 +53,8 @@ function App() {
   //   JSON.parse(localStorage.getItem(`${currentUser.email} - savedMovies`, savedMoviesList)) :
   //   []   
   // );
+
+  const [formErrorMessage, setFormErrorMessage] = React.useState('');
 
   // нажатие на иконку бургер-меню
   function handleBurgerMenuClick() {
@@ -66,20 +68,16 @@ function App() {
       (res) => {
          if (res._id) {
            handleLogin(email, password);
-          // setPopupInfo({
-          //   status: 'success',
-          //   popupMessage: 'Вы успешно зарегистрировались!'
-          // })
-        //  setIsInfoTooltipOpen(true);
-         history.push("/sign-in");
+           setFormErrorMessage('');
+           history.push("/sign-in");
         }
       })
       .catch((err) => {
-          //   setPopupInfo({
-          //   status: 'error',
-          //   popupMessage: 'Что-то пошло не так! Попробуйте ещё раз.'
-          // })
-          // setIsInfoTooltipOpen(true);
+
+        console.log('err внутри handleRegistration');
+        console.log(err);
+        handleErrorMessage(err) ;
+
         })
        .finally(() => setIsLoading(false));
       }
@@ -89,34 +87,27 @@ function App() {
       console.log(email, password);
       mainApi.authorize(email, password)
      .then ((data) => {
-          console.log('выводим data');
-          console.log(data);
+          // console.log('выводим data');
+          // console.log(data);
           localStorage.setItem("jwt", data.token);
-          console.log('выводим loggedIn');
-          console.log(loggedIn);
+          // console.log('выводим loggedIn');
+          // console.log(loggedIn);
 
           setLoggedIn(true);
+          setFormErrorMessage('');
 
-          console.log('выводим loggedIn');
-          console.log(loggedIn);
+          // console.log('выводим loggedIn');
+          // console.log(loggedIn);
 
-          history.push('/movies');
-          // setLoggedIn(true);
-          // setUserEmail(email);
-          // setPopupInfo({
-          //   status: 'success',
-          //   popupMessage: 'Вы успешно вошли на закрытую часть сайта!'
-          // })
-          // setIsInfoTooltipOpen(true);
-          // history.push("/");
+          history.push('/movies');          
+                    
          })
         .catch((err) => {
-          //  setPopupInfo({
-          //   status: 'error',
-          //   popupMessage: 'Что-то пошло не так! Попробуйте ещё раз.'
-          // })
-          // setIsInfoTooltipOpen(true);
-          console.log(err)
+          
+          console.log('err внутри handleLogin');
+          console.log(err);
+          handleErrorMessage(err) ;
+
         })
     }
      
@@ -155,7 +146,8 @@ function handleFilmLike(movie) {
   mainApi
     .addNewMovie(movie)
     .then(newMovie => setSavedMoviesList([newMovie, ...savedMoviesList]))
-    .catch(err => console.log(err))
+    .catch(err => {console.log(err);
+                    handleErrorMessage(err)})
 
     console.log('savedMoviesList внутри handleFilmLike');
     console.log(savedMoviesList);
@@ -279,7 +271,8 @@ function handleDeleteIconClick(movie, fromSaved) {
            
         localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);    
     })
-    .catch(err => console.log(err))
+    .catch(err => { console.log(err);
+                    handleErrorMessage(err)})
 }
 
 
@@ -299,10 +292,15 @@ useEffect(() => {
           setCurrentUser(res)
           console.log('currentUser');
           console.log(currentUser);
-          
-          
+                    
         })
-      .catch(err =>console.log(err))
+      .catch(err =>
+          {
+          
+          console.log(err);
+          handleErrorMessage(err)}
+          
+          )
       .finally(() => setIsLoading(false));
   
       console.log(currentUser);
@@ -319,9 +317,11 @@ function handleUpdateProfile (name, email) {
     .then(newUser => {
       console.log(newUser);
       console.log(newUser.data);
-      setCurrentUser(newUser.data);      
+      setCurrentUser(newUser.data);    
+      setFormErrorMessage('');  
     })
-    .catch(err =>console.log(err))
+    .catch(err => {console.log(err);
+          handleErrorMessage(err)} )
     .finally(() => setIsLoading(false));
 }
 
@@ -333,6 +333,15 @@ function handleLogOut() {
   history.push('/');
 }
 
+
+function handleErrorMessage(err) {
+  console.log('err in handleErrorMessage');
+  console.log(err);
+  console.log(err.status);
+  if (err.status!=200) { setFormErrorMessage(ERROR_MESSAGES[err.status])
+}
+
+}
 
 //const [savedMoviesList, setSavedMoviesList] = useState([]);
 //   localStorage.getItem(`${currentUser.email} - savedMovies`) ?
@@ -358,6 +367,7 @@ function handleLogOut() {
              <Register
           // loggedIn={loggedIn}
            handleRegistration={handleRegistration}
+           formErrorMessage={formErrorMessage}
           />
            ) : (
             <Redirect to='/' />
@@ -365,7 +375,10 @@ function handleLogOut() {
         </Route>
         <Route exact path="/signin">
            {!loggedIn ? (
-              <Login  handleLogin={handleLogin}/> 
+              <Login 
+                 handleLogin={handleLogin}
+                 formErrorMessage={formErrorMessage}
+                 /> 
              ) : 
              ( <Redirect to="/" />
              )} 
@@ -377,6 +390,7 @@ function handleLogOut() {
            loggedIn={loggedIn}    
            handleUpdateProfile={handleUpdateProfile}           
            handleLogOut={handleLogOut}
+           formErrorMessage={formErrorMessage}
         />
         
         <ProtectedRoute 
@@ -389,6 +403,7 @@ function handleLogOut() {
           onDeleteIconClick={handleDeleteIconClick}    
           savedMoviesList = {savedMoviesList}
         />
+
         <ProtectedRoute 
           path="/saved-movies"
           component={SavedMovies}

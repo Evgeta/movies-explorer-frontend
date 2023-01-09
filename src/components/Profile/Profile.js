@@ -11,7 +11,8 @@ import useFormWithValidation from '../../hooks/useFormWithValidation.js';
 
 function Profile({
    handleUpdateProfile,
-   handleLogOut
+   handleLogOut,
+   formErrorMessage
 }
 ) {
 
@@ -76,6 +77,7 @@ function Profile({
           />          
           <span className="profile__error">{errors.email || ''}</span>        
         </div>
+        <span className="profile__error">{formErrorMessage }</span>        
         <div className="profile__form-footer">
           <button 
               type="submit" 

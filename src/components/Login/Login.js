@@ -7,7 +7,8 @@ import logo from "../../images/logo.svg";
 import useFormWithValidation from '../../hooks/useFormWithValidation.js';
 
 function Login({
-  handleLogin
+  handleLogin,
+  formErrorMessage
 }
 ) {
   
@@ -62,7 +63,7 @@ function Login({
           />          
           <span className="login__error">{errors.passsword || ''}</span>
         </div>
-        <span className="login__error"></span>
+        <span className="login__error">{formErrorMessage}</span>
         <div className="login__form-footer">
           <button 
            type="submit"
