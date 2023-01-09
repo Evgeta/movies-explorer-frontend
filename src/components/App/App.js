@@ -310,15 +310,19 @@ useEffect(() => {
 }, [loggedIn]);
 
 
-function  handleUpdateProfile ({ name, email }) {
+function handleUpdateProfile (name, email) {
   setIsLoading(true);
+  console.log('name, email внутри handleUpdateProfile');
+  console.log(name, email);
   mainApi
-    .setUserInfo({ name, email })
+    .setUserInfo( name, email )
     .then(newUser => {
-      setCurrentUser(newUser);      
+      console.log(newUser);
+      console.log(newUser.data);
+      setCurrentUser(newUser.data);      
     })
     .catch(err =>console.log(err))
-    .finally(() => setIsLoading(true));
+    .finally(() => setIsLoading(false));
 }
 
 

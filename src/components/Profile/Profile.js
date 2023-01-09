@@ -25,6 +25,8 @@ function Profile({
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log('values.name, values.email');
+    console.log(values.name, values.email);
     handleUpdateProfile(values.name, values.email);
   }
 
@@ -36,6 +38,7 @@ function Profile({
 
   //данные не валидны или совпадают со старыми 
   const dataBadToSave = (!isValid || (currentUser.name === values.name && currentUser.email === values.email));
+  
 
   return (
     <main className="profile">
@@ -82,7 +85,7 @@ function Profile({
             Редактировать
           </button>
           <button 
-            type="submit"  
+            type="button"  
             className="profile__button profile__button-logout"
             onClick={handleLogOut}
           >

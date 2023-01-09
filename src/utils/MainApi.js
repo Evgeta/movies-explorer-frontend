@@ -45,6 +45,10 @@ import {
 
   //запрос на авторизацию
   authorize (email, password) {
+    console.log('email, password - в авторизации');
+    console.log(email);
+    console.log(password);
+    
     return fetch(`${this._baseUrl}/signin`, {
         method: 'POST',
         headers: {
@@ -90,13 +94,17 @@ import {
         )
     }
   
-    setUserInfo(data) {
+    setUserInfo (name, email) {
+      console.log('name -внутри setUserInfo ');
+      console.log(name);
+      console.log('email');
+      console.log(email);
       return fetch(`${this._baseUrl}/users/me`, {
           method: 'PATCH',
           headers: this._getHeaders(),
           body: JSON.stringify({
-            name: data.name,
-            email: data.email
+            name: name,
+            email: email
           })
         })
         .then((res) => this._checkResponse(res))
