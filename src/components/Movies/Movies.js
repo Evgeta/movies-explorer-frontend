@@ -19,6 +19,7 @@ import {
 } from '../../utils/utils.js';
 
 import { 
+  ERROR_MESSAGES,
   NOT_FOUND_MESSAGE,
   ERROR_DURING_REQUEST_MESSAGE
 }  from '../../utils/constants.js';
@@ -80,7 +81,6 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
   console.log('showShortMovies');
   console.log(showShortMovies);
 
-
   //фильтруем фильмы по короткометражкам и строке 
   const moviesList = filterMovies(movies, searchString, showShortMovies);
 
@@ -117,6 +117,20 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
   function handleSearchFormSubmit(searchStringValue){
 
 
+  setFilteredMovies([]);
+  console.log('searchStringValue внутри handleSearchFormSubmit'); 
+  console.log(searchStringValue); 
+
+
+   if(!searchStringValue)
+   {
+    setSearchError(true);    
+    setSearchErrorMessage(ERROR_MESSAGES['NEED_KEYWORD']);
+    console.log(ERROR_MESSAGES['NEED_KEYWORD']);    
+    return;
+   } 
+    
+
     localStorage.setItem(`${currentUser.email} - searchString`, searchStringValue);
     localStorage.setItem(`${currentUser.email} - showShortMovies`, showShortMovies);
 
@@ -130,6 +144,11 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
     // localStorage.setItem('SearchString', searchStringValue);
     // localStorage.setItem('showShortMovies', showShortMovies);
 
+    console.log('publicServerMovies.length');
+    console.log(publicServerMovies.length);
+
+
+
     if (publicServerMovies.length === 0) {
 
     setIsLoading(true);
@@ -142,39 +161,43 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
         'movies-from-public-server',
         JSON.stringify(movies)
       );
+      }
+      )
 
+    .catch((err) => {
+      setSearchError(true);
+      setSearchErrorMessage(ERROR_MESSAGES['ERROR_DURING_REQUEST']);  
+      console.log(`Ошибка: ${err.status}`)
+    })
+    .finally(
+         setIsLoading(false)
+      );
+    } 
+    
       console.log('перед фильтрацией');
-      console.log('movies');
-      console.log(movies);
+      console.log('publicServerMovies');
+      console.log(publicServerMovies);
       console.log('searchString');
       console.log(searchString);
       console.log('showShortMovies');
       console.log(showShortMovies);
 
       handleFilterMovies(
-         movies,
+         publicServerMovies,
          searchString, 
-         showShortMovies); 
-    })
+         showShortMovies);     
 
-    .catch((err) => {
-      console.log(`Ошибка: ${err.status}`)
-    })
-    .finally(
-         setIsLoading(false)
-      );
-    }   
 }
  
-// нужно ли сохранять фильмы с общего хранилища?
+// данные по фильмам из общего хранилища, сохраненные в local storage (нужно ли?)
   useEffect(() => {
     if (localStorage.getItem('movies-from-public-server')) {
       const movies = JSON.parse(
-        localStorage.getItem('movies-from-public-server')
-      );      
+        localStorage.getItem('movies-from-public-server'));  
+    setPublicServerMovies(movies);
     }
-  }
-  );
+  }, [currentUser]);
+  
 
   // извлекаем состояние чекбокса короткометражек из локального хранилища для текущего пользователя
   useEffect(() => {
@@ -185,16 +208,15 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
     }
   }, [currentUser]);
 
-  // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
-  
-useEffect(() => {
-  if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
-    const movies = JSON.parse(
-      localStorage.getItem(`${currentUser.email} - filtered_movies`)
-    );
-    setFilteredMovies(movies);    
-  }
-}, [currentUser]);
+//   // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
+//   useEffect(() => {
+//   if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
+//     const movies = JSON.parse(
+//       localStorage.getItem(`${currentUser.email} - filtered_movies`)
+//     );
+//     setFilteredMovies(movies);    
+//   }
+// }, [currentUser]);
 
 
   return (

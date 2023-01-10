@@ -17,6 +17,12 @@ import {
 } from '../../utils/utils.js';
 
 
+import { 
+  ERROR_MESSAGES,
+  NOT_FOUND_MESSAGE,
+  ERROR_DURING_REQUEST_MESSAGE
+}  from '../../utils/constants.js';
+
 function SavedMovies({
   loggedIn,
   onDeleteIconClick,
@@ -39,6 +45,9 @@ function SavedMovies({
   //   ''); 
   
   const [searchString, setSearchString] = useState('');
+
+  const [searchError, setSearchError] = useState(false); 
+  const [searchErrorMessage, setSearchErrorMessage] = useState('NOT_FOUND_MESSAGE'); 
 
 
 // отфильтрованные сохраненные фильмы (по чекбоксу короткометражек и строке поиска)
@@ -70,32 +79,32 @@ function handleSearchStringChange(value) {
 }
 
 // поиск по массиву и установка состояния
-function handleFilterMovies(movies, searchString, showShortMovies) {
+// function handleFilterMovies(movies, searchString, showShortMovies) {
 
-  console.log('внутри handleFilterMovies');
-  console.log('movies');
-  console.log(movies);
-  console.log('searchString');
-  console.log(searchString);
-  console.log('showShortMovies');
-  console.log(showShortMovies);
-
-
-  //фильтруем фильмы по короткометражкам и строке 
-  const moviesList = filterMovies(savedMoviesList, searchString, showShortMovies);
-
-  console.log('moviesList - после фильтрации');
-  console.log(moviesList);
+//   console.log('внутри handleFilterMovies');
+//   console.log('movies');
+//   console.log(movies);
+//   console.log('searchString');
+//   console.log(searchString);
+//   console.log('showShortMovies');
+//   console.log(showShortMovies);
 
 
-  if (moviesList.length === 0) {
-        //если не нашли фильмов - отображаем ошибку    
-  } 
+//   //фильтруем фильмы по короткометражкам и строке 
+//   const moviesList = filterMovies(savedMoviesList, searchString, showShortMovies);
 
-  setFilteredMovies(moviesList);
-  setDisplayMovies(moviesList);
+//   console.log('moviesList - после фильтрации');
+//   console.log(moviesList);
+
+
+//   if (moviesList.length === 0) {
+//         //если не нашли фильмов - отображаем ошибку    
+//   } 
+
+//   setFilteredMovies(moviesList);
+//   setDisplayMovies(moviesList);
     
-}
+// }
 
 
 function handleSearchFormSubmit(searchStringValue){
@@ -119,10 +128,23 @@ function handleSearchFormSubmit(searchStringValue){
   // localStorage.setItem('showShortMovies', showShortMovies);
   if (moviesList.length === 0) {
     //отображаем ошибку
+    console.log('Ошибка - не найдено');
+    setSearchError(true); 
+    console.log('searchError');
+    console.log(searchError);
+    setSearchErrorMessage(NOT_FOUND_MESSAGE); 
+    console.log('searchErrorMessage');
+    console.log(searchErrorMessage);
+    console.log('searchError');
+    console.log(searchError);
+
+
   } else {
-    setFilteredMovies(moviesList);
-    setDisplayMovies(moviesList);
+    setSearchError(false); 
   }    
+
+  setFilteredMovies(moviesList);
+  setDisplayMovies(moviesList);
 }
 
 // извлекаем состояние чекбокса короткометражек из локального хранилища для текущего пользователя
@@ -157,12 +179,23 @@ useEffect(() => {
   // localStorage.setItem('showShortMovies', showShortMovies);
   if (moviesList.length === 0) {
     //отображаем ошибку
-  } else {
-    setFilteredMovies(moviesList);
-    setDisplayMovies(moviesList);
-  }    
+        console.log('Ошибка - не найдено');
+        setSearchError(true); 
+        console.log('searchError');
+        console.log(searchError);
+        setSearchErrorMessage(NOT_FOUND_MESSAGE); 
+        console.log('searchErrorMessage');
+        console.log(searchErrorMessage);
+        console.log('searchError');
+        console.log(searchError);
 
-     //setDisplayMovies(movies);  
+
+  } else {
+    setSearchError(false); 
+    
+  }    
+    setFilteredMovies(moviesList);
+    setDisplayMovies(moviesList);  
   
   }, [savedMoviesList.length]);
   

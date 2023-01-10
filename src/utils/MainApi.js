@@ -196,7 +196,7 @@ country,
           
           )
         })
-        .then((res) => this._checkResponse(res))
+        .then((res) => this.checkResponse(res))
     }
   
     deleteMovie(_id) {

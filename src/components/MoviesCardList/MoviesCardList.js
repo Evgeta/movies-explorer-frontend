@@ -46,6 +46,8 @@ function MoviesCardList(
       } else {
         setShowMoreButtonuttonVisible(true);        
       }    
+      console.log('moviesCardsList в UseEffect');
+      console.log(moviesCardsList);
   }, [moviesList, cardListLength]);
 
 

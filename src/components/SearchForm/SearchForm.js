@@ -2,6 +2,11 @@ import React, { useState }  from "react";
 
 import "./SearchForm.css";
 
+// import { 
+//   ERROR_MESSAGES,
+// }  from '../../utils/constants.js';
+
+
 function SearchForm({
     handleSearchFormSubmit,  
     handleShowShortMovies,
@@ -17,7 +22,7 @@ function SearchForm({
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleSearchFormSubmit();
+    handleSearchFormSubmit(searchString);
   };
 
   return (
@@ -28,8 +33,7 @@ function SearchForm({
             className="search-form__input"
             type="text"
             placeholder="Фильм"
-            aria-label="Поле для ввода критериев поиска фильмов"
-            required
+            aria-label="Поле для ввода критериев поиска фильмов"            
             onChange={onSearchStringChange}
             value={searchString}
           />

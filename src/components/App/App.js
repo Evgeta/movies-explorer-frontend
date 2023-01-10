@@ -69,7 +69,7 @@ function App() {
          if (res._id) {
            handleLogin(email, password);
            setFormErrorMessage('');
-           history.push("/");
+           history.push("/movies");
         }
       })
       .catch((err) => {
@@ -164,24 +164,6 @@ function handleDeleteIconClick(movie, fromSaved) {
   console.log(movie);
 
   
-  // const movieToDelete = savedMoviesList.find(
-   
-  //   (item) => {
-  //     console.log('item');
-  //     console.log(item);
-   
-      
-  //     // return item.movie.movieId === movie.id || item.movie.movieId === movie.movieId}
-  //     return item.movie.movieId === movie.movie.movieId || item.movie.movieId === movie.movieId}
-  // );
-
-  // console.log('movieToDelete');
-
-  // console.log(movieToDelete);
-  //console.log(movieToDelete.movie._id);
-  // ?console.log(movieToDelete._id);
-    
-
   console.log('fromSaved');
   console.log(fromSaved);
   //console.log(movieToDelete.movie.movieId);
@@ -195,7 +177,9 @@ function handleDeleteIconClick(movie, fromSaved) {
       (item) => {
        console.log('item');
        console.log(item);
-       return item.movie.movieId === movie.movie.movieId || item.movie.movieId === movie.movieId}
+       return item.movie.movieId === movie.movie.movieId 
+      // || item.movie.movieId === movie.movieId
+      }
  );
     console.log('movieToDelete');
     console.log(movieToDelete);
@@ -236,37 +220,63 @@ function handleDeleteIconClick(movie, fromSaved) {
       //     return true;
       //   }
       // });
-      setSavedMoviesList(
+
+      const newMoviesList =  savedMoviesList.filter(item => {
+
+        console.log('item.movie.movieId');
+        console.log(item.movie.movieId);
+
+        console.log('item.movie._id');
+        console.log(item.movie._id);
+     
+        if (
+
+          //idToDeleteOnLocalArray === item.movie.movieId     //работает
+
+          idToDeleteOnServer === item.movie._id
+
+          // movie.id === item.movie.movieId 
+          //             || 
+          // movie.movieId === item.movie.movieId
+
+          ) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+
+      setSavedMoviesList( newMoviesList
         // newMoviesList
-        savedMoviesList.filter(item => {
+        // savedMoviesList.filter(item => {
 
-          console.log('item.movie.movieId');
-          console.log(item.movie.movieId);
+        //   console.log('item.movie.movieId');
+        //   console.log(item.movie.movieId);
 
-          console.log('item.movie._id');
-          console.log(item.movie._id);
+        //   console.log('item.movie._id');
+        //   console.log(item.movie._id);
           
 
 
-          if (
+        //   if (
 
-            //idToDeleteOnLocalArray === item.movie.movieId     //работает
+        //     //idToDeleteOnLocalArray === item.movie.movieId     //работает
 
-            idToDeleteOnServer === item.movie._id
+        //     idToDeleteOnServer === item.movie._id
 
-            // movie.id === item.movie.movieId 
-            //             || 
-            // movie.movieId === item.movie.movieId
+        //     // movie.id === item.movie.movieId 
+        //     //             || 
+        //     // movie.movieId === item.movie.movieId
 
-            ) {
-            return false;
-          } else {
-            return true;
-          }
-        })
+        //     ) {
+        //     return false;
+        //   } else {
+        //     return true;
+        //   }
+        // })
         );
 
-        console.log('savedMoviesList');
+        console.log('savedMoviesList - после удаления фильма');
         console.log(savedMoviesList);
            
         localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);    

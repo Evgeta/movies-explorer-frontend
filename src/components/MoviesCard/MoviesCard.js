@@ -9,11 +9,11 @@ import { formatDuration } from '../../utils/utils.js';
 function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
    const location = useLocation().pathname;
 
-  console.log("saved внутри MoviesCard");
-  console.log(saved);
+  // console.log("saved внутри MoviesCard");
+  // console.log(saved);
  
-  console.log("movie внутри MoviesCard");
-  console.log(movie);
+  // console.log("movie внутри MoviesCard");
+  // console.log(movie);
  
 
   //  нажатие по кнопке лайк - сохраниение фильма
@@ -43,7 +43,7 @@ function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
         {location === "/saved-movies" &&
           (<div className="movies-card__info-box">
             <h2 className="movies-card__title">{movie.movie.nameRU}</h2>
-            <span className="movies-card__duration">{formatDuration(movie.duration)}</span>
+            <span className="movies-card__duration">{formatDuration(movie.movie.duration)}</span>
           </div>)
           }
 
