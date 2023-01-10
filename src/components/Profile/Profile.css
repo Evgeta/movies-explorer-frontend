@@ -104,7 +104,6 @@
   cursor: default;
 }
 
-
 .profile__button-logout {
   color: #EE3465;
   margin: 16px 0 0;
@@ -112,6 +111,10 @@
 
 .profile__button:hover {
   opacity: .8;
+}
+
+.profile__button_disabled:hover {
+  opacity: 1;
 }
 
 .profile__enter-link {

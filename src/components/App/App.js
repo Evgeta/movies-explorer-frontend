@@ -69,7 +69,7 @@ function App() {
          if (res._id) {
            handleLogin(email, password);
            setFormErrorMessage('');
-           history.push("/sign-in");
+           history.push("/");
         }
       })
       .catch((err) => {

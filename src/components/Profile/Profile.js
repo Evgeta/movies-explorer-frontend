@@ -46,12 +46,13 @@ function Profile({
       <form className="profile__form" name="profile" onSubmit={handleSubmit} noValidate>
         <h1 className="profile__form-title">
         {`Привет, ${currentUser.name}!`}</h1>
+        
         <div className="profile__control-box">
           <label className="profile__form-label" htmlFor="name">
             Имя
           </label>
           <input
-            className={`profile__form-input ${errors.username && 'profile__form-input_error'}`}
+            className={`profile__form-input ${errors.name && 'profile__form-input_error'}`}
             name="name"
             type="text"
             value={values.name || ""}
@@ -59,9 +60,9 @@ function Profile({
             minLength="2"
             maxLength="30"
             required
-          />  
-          <span className="profile__error">{errors.name || ''}</span>        
+          />            
         </div>
+        <span className="profile__error">{errors.name || ''}</span>        
         <div className="profile__control-box profile__control-box_no_border">
           <label className="profile__form-label" htmlFor="email">
             E-mail
@@ -74,9 +75,9 @@ function Profile({
             onChange={handleChange}     
             pattern='[a-z0-9]+@[a-z]+\.[a-z]{2,3}'  
             required
-          />          
-          <span className="profile__error">{errors.email || ''}</span>        
+          />                    
         </div>
+        <span className="profile__error">{errors.email || ''}</span>        
         <span className="profile__error">{formErrorMessage }</span>        
         <div className="profile__form-footer">
           <button 
