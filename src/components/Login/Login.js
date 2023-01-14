@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 
 import logo from "../../images/logo.svg";
-import useFormWithValidation from '../../hooks/useFormWithValidation.js';
+import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 
-function Login({
-  handleLogin,
-  formErrorMessage
-}
-) {
-  
-  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+function Login({ handleLogin, formErrorMessage }) {
+  const {
+    values,
+    handleChange,
+    resetForm,
+    errors,
+    isValid,
+  } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -38,37 +39,39 @@ function Login({
           <label className="login__form-label" htmlFor="email">
             E-mail
           </label>
-          <input 
-           className= {`login__form-input ${errors.email && 'login__form-input_error'}`}
-           name="email" 
-           type="email"
-           required            
-           value={values.email || ""}
-           onChange={handleChange}     
-           pattern='[a-z0-9]+@[a-z]+\.[a-z]{2,3}'
-          />          
-          <span className="register__error">{errors.email || ''}</span>
+          <input
+            className={`login__form-input ${errors.email &&
+              "login__form-input_error"}`}
+            name="email"
+            type="email"
+            required
+            value={values.email || ""}
+            onChange={handleChange}
+            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+          />
+          <span className="register__error">{errors.email || ""}</span>
         </div>
         <div className="login__labels-block">
           <label className="login__form-label" htmlFor="password">
             Пароль
           </label>
-          <input 
-             className={`login__form-input ${errors.email && 'login__form-input_error'}`}
-             name="password"
-             type="text"
-             required 
-             value={values.password || ""}
-             onChange={handleChange}
-          />          
-          <span className="login__error">{errors.passsword || ''}</span>
+          <input
+            className={`login__form-input ${errors.email &&
+              "login__form-input_error"}`}
+            name="password"
+            type="text"
+            required
+            value={values.password || ""}
+            onChange={handleChange}
+          />
+          <span className="login__error">{errors.passsword || ""}</span>
         </div>
         <span className="login__error">{formErrorMessage}</span>
         <div className="login__form-footer">
-          <button 
-           type="submit"
-           className={`login__button ${!isValid && 'login__button_disabled'}`}
-           >
+          <button
+            type="submit"
+            className={`login__button ${!isValid && "login__button_disabled"}`}
+          >
             Войти
           </button>
           <span className="login__already">

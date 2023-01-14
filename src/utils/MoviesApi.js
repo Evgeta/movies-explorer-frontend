@@ -1,37 +1,39 @@
 import {
-    MOVIES_URL,
-  } from './constants.js';
-   
-  class MoviesApi {
-    constructor({ baseUrl }) {
-      this._baseUrl = baseUrl;      
-    }
-    
-    //проверка ответа
-    _checkResponse(res) {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-  
-    //получение списка фильмов с сервера
-    getMovies() {
-      console.log("getMovies");
-      console.log(this._baseUrl);
-      return fetch(`${this._baseUrl}`, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then((res) => this._checkResponse(res)
-        )
-    }
+  MOVIES_URL,
+} from './constants.js';
+
+class MoviesApi {
+  constructor({
+    baseUrl
+  }) {
+    this._baseUrl = baseUrl;
   }
-  
-  //инициализация moviesAPI
-  export const moviesApi = new MoviesApi({
-    baseUrl: MOVIES_URL,    
-  });
-  
-  export default moviesApi;
-  
+
+  //проверка ответа
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
+  //получение списка фильмов с сервера
+  getMovies() {
+    console.log("getMovies");
+    console.log(this._baseUrl);
+    return fetch(`${this._baseUrl}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then((res) => this._checkResponse(res))
+  }
+}
+
+//инициализация moviesAPI
+export const moviesApi = new MoviesApi({
+  baseUrl: MOVIES_URL,
+});
+
+export default moviesApi;

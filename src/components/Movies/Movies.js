@@ -1,257 +1,205 @@
-import React, { useState, useEffect, useContext,}  from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import { useHistory } from "react-router-dom";
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import SearchErrorMessage from "../SearchErrorMessage/SearchErrorMessage";
 
-import {
-  CurrentUserContext
-} from '../../contexts/CurrentUserContext.js';
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 import "./Movies.css";
 
-import moviesApi from '../../utils/MoviesApi.js';
+import moviesApi from "../../utils/MoviesApi.js";
 
-
-import { 
+import {
   filterMovies, // фильтрация фльмов по короткометражкам и строке поиска
-} from '../../utils/utils.js';
+} from "../../utils/utils.js";
 
-import { 
-  ERROR_MESSAGES,
-  NOT_FOUND_MESSAGE,
-  ERROR_DURING_REQUEST_MESSAGE
-}  from '../../utils/constants.js';
+import { ERROR_MESSAGES, NOT_FOUND_MESSAGE } from "../../utils/constants.js";
 
 function Movies({
-  loggedIn,  
+  loggedIn,
   setIsLoading,
   isLoading,
-  onFilmLikeClick, 
+  onFilmLikeClick,
   onDeleteIconClick,
   savedMoviesList,
-  }) {
-
+}) {
   // const [isLoading, setIsLoading] = useState(false); //состояние прелоадера
 
-//фильмы, которые пришли через запрос на публичный сервер
-const [publicServerMovies, setPublicServerMovies] = useState([]);
-  
-// отфильтрованные фильмы (по чекбоксу короткометражек и строке поиска)
-const [filteredMovies, setFilteredMovies] = useState([]); 
- 
+  //фильмы, которые пришли через запрос на публичный сервер
+  const [publicServerMovies, setPublicServerMovies] = useState([]);
 
-const [showShortMovies, setShowShortMovies] = useState(false); 
-const [searchString, setSearchString] = useState(""); //строка поиска
+  // отфильтрованные фильмы (по чекбоксу короткометражек и строке поиска)
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
-const currentUser = useContext(CurrentUserContext);
-console.log('currentUser в Movies');
-console.log(currentUser);
+  const [showShortMovies, setShowShortMovies] = useState(false);
+  const [searchString, setSearchString] = useState(""); //строка поиска
 
-console.log('savedMoviesList - in Movies');
-console.log(savedMoviesList);
+  const history = useHistory();
 
+  const currentUser = useContext(CurrentUserContext);
+  console.log("currentUser в Movies");
+  console.log(currentUser);
 
-//const [isLoading, setIsLoading] = useState(false); 
+  console.log("savedMoviesList - in Movies");
+  console.log(savedMoviesList);
 
-const [searchError, setSearchError] = useState(false); 
-const [searchErrorMessage, setSearchErrorMessage] = useState(NOT_FOUND_MESSAGE); 
+  //const [isLoading, setIsLoading] = useState(false);
+
+  const [searchError, setSearchError] = useState(false);
+  const [searchErrorMessage, setSearchErrorMessage] = useState(
+    NOT_FOUND_MESSAGE
+  );
 
   //изменение состояния чекбокса
   function handleShowShortMovies() {
-    setShowShortMovies(!showShortMovies);    
-    localStorage.setItem(`${currentUser.email} - showShortMoviesPublic`, showShortMovies);
+    setShowShortMovies(!showShortMovies);
+    localStorage.setItem(
+      `${currentUser.email} - showShortMoviesPublic`,
+      showShortMovies
+    );
   }
 
   //изменение записи в строке поиска
-  function handleSearchStringChange(value) {   
+  function handleSearchStringChange(value) {
     console.log(value);
-    setSearchString(value); 
+    setSearchString(value);
   }
 
-// поиск по массиву и установка состояния
-function handleFilterMovies(movies, searchString, showShortMovies) {
+  // поиск по массиву и установка состояния
+  function handleFilterMovies(movies, searchString, showShortMovies) {
+    //фильтруем фильмы по короткометражкам и строке
+    const moviesList = filterMovies(movies, searchString, showShortMovies);
+    if (moviesList.length === 0) {
+      //если не нашли фильмов - отображаем ошибку
+      setSearchError(true);
+      setSearchErrorMessage(NOT_FOUND_MESSAGE);
+    } else {
+      setSearchError(false);
+    }
 
-  console.log('внутри handleFilterMovies');
-  console.log('movies');
-  console.log(movies);
-  console.log('searchString');
-  console.log(searchString);
-  console.log('showShortMovies');
-  console.log(showShortMovies);
+    setFilteredMovies(moviesList);
 
-  //фильтруем фильмы по короткометражкам и строке 
-  const moviesList = filterMovies(movies, searchString, showShortMovies);
-
-  console.log('moviesList - после фильтрации');
-  console.log(moviesList);
-
-
-  if (moviesList.length === 0) {
-        //если не нашли фильмов - отображаем ошибку    
-        console.log('Ошибка - не найдено');
-        setSearchError(true); 
-        console.log('searchError');
-        console.log(searchError);
-        setSearchErrorMessage(NOT_FOUND_MESSAGE); 
-        console.log('searchErrorMessage');
-        console.log(searchErrorMessage);
-        console.log('searchError');
-        console.log(searchError);
-  } 
-  else
-  {
-    setSearchError(false); 
-  }
-
-  setFilteredMovies(moviesList);
-
-  //сохранаяем отфильтрованные фильмы в локальном хранилище
-  localStorage.setItem(
+    //сохранаяем отфильтрованные фильмы в локальном хранилище
+    localStorage.setItem(
       `${currentUser.email} - filtered_movies`,
       JSON.stringify(moviesList)
     );
-}
+  }
 
-  function handleSearchFormSubmit(searchStringValue){
+  function handleSearchFormSubmit(searchStringValue) {
+    setFilteredMovies([]);
 
+    if (!searchStringValue) {
+      setSearchError(true);
+      setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);
+      console.log(ERROR_MESSAGES["NEED_KEYWORD"]);
+      return;
+    }
 
-  setFilteredMovies([]);
-  console.log('searchStringValue внутри handleSearchFormSubmit'); 
-  console.log(searchStringValue); 
+    //сохряняем состояния чекбокса и строки поиска
 
-
-   if(!searchStringValue)
-   {
-    setSearchError(true);    
-    setSearchErrorMessage(ERROR_MESSAGES['NEED_KEYWORD']);
-    console.log(ERROR_MESSAGES['NEED_KEYWORD']);    
-    return;
-   } 
- 
-   //сохряняем состояния чекбокса и строки поиска
-
-    localStorage.setItem(`${currentUser.email} - moviesSearchStringPublic`, searchStringValue);
-    localStorage.setItem(`${currentUser.email} - showShortMoviesPublic`, showShortMovies);
-
-
-    console.log('выводим loggedIn');
-    console.log(loggedIn);
-
-
-    console.log("handleSearchFormSubmit");
-
-
-    console.log('publicServerMovies.length');
-    console.log(publicServerMovies.length);
-
-
+    localStorage.setItem(
+      `${currentUser.email} - moviesSearchStringPublic`,
+      searchStringValue
+    );
+    localStorage.setItem(
+      `${currentUser.email} - showShortMoviesPublic`,
+      showShortMovies
+    );
 
     if (publicServerMovies.length === 0) {
+      setIsLoading(true);
+      moviesApi
+        .getMovies()
+        .then((movies) => {
+          setPublicServerMovies(movies);
+          localStorage.setItem(
+            "movies-from-public-server",
+            JSON.stringify(movies)
+          );
+        })
 
-    setIsLoading(true);
-    moviesApi.getMovies()
-    .then(movies => {
-      setPublicServerMovies(movies)
-      console.log(publicServerMovies);
-      
-      localStorage.setItem(
-        'movies-from-public-server',
-        JSON.stringify(movies)
-      );
-      }
-      )
+        .catch((err) => {
+          setSearchError(true);
+          setSearchErrorMessage(ERROR_MESSAGES["ERROR_DURING_REQUEST"]);
+        })
+        .finally(setIsLoading(false));
+    }
+    handleFilterMovies(publicServerMovies, searchString, showShortMovies);
+  }
 
-    .catch((err) => {
-      setSearchError(true);
-      setSearchErrorMessage(ERROR_MESSAGES['ERROR_DURING_REQUEST']);  
-      console.log(`Ошибка: ${err.status}`)
-    })
-    .finally(
-         setIsLoading(false)
-      );
-    } 
-    
-      console.log('перед фильтрацией');
-      console.log('publicServerMovies');
-      console.log(publicServerMovies);
-      console.log('searchString');
-      console.log(searchString);
-      console.log('showShortMovies');
-      console.log(showShortMovies);
-
-      handleFilterMovies(
-         publicServerMovies,
-         searchString, 
-         showShortMovies);     
-
-}
- 
-// данные по фильмам из общего хранилища, сохраненные в local storage 
+  // данные по фильмам из общего хранилища, сохраненные в local storage
   useEffect(() => {
-    if (localStorage.getItem('movies-from-public-server')) {
+    if (localStorage.getItem("movies-from-public-server")) {
       const movies = JSON.parse(
-        localStorage.getItem('movies-from-public-server'));  
-    setPublicServerMovies(movies);
+        localStorage.getItem("movies-from-public-server")
+      );
+      setPublicServerMovies(movies);
     }
   }, [currentUser]);
-  
-  
+
   // извлекаем состояние чекбокса короткометражек для списка фильмов из общедоступного сервиса из локального хранилища для текущего пользователя
   useEffect(() => {
-    if (localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`) === 'true') {
+    if (
+      localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`) ===
+      "true"
+    ) {
       setShowShortMovies(true);
     } else {
       setShowShortMovies(false);
     }
   }, [currentUser]);
 
-    
-
   // извлекаем значение строки поиска из локального хранилища для текущего пользователя
   useEffect(() => {
-    if (localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`) === 'true') {
-      setSearchString(localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`)); 
+    if (
+      localStorage.getItem(
+        `${currentUser.email} - moviesSearchStringPublic`
+      ) === "true"
+    ) {
+      setSearchString(
+        localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`)
+      );
     } else {
-      setSearchString('');
+      setSearchString("");
     }
-  }, [currentUser]);
+  }, [currentUser, history]);
 
   // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
   useEffect(() => {
-  if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
-    const movies = JSON.parse(
-      localStorage.getItem(`${currentUser.email} - filtered_movies`)
-    );
-    setFilteredMovies(movies);    
-  }
-}, [currentUser]);
-
+    if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
+      const movies = JSON.parse(
+        localStorage.getItem(`${currentUser.email} - filtered_movies`)
+      );
+      setFilteredMovies(movies);
+    }
+  }, [currentUser]);
 
   return (
     <main className="movies">
-      <SearchForm 
+      <SearchForm
         handleSearchFormSubmit={handleSearchFormSubmit}
         handleShowShortMovies={handleShowShortMovies}
         showShortMovies={showShortMovies}
         searchString={searchString}
-     //   setSearchString={setSearchString}
+        //   setSearchString={setSearchString}
         handleSearchStringChange={handleSearchStringChange}
       />
 
-       {searchError && 
-        <SearchErrorMessage
-          searchErrorMessage={searchErrorMessage}
-        />
-       } 
+      {searchError && (
+        <SearchErrorMessage searchErrorMessage={searchErrorMessage} />
+      )}
 
-      {isLoading && <Preloader />}  
-      <MoviesCardList 
+      {isLoading && <Preloader />}
+      <MoviesCardList
         moviesList={filteredMovies}
-        // isLoading = {isLoading}     
-        onFilmLikeClick={onFilmLikeClick}   
-        onDeleteIconClick={onDeleteIconClick} 
+        // isLoading = {isLoading}
+        onFilmLikeClick={onFilmLikeClick}
+        onDeleteIconClick={onDeleteIconClick}
         savedMoviesList={savedMoviesList}
       />
     </main>
