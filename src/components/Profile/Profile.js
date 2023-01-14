@@ -6,7 +6,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 
-function Profile({ handleUpdateProfile, handleLogOut, formErrorMessage }) {
+function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage }) {
   const {
     values,
     handleChange,

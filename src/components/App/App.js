@@ -88,6 +88,7 @@ function App() {
             setLoggedIn(true);
             setCurrentUser({ _id: res._id, name: res.name, email: res.email });
             history.push("/");
+            console.log(loggedIn);
           }
         })
         .catch((err) => console.log(err));
@@ -161,7 +162,7 @@ function App() {
     }
   }, [loggedIn]);
 
-  function handleUpdateProfile(name, email) {
+    function handleUpdateProfile(name, email) {
     setIsLoading(true);
     mainApi
       .setUserInfo(name, email)
@@ -188,6 +189,7 @@ function App() {
     }
   }
 
+  //получение сохраненных фильмов при монтировании приложения
   useEffect(() => {
     if (loggedIn && currentUser) {
       getSavedMovies();
@@ -249,7 +251,6 @@ function App() {
         </Route>
         <Switch>
           <Route exact path="/" component={Main} />
-
           <Route exact path="/signup">
              {!loggedIn ? ( 
             <Register
@@ -258,7 +259,7 @@ function App() {
             />
             ) : (
               <Redirect to="/" />
-            ) }
+            ) } 
           </Route>
           <Route exact path="/signin">
              {!loggedIn ? ( 
@@ -298,7 +299,6 @@ function App() {
             onDeleteIconClick={handleDeleteIconClick}
             savedMoviesList={savedMoviesList}
           />
-
           <Route path="*">
             <NotFoundPage handleGoBack={handleGoBack} />
           </Route>

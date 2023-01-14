@@ -20,7 +20,7 @@ import {
 import { ERROR_MESSAGES, NOT_FOUND_MESSAGE } from "../../utils/constants.js";
 
 function Movies({
-  // loggedIn,
+  loggedIn,
   setIsLoading,
   isLoading,
   onFilmLikeClick,
@@ -108,7 +108,7 @@ function Movies({
         .getMovies()
         .then((movies) => {
           setPublicServerMovies(movies);
-          handleFilterMovies(movies, searchString, showShortMovies);
+          // handleFilterMovies(movies, searchString, showShortMovies);
           console.log('movies from public server');
           console.log(movies);
           localStorage.setItem(

@@ -15,7 +15,7 @@ import {
 import { ERROR_MESSAGES, NOT_FOUND_MESSAGE } from "../../utils/constants.js";
 
 function SavedMovies({ 
-  // loggedIn, 
+  loggedIn, 
   onDeleteIconClick, savedMoviesList }) {
   const currentUser = useContext(CurrentUserContext);
   
