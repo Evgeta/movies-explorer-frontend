@@ -21,8 +21,6 @@ class MainApi {
 
   //проверка ответа
   checkResponse(res) {
-    console.log('res внутри checkResponse');
-    console.log(res);
     if (res.ok) {
       return res.json();
     }

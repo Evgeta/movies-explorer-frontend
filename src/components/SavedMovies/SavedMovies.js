@@ -14,7 +14,7 @@ import {
   filterMovies, // фильтрация фльмов по короткометражкам и строке поиска
 } from "../../utils/utils.js";
 
-import { NOT_FOUND_MESSAGE } from "../../utils/constants.js";
+import { ERROR_MESSAGES, NOT_FOUND_MESSAGE } from "../../utils/constants.js";
 
 function SavedMovies({ loggedIn, onDeleteIconClick, savedMoviesList }) {
   const currentUser = useContext(CurrentUserContext);
@@ -25,11 +25,7 @@ function SavedMovies({ loggedIn, onDeleteIconClick, savedMoviesList }) {
   const [searchString, setSearchString] = useState("");
 
   // отфильтрованные сохраненные фильмы (по чекбоксу короткометражек и строке поиска)
-  const [filteredMovies, setFilteredMovies] = useState(
-    savedMoviesList.length > 0
-      ? filterMovies(savedMoviesList, searchString, showShortMovies)
-      : []
-  );
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   // фильмы, которые мы отобразим на странице
   const [displayMovies, setDisplayMovies] = useState(filteredMovies);
@@ -46,16 +42,32 @@ function SavedMovies({ loggedIn, onDeleteIconClick, savedMoviesList }) {
       `${currentUser.email} - showShortMovies`,
       showShortMovies
     );
-    setDisplayMovies(filterMovies(filteredMovies));
+
+    if (!searchString) {
+      setSearchError(true);
+      setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);
+      return;
+    }
+    setDisplayMovies(
+      filterMovies(savedMoviesList, searchString, showShortMovies, true)
+    );
   }
 
   //изменение записи в строке поиска
   function handleSearchStringChange(value) {
-    console.log(value);
     setSearchString(value);
   }
 
   function handleSearchFormSubmit(searchStringValue) {
+   
+    console.log('вошли в handleSearchFormSubmit');  
+
+    if (!searchStringValue) {
+      setSearchError(true);
+      setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);
+      return;
+    }
+
     //сохраняем текущие значения строки поиска и положение чек-бокса
     localStorage.setItem(
       `${currentUser.email} - searchStringSaved`,
@@ -66,11 +78,17 @@ function SavedMovies({ loggedIn, onDeleteIconClick, savedMoviesList }) {
       showShortMovies
     );
 
+     console.log('значения перед фильтрацией в обработке формы сохраненных');  
+     console.log(savedMoviesList);  
+     console.log(searchStringValue); 
+     console.log(showShortMovies);  
+
     //фильтруем фильмы по короткометражкам и строке
     const moviesList = filterMovies(
       savedMoviesList,
-      searchString,
-      showShortMovies
+      searchStringValue,
+      showShortMovies,
+      true
     );
 
     if (moviesList.length === 0) {
@@ -83,33 +101,7 @@ function SavedMovies({ loggedIn, onDeleteIconClick, savedMoviesList }) {
     setFilteredMovies(moviesList);
     setDisplayMovies(moviesList);
   }
-
-  // извлекаем состояние чекбокса короткометражек из локального хранилища для текущего пользователя
-  useEffect(() => {
-    if (
-      localStorage.getItem(`${currentUser.email} - showShortMoviesSaved`) ===
-      "true"
-    ) {
-      setShowShortMovies(true);
-    } else {
-      setShowShortMovies(false);
-    }
-  }, [currentUser]);
-
-  // извлекаем значение строки поиска из локального хранилища для текущего пользователя
-  useEffect(() => {
-    if (
-      localStorage.getItem(`${currentUser.email} - moviesSearchStringSaved`) ===
-      "true"
-    ) {
-      setSearchString(
-        localStorage.getItem(`${currentUser.email} - moviesSearchStringSaved`)
-      );
-    } else {
-      setSearchString("");
-    }
-  }, [currentUser, history]);
-
+  
   // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
   useEffect(() => {
     if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
@@ -126,8 +118,10 @@ function SavedMovies({ loggedIn, onDeleteIconClick, savedMoviesList }) {
     const moviesList = filterMovies(
       savedMoviesList,
       searchString,
-      showShortMovies
+      showShortMovies,
+      true
     );
+
     if (moviesList.length === 0) {
       //отображаем ошибку
       setSearchError(true);
@@ -148,16 +142,14 @@ function SavedMovies({ loggedIn, onDeleteIconClick, savedMoviesList }) {
         searchString={searchString}
         handleSearchStringChange={handleSearchStringChange}
       />
-
       {searchError && (
         <SearchErrorMessage searchErrorMessage={searchErrorMessage} />
       )}
-
       <MoviesCardList
         moviesList={displayMovies}
         onDeleteIconClick={onDeleteIconClick}
         savedMoviesList={savedMoviesList}
-      />
+      />{" "}
     </main>
   );
 }

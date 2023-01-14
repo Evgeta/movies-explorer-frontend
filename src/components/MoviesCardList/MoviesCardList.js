@@ -15,6 +15,7 @@ function MoviesCardList({
   onDeleteIconClick,
   savedMoviesList,
 }) {
+
   const [moviesCardsList, setMoviesCardsList] = React.useState([]);
   const [showMoreButtonuttonVisible, setShowMoreButtonuttonVisible] = useState(
     true
@@ -68,7 +69,7 @@ function MoviesCardList({
       <ul className="movies-cardlist__list">
         {moviesCardsList.map((movie) => (
           <MoviesCard
-            key={movie.id || movie._id}
+            key={movie.id || movie._id || movie.movie._id }
             movie={movie}
             saved={findSavedMovie(savedMoviesList, movie)}
             onFilmLikeClick={onFilmLikeClick}

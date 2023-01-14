@@ -46,9 +46,7 @@ function Movies({
 
   console.log("savedMoviesList - in Movies");
   console.log(savedMoviesList);
-
-  //const [isLoading, setIsLoading] = useState(false);
-
+  
   const [searchError, setSearchError] = useState(false);
   const [searchErrorMessage, setSearchErrorMessage] = useState(
     NOT_FOUND_MESSAGE
@@ -65,14 +63,17 @@ function Movies({
 
   //изменение записи в строке поиска
   function handleSearchStringChange(value) {
-    console.log(value);
-    setSearchString(value);
+     setSearchString(value);
   }
 
   // поиск по массиву и установка состояния
   function handleFilterMovies(movies, searchString, showShortMovies) {
     //фильтруем фильмы по короткометражкам и строке
-    const moviesList = filterMovies(movies, searchString, showShortMovies);
+    const moviesList = filterMovies(movies, searchString, showShortMovies, false) ;
+
+    console.log('moviesList после фильтрации');
+    console.log(moviesList);
+
     if (moviesList.length === 0) {
       //если не нашли фильмов - отображаем ошибку
       setSearchError(true);
@@ -95,8 +96,7 @@ function Movies({
 
     if (!searchStringValue) {
       setSearchError(true);
-      setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);
-      console.log(ERROR_MESSAGES["NEED_KEYWORD"]);
+      setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);      
       return;
     }
 
@@ -185,8 +185,7 @@ function Movies({
         handleSearchFormSubmit={handleSearchFormSubmit}
         handleShowShortMovies={handleShowShortMovies}
         showShortMovies={showShortMovies}
-        searchString={searchString}
-        //   setSearchString={setSearchString}
+        searchString={searchString}        
         handleSearchStringChange={handleSearchStringChange}
       />
 
@@ -196,8 +195,7 @@ function Movies({
 
       {isLoading && <Preloader />}
       <MoviesCardList
-        moviesList={filteredMovies}
-        // isLoading = {isLoading}
+        moviesList={filteredMovies}        
         onFilmLikeClick={onFilmLikeClick}
         onDeleteIconClick={onDeleteIconClick}
         savedMoviesList={savedMoviesList}
