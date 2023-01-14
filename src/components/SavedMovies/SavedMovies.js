@@ -6,8 +6,6 @@ import SearchErrorMessage from "../SearchErrorMessage/SearchErrorMessage";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
-import { useHistory } from "react-router-dom";
-
 import "./SavedMovies.css";
 
 import {
@@ -16,10 +14,11 @@ import {
 
 import { ERROR_MESSAGES, NOT_FOUND_MESSAGE } from "../../utils/constants.js";
 
-function SavedMovies({ loggedIn, onDeleteIconClick, savedMoviesList }) {
+function SavedMovies({ 
+  // loggedIn, 
+  onDeleteIconClick, savedMoviesList }) {
   const currentUser = useContext(CurrentUserContext);
-  const history = useHistory();
-
+  
   //состояние чек-бокса. Если сохранено - берем из локального хранилища
   const [showShortMovies, setShowShortMovies] = useState(false);
   const [searchString, setSearchString] = useState("");

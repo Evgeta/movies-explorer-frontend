@@ -25,9 +25,6 @@ function MoviesCardList({
 
   const screenWidth = useScreenWidth();
 
-  console.log("savedMoviesList - in MoviesCardList");
-  console.log(savedMoviesList);
-
   useEffect(() => {
     if (screenWidth > WIDTH_TO_COLUMS_NUMBER.threeColunmsDelimeter) {
       setCardListLength(CARDS_NUMBER.threeColunms.cards);
@@ -50,9 +47,7 @@ function MoviesCardList({
       setShowMoreButtonuttonVisible(false);
     } else {
       setShowMoreButtonuttonVisible(true);
-    }
-    console.log("moviesCardsList в UseEffect");
-    console.log(moviesCardsList);
+    }    
   }, [moviesList, cardListLength]);
 
   const handleShowMoreButtonClick = () => {

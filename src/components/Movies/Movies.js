@@ -20,7 +20,7 @@ import {
 import { ERROR_MESSAGES, NOT_FOUND_MESSAGE } from "../../utils/constants.js";
 
 function Movies({
-  loggedIn,
+  // loggedIn,
   setIsLoading,
   isLoading,
   onFilmLikeClick,
@@ -41,12 +41,7 @@ function Movies({
   const history = useHistory();
 
   const currentUser = useContext(CurrentUserContext);
-  console.log("currentUser в Movies");
-  console.log(currentUser);
-
-  console.log("savedMoviesList - in Movies");
-  console.log(savedMoviesList);
-  
+      
   const [searchError, setSearchError] = useState(false);
   const [searchErrorMessage, setSearchErrorMessage] = useState(
     NOT_FOUND_MESSAGE
@@ -71,17 +66,13 @@ function Movies({
     //фильтруем фильмы по короткометражкам и строке
     const moviesList = filterMovies(movies, searchString, showShortMovies, false) ;
 
-    console.log('moviesList после фильтрации');
-    console.log(moviesList);
-
-    if (moviesList.length === 0) {
+      if (moviesList.length === 0) {
       //если не нашли фильмов - отображаем ошибку
       setSearchError(true);
       setSearchErrorMessage(NOT_FOUND_MESSAGE);
     } else {
       setSearchError(false);
     }
-
     setFilteredMovies(moviesList);
 
     //сохранаяем отфильтрованные фильмы в локальном хранилище
@@ -92,6 +83,7 @@ function Movies({
   }
 
   function handleSearchFormSubmit(searchStringValue) {
+
     setFilteredMovies([]);
 
     if (!searchStringValue) {
@@ -101,7 +93,6 @@ function Movies({
     }
 
     //сохряняем состояния чекбокса и строки поиска
-
     localStorage.setItem(
       `${currentUser.email} - moviesSearchStringPublic`,
       searchStringValue
@@ -117,18 +108,22 @@ function Movies({
         .getMovies()
         .then((movies) => {
           setPublicServerMovies(movies);
+          handleFilterMovies(movies, searchString, showShortMovies);
+          console.log('movies from public server');
+          console.log(movies);
           localStorage.setItem(
             "movies-from-public-server",
             JSON.stringify(movies)
           );
         })
-
-        .catch((err) => {
+        .catch(() => {
           setSearchError(true);
           setSearchErrorMessage(ERROR_MESSAGES["ERROR_DURING_REQUEST"]);
         })
-        .finally(setIsLoading(false));
-    }
+        .finally(setIsLoading(false));    
+      }
+    console.log('publicServerMovies');
+    console.log(publicServerMovies);
     handleFilterMovies(publicServerMovies, searchString, showShortMovies);
   }
 

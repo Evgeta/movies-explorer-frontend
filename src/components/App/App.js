@@ -96,9 +96,6 @@ function App() {
 
   // нажатие на лайк - cохранение фильма
   function handleFilmLike(movie) {
-    console.log("movie внутри handleFilmLike");
-    console.log(movie);
-
     mainApi
       .addNewMovie(movie)
       .then((newMovie) => setSavedMoviesList([newMovie, ...savedMoviesList]))
@@ -111,14 +108,13 @@ function App() {
   // нажатие на иконку удаления
   function handleDeleteIconClick(movie, fromSaved) {
     let idToDeleteOnServer = 0;
-    let idToDeleteOnLocalArray = 0;
-
+   
     if (fromSaved) {
       const movieToDelete = savedMoviesList.find((item) => {
         return item.movie.movieId === movie.movie.movieId;
       });
       idToDeleteOnServer = movieToDelete.movie._id;
-      idToDeleteOnLocalArray = movieToDelete.movie.movieId;
+     
     } else {
       const movieToDelete = savedMoviesList.find((item) => {
         return (
@@ -126,8 +122,7 @@ function App() {
           item.movie.movieId === movie.movieId
         );
       });
-      idToDeleteOnServer = movieToDelete.movie._id;
-      idToDeleteOnLocalArray = movieToDelete.movie.movieId;
+      idToDeleteOnServer = movieToDelete.movie._id;   
     }
     mainApi
       .deleteMovie(idToDeleteOnServer)
@@ -201,6 +196,11 @@ function App() {
 
   // получение сохраненных фильмоы с сервера и сохранение их в локальном хранилище
   function getSavedMovies() {
+
+    console.log('внутри getSavedMovies loggedIn && currentUser');
+    console.log(loggedIn);
+    console.log(currentUser);
+
     if (loggedIn && currentUser) {
       if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
         const movies = JSON.parse(
@@ -251,24 +251,24 @@ function App() {
           <Route exact path="/" component={Main} />
 
           <Route exact path="/signup">
-            {/* {!loggedIn ? ( */}
+             {!loggedIn ? ( 
             <Register
               handleRegistration={handleRegistration}
               formErrorMessage={formErrorMessage}
             />
-            {/* ) : (
+            ) : (
               <Redirect to="/" />
-            )} */}
+            ) }
           </Route>
           <Route exact path="/signin">
-            {/* {!loggedIn ? ( */}
+             {!loggedIn ? ( 
             <Login
               handleLogin={handleLogin}
               formErrorMessage={formErrorMessage}
             />
-            {/* ) : (
+             ) : (
               <Redirect to="/" />
-            )} */}
+            )} 
           </Route>
 
           <ProtectedRoute

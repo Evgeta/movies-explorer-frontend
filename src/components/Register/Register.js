@@ -49,6 +49,7 @@ function Register({ handleRegistration, formErrorMessage }) {
             onChange={handleChange}
             minLength="2"
             maxLength="30"
+            pattern="^[A-Za-zа-яА-ЯёЁ0-9\s-]+$"
           />
           <span className="register__error">{errors.username || ""}</span>
         </div>

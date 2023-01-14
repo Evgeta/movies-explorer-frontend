@@ -13,24 +13,15 @@ export function formatDuration(duration) {
   }
 }
 
-// фильтрация по короткометражкам (короткометрадки не отображаем)
-// function filterShortMovies(movies) {
-//   return movies.filter(movie => movie.duration > SHORTMOVIE_DURATION);
-// }
-
 // фильтрация по короткометражкам и по строке запроса
 export function filterMovies(movies, searchString, showShortMovies, fromSaved) {
 
   //усекаем значение строки поиска и приводим к нижнему регистру
   const cleanSearchString = searchString.trim().toLowerCase();
 
-  console.log('movies внутри фильтрации');
-  console.log(movies);
-
   let movieNameEn;
   let movieNameRu;
   let movieDuration;
-
 
   return movies.filter((movie) => {
        
@@ -44,11 +35,7 @@ export function filterMovies(movies, searchString, showShortMovies, fromSaved) {
       movieNameRu = String(movie.nameRU).trim().toLowerCase();
       movieDuration = movie.duration;    
     }
-      
-    console.log(movieNameEn);
-    console.log(movieNameRu);
-    console.log(movieDuration);
-    
+   
     if (showShortMovies) {
       return ((movieNameRu.includes(cleanSearchString) ||
           movieNameEn.includes(cleanSearchString)) &&
