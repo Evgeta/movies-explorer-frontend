@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext,}  from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
+import SearchErrorMessage from "../SearchErrorMessage/SearchErrorMessage";
 
 import {
   CurrentUserContext
@@ -20,10 +21,9 @@ import {
 
 
 import { 
-  ERROR_MESSAGES,
   NOT_FOUND_MESSAGE,
-  ERROR_DURING_REQUEST_MESSAGE
 }  from '../../utils/constants.js';
+
 
 function SavedMovies({
   loggedIn,
@@ -49,10 +49,7 @@ function SavedMovies({
   //   ''); 
   
   const [searchString, setSearchString] = useState('');
-
-  const [searchError, setSearchError] = useState(false); 
-  const [searchErrorMessage, setSearchErrorMessage] = useState('NOT_FOUND_MESSAGE'); 
-
+  
 
 // отфильтрованные сохраненные фильмы (по чекбоксу короткометражек и строке поиска)
 const [filteredMovies, setFilteredMovies] = useState(
@@ -60,7 +57,7 @@ const [filteredMovies, setFilteredMovies] = useState(
   filterMovies(savedMoviesList, searchString, showShortMovies)
   :[]); 
 
-  
+
 // фильмы, которые мы отобразим на странице
 const [displayMovies, setDisplayMovies] = useState(filteredMovies); 
 
@@ -69,6 +66,8 @@ console.log('внутри SavedMovies');
 console.log('savedMoviesList');
 console.log(savedMoviesList);
 
+const [searchError, setSearchError] = useState(false); 
+const [searchErrorMessage, setSearchErrorMessage] = useState(NOT_FOUND_MESSAGE); 
 
 //изменение состояния чекбокса
 function handleShowShortMovies() {
@@ -170,6 +169,7 @@ useEffect(() => {
   }
 }, [currentUser, history]);
 
+
 // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
 useEffect(() => {
 if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
@@ -213,6 +213,7 @@ useEffect(() => {
   }, [savedMoviesList.length]);
   
 
+  
 
 // // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
 // useEffect(() => {
@@ -236,7 +237,12 @@ useEffect(() => {
       handleSearchStringChange={handleSearchStringChange}
       
       />
-      {/* {isLoading && <Preloader />} */}  
+      
+      {searchError && 
+        <SearchErrorMessage
+          searchErrorMessage={searchErrorMessage}
+        />
+       } 
 
       <MoviesCardList 
         moviesList={displayMovies}

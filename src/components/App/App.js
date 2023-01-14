@@ -558,7 +558,7 @@ function getSavedMovies() {
            handleRegistration={handleRegistration}
            formErrorMessage={formErrorMessage}
           />
-           ) : (
+            ) : (
             <Redirect to='/' />
           )} 
         </Route>
