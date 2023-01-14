@@ -327,8 +327,7 @@ useEffect(() => {
           setCurrentUser(res)
           console.log('currentUser');
           console.log(currentUser);
-          //получаем сохраненные пользователем фильмы
-         // getSavedMovies();                    
+          
         })
       .catch(err =>
           {
@@ -603,7 +602,9 @@ function getSavedMovies() {
         />     
       
         <Route path="*">
-          <NotFoundPage handleGoBack={handleGoBack}/>
+          <NotFoundPage 
+            handleGoBack={handleGoBack}
+          />
         </Route>
       </Switch>
       <Route exact path={footerShowRoutes}>

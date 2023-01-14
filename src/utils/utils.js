@@ -107,20 +107,20 @@ export function findSavedMovie (savedMovies, movie) {
 
     console.log('внутри filter');
 
-       console.log('item');
-       console.log(item);
+      //  console.log('item');
+      //  console.log(item);
       
       // console.log('item.movie');
       // console.log(item.movie);
 
-            // console.log('item.movie.movieId');
-            // console.log(item.movie.movieId);
+    //  console.log('item.movie.movieId');
+    //  console.log(item.movie.movieId);
       
       // console.log('item.movieId');
       // console.log(item.movieId);
 
-              // console.log('movie.id');
-              // console.log(movie.id);
+      //  console.log('movie.id');
+      //  console.log(movie.id);
 
        return item.movie.movieId === (movie.id || movie.movieId);
      });
