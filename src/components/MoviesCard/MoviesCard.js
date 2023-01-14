@@ -26,7 +26,6 @@ function MoviesCard({movie, saved, onFilmLikeClick, onDeleteIconClick}) {
     if (location === "/saved-movies") onDeleteIconClick(movie, true);
     else onDeleteIconClick(movie, false);
   }
-
   
   return (
     <li className="movies-card">

@@ -133,7 +133,32 @@ useEffect(() => {
       })
       .catch(err => console.log(err));
   }
-}, [history]);
+}, []);
+
+
+
+// получение сохраненных фильмов из локального хранилища, в случае отсутствия - загрузка
+//с сервера при монтировании приложения
+
+// - не работает
+// useEffect(() => {
+//   if (loggedIn && currentUser) {
+    
+//   if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
+//     const movies = JSON.parse(
+//       localStorage.getItem(`${currentUser.email}  - savedMovies`)      
+      
+//     );
+//     console.log('фильмы есть в локальнм хранилище');
+//     console.log(movies);
+//     setSavedMoviesList(movies);}
+//     else 
+//     {
+//     console.log('фильмов нет в локальнм хранилище');  
+//     getSavedMovies(); 
+//     }
+//   }
+// }, [currentUser, loggedIn]);
 
 
 // нажатие на лайк - cохранение фильма
@@ -302,7 +327,8 @@ useEffect(() => {
           setCurrentUser(res)
           console.log('currentUser');
           console.log(currentUser);
-                    
+          //получаем сохраненные пользователем фильмы
+         // getSavedMovies();                    
         })
       .catch(err =>
           {
@@ -348,10 +374,164 @@ function handleErrorMessage(err) {
   console.log('err in handleErrorMessage');
   console.log(err);
   console.log(err.status);
-  if (err.status!=200) { setFormErrorMessage(ERROR_MESSAGES[err.status])
+  if (err.status!==200) { setFormErrorMessage(ERROR_MESSAGES[err.status])
 }
 
 }
+
+useEffect(() => {
+  if (loggedIn && currentUser) {
+    console.log("перед запуском getSavedMovies() после проверки loggedIn && currentUser");
+    console.log(currentUser);
+    getSavedMovies();
+  }
+}, [currentUser, loggedIn]);
+
+
+// получение сохраненных фильмоы с сервера и сохранение их в локальном хранилище
+
+function getSavedMovies() {
+
+  console.log('внутри getSavedMovies');
+
+  if (loggedIn && currentUser) {
+    
+  if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
+    const movies = JSON.parse(
+      localStorage.getItem(`${currentUser.email}  - savedMovies`)      
+      
+    );
+    console.log('фильмы есть в локальнм хранилище');
+    console.log(movies);
+    setSavedMoviesList(movies);}
+    else 
+    {
+    console.log('фильмов нет в локальнм хранилище');  
+    
+    mainApi
+    .getSavedMovies()
+    .then(data => {
+      console.log('data - внутри getSavedMovies, которые пришли с севера');
+      console.log(data);
+      console.log('currentUser._id - внутри getSavedMovies currentUser._id');
+      console.log(currentUser._id);
+      console.log(currentUser);
+
+      const movies = data.movies;
+      console.log('movies - внутри getSavedMovies, которые пришли с севера');
+      console.log(movies);
+   
+      
+      const currentUserMoviesList = movies.filter(movie => {
+        console.log('movie.owner');            
+        console.log(movie.owner);            
+        console.log('currentUser._id');            
+        console.log(currentUser._id);            
+        
+          if(movie.owner === currentUser._id) return true;
+          else return false;
+      });
+      console.log('currentUserMoviesList');
+      console.log(currentUserMoviesList);
+  
+    // console.log(JSON.stringify(currentUserMoviesList));
+
+    //   console.log(`{movies: ${JSON.stringify(currentUserMoviesList)}}`);
+      
+      
+      // const compatibleMovies = JSON.parse(`{movies: {${JSON.stringify(currentUserMoviesList)}}}`);
+
+      const compatibleMovies = currentUserMoviesList.map(item => 
+         {
+
+
+          // JSON.parse(`{movies: {${JSON.stringify(item)}}}`);
+
+        //   console.log(item);
+
+          // const stringItem = JSON.stringify(item);
+          // console.log(stringItem);
+
+          // const newItem =
+          
+    // const item2 =  {movies: item};
+    //  console.log(item2);
+            return  {movie: item};
+
+           //JSON.parse(`{movies: {${JSON.stringify(item)}}}`);
+          // console.log(newItem);
+
+          // item = newItem;
+
+
+        //JSON.parse(`{movies: {${JSON.stringify(item)}}}`);
+          // console.log(newItem);
+
+
+
+        }          
+      )
+
+
+
+
+      console.log('compatibleMovies');
+      console.log(compatibleMovies);
+
+      //  const compatibleMovies = JSON.parse 
+       
+      //  currentUserMoviesList.map(item => 
+      
+      
+      //   JSON.stringify(
+      //     {"movie":
+      //     {
+      //     movieId: data.id,  
+      //     nameRU: data.nameRU,
+      //     nameEN: data.nameEN,
+      //     director: data.director,
+      //     country: data.country,
+      //     year: data.year,  
+      //     duration: data.duration,
+      //     description: data.description,
+      //     trailerLink: data.trailerLink,
+      //     thumbnail: thumbnail,
+      //     image: image}
+      //   }
+      //   );    
+      setSavedMoviesList(compatibleMovies);
+
+      //setSavedMoviesList(currentUserMoviesList);
+      //movies.forEach(movie => {
+       //  console.log(movie);
+            
+       // }
+       // );
+    }
+            
+      )
+    .catch(err => {console.log(err);
+                    handleErrorMessage(err)})
+
+    console.log('savedMoviesList внутри getSavedMovies');
+    console.log(savedMoviesList);
+
+    localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);    
+  }
+  }
+
+
+
+  
+  }
+
+
+  // кнопка назад 
+  function handleGoBack() {
+    history.goBack();
+  }
+
+
 
 //const [savedMoviesList, setSavedMoviesList] = useState([]);
 //   localStorage.getItem(`${currentUser.email} - savedMovies`) ?
@@ -420,11 +600,10 @@ function handleErrorMessage(err) {
           loggedIn={loggedIn}          
           onDeleteIconClick={handleDeleteIconClick}    
           savedMoviesList = {savedMoviesList}
-        />
-       
+        />     
       
         <Route path="*">
-          <NotFoundPage />
+          <NotFoundPage handleGoBack={handleGoBack}/>
         </Route>
       </Switch>
       <Route exact path={footerShowRoutes}>

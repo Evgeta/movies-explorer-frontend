@@ -61,7 +61,7 @@ const [searchErrorMessage, setSearchErrorMessage] = useState(NOT_FOUND_MESSAGE);
   //изменение состояния чекбокса
   function handleShowShortMovies() {
     setShowShortMovies(!showShortMovies);    
-    localStorage.setItem(`${currentUser.email} - showShortMovies`, showShortMovies);
+    localStorage.setItem(`${currentUser.email} - showShortMoviesPublic`, showShortMovies);
   }
 
   //изменение записи в строке поиска
@@ -129,10 +129,11 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
     console.log(ERROR_MESSAGES['NEED_KEYWORD']);    
     return;
    } 
-    
+ 
+   //сохряняем состояния чекбокса и строки поиска
 
-    localStorage.setItem(`${currentUser.email} - searchString`, searchStringValue);
-    localStorage.setItem(`${currentUser.email} - showShortMovies`, showShortMovies);
+    localStorage.setItem(`${currentUser.email} - moviesSearchStringPublic`, searchStringValue);
+    localStorage.setItem(`${currentUser.email} - showShortMoviesPublic`, showShortMovies);
 
 
     console.log('выводим loggedIn');
@@ -141,8 +142,6 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
 
     console.log("handleSearchFormSubmit");
 
-    // localStorage.setItem('SearchString', searchStringValue);
-    // localStorage.setItem('showShortMovies', showShortMovies);
 
     console.log('publicServerMovies.length');
     console.log(publicServerMovies.length);
@@ -189,7 +188,7 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
 
 }
  
-// данные по фильмам из общего хранилища, сохраненные в local storage (нужно ли?)
+// данные по фильмам из общего хранилища, сохраненные в local storage 
   useEffect(() => {
     if (localStorage.getItem('movies-from-public-server')) {
       const movies = JSON.parse(
@@ -198,25 +197,36 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
     }
   }, [currentUser]);
   
-
-  // извлекаем состояние чекбокса короткометражек из локального хранилища для текущего пользователя
+  
+  // извлекаем состояние чекбокса короткометражек для списка фильмов из общедоступного сервиса из локального хранилища для текущего пользователя
   useEffect(() => {
-    if (localStorage.getItem(`${currentUser.email} - showShortMovies`) === 'true') {
+    if (localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`) === 'true') {
       setShowShortMovies(true);
     } else {
       setShowShortMovies(false);
     }
   }, [currentUser]);
 
-//   // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
-//   useEffect(() => {
-//   if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
-//     const movies = JSON.parse(
-//       localStorage.getItem(`${currentUser.email} - filtered_movies`)
-//     );
-//     setFilteredMovies(movies);    
-//   }
-// }, [currentUser]);
+    
+
+  // извлекаем значение строки поиска из локального хранилища для текущего пользователя
+  useEffect(() => {
+    if (localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`) === 'true') {
+      setSearchString(localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`)); 
+    } else {
+      setSearchString('');
+    }
+  }, [currentUser]);
+
+  // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
+  useEffect(() => {
+  if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
+    const movies = JSON.parse(
+      localStorage.getItem(`${currentUser.email} - filtered_movies`)
+    );
+    setFilteredMovies(movies);    
+  }
+}, [currentUser]);
 
 
   return (
@@ -226,6 +236,7 @@ function handleFilterMovies(movies, searchString, showShortMovies) {
         handleShowShortMovies={handleShowShortMovies}
         showShortMovies={showShortMovies}
         searchString={searchString}
+     //   setSearchString={setSearchString}
         handleSearchStringChange={handleSearchStringChange}
       />
 

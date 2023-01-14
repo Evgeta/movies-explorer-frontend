@@ -105,8 +105,10 @@ export function findSavedMovie (savedMovies, movie) {
   
   const savedFilms = savedMovies.filter((item) => {
 
-      // console.log('item');
-      // console.log(item);
+    console.log('внутри filter');
+
+       console.log('item');
+       console.log(item);
       
       // console.log('item.movie');
       // console.log(item.movie);

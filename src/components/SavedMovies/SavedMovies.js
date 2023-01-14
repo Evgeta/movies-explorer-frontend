@@ -8,6 +8,8 @@ import {
   CurrentUserContext
 } from '../../contexts/CurrentUserContext.js';
 
+import { useHistory, useLocation } from "react-router-dom";
+
 import "./SavedMovies.css";
 
 // import moviesApi from '../../utils/MoviesApi.js';
@@ -31,6 +33,8 @@ function SavedMovies({
 
 
   const currentUser = useContext(CurrentUserContext);
+
+  const history = useHistory();
 
   //состояние чек-бокса. Если сохранено - берем из локального хранилища
   const [showShortMovies, setShowShortMovies] = useState(false);
@@ -56,6 +60,7 @@ const [filteredMovies, setFilteredMovies] = useState(
   filterMovies(savedMoviesList, searchString, showShortMovies)
   :[]); 
 
+  
 // фильмы, которые мы отобразим на странице
 const [displayMovies, setDisplayMovies] = useState(filteredMovies); 
 
@@ -110,8 +115,8 @@ function handleSearchStringChange(value) {
 function handleSearchFormSubmit(searchStringValue){
 
   //сохраняем текущие значения строки поиска и положение чек-бокса 
-  localStorage.setItem(`${currentUser.email} - searchString`, searchStringValue);
-  localStorage.setItem(`${currentUser.email} - showShortMovies`, showShortMovies);
+  localStorage.setItem(`${currentUser.email} - searchStringSaved`, searchStringValue);
+  localStorage.setItem(`${currentUser.email} - showShortMoviesSaved`, showShortMovies);
 
 
   // console.log('выводим loggedIn');
@@ -149,13 +154,21 @@ function handleSearchFormSubmit(searchStringValue){
 
 // извлекаем состояние чекбокса короткометражек из локального хранилища для текущего пользователя
 useEffect(() => {
-  if (localStorage.getItem(`${currentUser.email} - showShortMovies`) === 'true') {
+  if (localStorage.getItem(`${currentUser.email} - showShortMoviesSaved`) === 'true') {
     setShowShortMovies(true);
   } else {
     setShowShortMovies(false);
   }
 }, [currentUser]);
 
+// извлекаем значение строки поиска из локального хранилища для текущего пользователя
+useEffect(() => {
+  if (localStorage.getItem(`${currentUser.email} - moviesSearchStringSaved`) === 'true') {
+    setSearchString(localStorage.getItem(`${currentUser.email} - moviesSearchStringSaved`)); 
+  } else {
+    setSearchString('');
+  }
+}, [currentUser, history]);
 
 // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
 useEffect(() => {
