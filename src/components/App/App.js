@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory, useLocation } from "react-router-dom";
 
 import "./App.css";
 
@@ -27,8 +27,13 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.js";
 
 function App() {
   const history = useHistory();
+  const location = useLocation();
 
   const [loggedIn, setLoggedIn] = useState(false);
+
+
+
+
   const [currentUser, setCurrentUser] = useState({});
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню
@@ -80,6 +85,7 @@ function App() {
   //проверка токена пользователя при монтировании App
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
+    const currentPath = location.pathname;
     if (jwt) {
       mainApi
         .checkToken(jwt)
@@ -87,7 +93,7 @@ function App() {
           if (res) {
             setLoggedIn(true);
             setCurrentUser({ _id: res._id, name: res.name, email: res.email });
-            history.push("/");
+            history.push(currentPath);
             console.log(loggedIn);
           }
         })
@@ -162,6 +168,7 @@ function App() {
     }
   }, [loggedIn]);
 
+  
     function handleUpdateProfile(name, email) {
     setIsLoading(true);
     mainApi
@@ -241,6 +248,8 @@ function App() {
 
   return (
     <div className="app">
+
+
       <CurrentUserContext.Provider value={currentUser}>
         <Route exact path={headerShowRoutes}>
           <Header
