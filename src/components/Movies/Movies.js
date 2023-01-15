@@ -43,9 +43,7 @@ function Movies({
   const currentUser = useContext(CurrentUserContext);
       
   const [searchError, setSearchError] = useState(false);
-  const [searchErrorMessage, setSearchErrorMessage] = useState(
-    NOT_FOUND_MESSAGE
-  );
+  const [searchErrorMessage, setSearchErrorMessage] = useState(NOT_FOUND_MESSAGE);
 
   //изменение состояния чекбокса
   function handleShowShortMovies() {
@@ -108,7 +106,7 @@ function Movies({
         .getMovies()
         .then((movies) => {
           setPublicServerMovies(movies);
-          // handleFilterMovies(movies, searchString, showShortMovies);
+          handleFilterMovies(movies, searchStringValue, showShortMovies);
           console.log('movies from public server');
           console.log(movies);
           localStorage.setItem(
@@ -122,9 +120,9 @@ function Movies({
         })
         .finally(setIsLoading(false));    
       }
-    console.log('publicServerMovies');
-    console.log(publicServerMovies);
-    handleFilterMovies(publicServerMovies, searchString, showShortMovies);
+    // console.log('publicServerMovies');
+    // console.log(publicServerMovies);
+    // handleFilterMovies(publicServerMovies, searchString, showShortMovies);
   }
 
   // данные по фильмам из общего хранилища, сохраненные в local storage

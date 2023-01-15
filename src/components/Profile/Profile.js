@@ -17,9 +17,6 @@ function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage
 
   const currentUser = useContext(CurrentUserContext);
 
-  console.log("currentUser");
-  console.log(currentUser);
-
   function handleSubmit(e) {
     e.preventDefault();
     console.log("values.name, values.email");

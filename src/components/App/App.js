@@ -30,10 +30,6 @@ function App() {
   const location = useLocation();
 
   const [loggedIn, setLoggedIn] = useState(false);
-
-
-
-
   const [currentUser, setCurrentUser] = useState({});
 
   const [isBurgerMenuOpened, setIsBurgerOpened] = useState(false); //контроль состояния окна бургер-меню
@@ -93,8 +89,7 @@ function App() {
           if (res) {
             setLoggedIn(true);
             setCurrentUser({ _id: res._id, name: res.name, email: res.email });
-            history.push(currentPath);
-            console.log(loggedIn);
+            history.push(currentPath);            
           }
         })
         .catch((err) => console.log(err));
@@ -129,7 +124,7 @@ function App() {
           item.movie.movieId === movie.movieId
         );
       });
-      idToDeleteOnServer = movieToDelete.movie._id;   
+        idToDeleteOnServer = movieToDelete.movie._id;   
     }
     mainApi
       .deleteMovie(idToDeleteOnServer)
@@ -167,7 +162,6 @@ function App() {
         .finally(() => setIsLoading(false));
     }
   }, [loggedIn]);
-
   
     function handleUpdateProfile(name, email) {
     setIsLoading(true);
@@ -205,13 +199,8 @@ function App() {
 
   // получение сохраненных фильмоы с сервера и сохранение их в локальном хранилище
   function getSavedMovies() {
-
-    console.log('внутри getSavedMovies loggedIn && currentUser');
-    console.log(loggedIn);
-    console.log(currentUser);
-
-    if (loggedIn && currentUser) {
-      if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
+      if (loggedIn && currentUser) {
+     if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
         const movies = JSON.parse(
           localStorage.getItem(`${currentUser.email}  - savedMovies`)
         );
@@ -248,8 +237,6 @@ function App() {
 
   return (
     <div className="app">
-
-
       <CurrentUserContext.Provider value={currentUser}>
         <Route exact path={headerShowRoutes}>
           <Header
