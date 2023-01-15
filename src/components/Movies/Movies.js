@@ -100,6 +100,7 @@ function Movies({
       showShortMovies
     );
 
+    
     if (publicServerMovies.length === 0) {
       setIsLoading(true);
       moviesApi
@@ -120,9 +121,9 @@ function Movies({
         })
         .finally(setIsLoading(false));    
       }
-    // console.log('publicServerMovies');
-    // console.log(publicServerMovies);
-    // handleFilterMovies(publicServerMovies, searchString, showShortMovies);
+     else{
+      handleFilterMovies(publicServerMovies, searchStringValue, showShortMovies);
+     }   
   }
 
   // данные по фильмам из общего хранилища, сохраненные в local storage
