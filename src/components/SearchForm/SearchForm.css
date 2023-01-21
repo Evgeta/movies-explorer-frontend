@@ -69,6 +69,7 @@
 .search-form__button {
   border: none;
   background-image: url('../../images/find-icon.svg');
+  background-color: #2BE080;
   background-position: center;
   object-fit: cover;
   background-repeat: no-repeat;
@@ -79,6 +80,11 @@
   padding: 0 48px 0 46px;
   transition: ease-in-out 0.2s;
   cursor: pointer;
+}
+
+.search-form__button_disabled {
+  background-image: url('../../images/find-icon-disabled.svg');
+  cursor: default;
 }
 
 .search-form__button:hover {

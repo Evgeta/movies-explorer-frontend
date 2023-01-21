@@ -8,6 +8,7 @@ function SearchForm({
   showShortMovies = true,
   searchString,  
   handleSearchStringChange,
+  searchButtonEnabled
 }) {
 
   function onSearchStringChange(e) {
@@ -31,7 +32,9 @@ function SearchForm({
             onChange={onSearchStringChange}
             value={searchString}
           />
-          <button className="search-form__button" type="submit"></button>
+          <button className = {`search-form__button ${!searchButtonEnabled &&
+            "search-form__button_disabled"}`}
+          type="submit"></button>
         </form>
         <div className="search-form__decorline"> </div>
         <label className="search-form__filter">

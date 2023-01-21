@@ -42,9 +42,11 @@ function Movies({
 
   const currentUser = useContext(CurrentUserContext);
       
-  const [searchError, setSearchError] = useState(false);
-  const [searchErrorMessage, setSearchErrorMessage] = useState(NOT_FOUND_MESSAGE);
+  const [searchError, setSearchError] = useState(true);
+  const [searchErrorMessage, setSearchErrorMessage] = useState(ERROR_MESSAGES["NEED_KEYWORD"]);
 
+  const [searchButtonEnabled, setSearchButtonState] = useState(false);
+  
   //изменение состояния чекбокса
   function handleShowShortMovies() {
     setShowShortMovies(!showShortMovies);
@@ -57,6 +59,16 @@ function Movies({
   //изменение записи в строке поиска
   function handleSearchStringChange(value) {
      setSearchString(value);
+     if (!value) {
+      setSearchError(true);
+      setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);      
+      setSearchButtonState(false);
+      return;
+    } 
+    else {
+      setSearchError(false);
+      setSearchButtonState(true);
+    }
   }
 
   // поиск по массиву и установка состояния
@@ -68,6 +80,7 @@ function Movies({
       //если не нашли фильмов - отображаем ошибку
       setSearchError(true);
       setSearchErrorMessage(NOT_FOUND_MESSAGE);
+
     } else {
       setSearchError(false);
     }
@@ -181,6 +194,7 @@ function Movies({
         showShortMovies={showShortMovies}
         searchString={searchString}        
         handleSearchStringChange={handleSearchStringChange}
+        searchButtonEnabled={searchButtonEnabled}
       />
 
       {searchError && (
