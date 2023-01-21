@@ -16,12 +16,13 @@ import { ERROR_MESSAGES, NOT_FOUND_MESSAGE } from "../../utils/constants.js";
 
 function SavedMovies({ 
   loggedIn, 
-  onDeleteIconClick, savedMoviesList }) {
+  onDeleteIconClick, 
+  savedMoviesList,
+  showShortMoviesSaved,
+  setShowShortMoviesSaved,
+  searchStringSaved,
+  setSearchStringSaved}) {
   const currentUser = useContext(CurrentUserContext);
-  
-  //состояние чек-бокса. Если сохранено - берем из локального хранилища
-  const [showShortMovies, setShowShortMovies] = useState(false);
-  const [searchString, setSearchString] = useState("");
 
   // отфильтрованные сохраненные фильмы (по чекбоксу короткометражек и строке поиска)
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -29,41 +30,47 @@ function SavedMovies({
   // фильмы, которые мы отобразим на странице
   const [displayMovies, setDisplayMovies] = useState(filteredMovies);
 
-  const [searchError, setSearchError] = useState(false);
-  const [searchErrorMessage, setSearchErrorMessage] = useState(
-    NOT_FOUND_MESSAGE
+  const [searchErrorSavedMovies, setSearchErrorSavedMovies] = useState(false);
+  const [searchErrorMessageSavedMovies, setSearchErrorMessageSavedMovies] = useState(
+    ERROR_MESSAGES["NEED_KEYWORD"]
   );
+
+  const [searchButtonSavedMoviesEnabled, setSearchButtonSavedMoviesState] = useState(false);
 
   //изменение состояния чекбокса
   function handleShowShortMovies() {
-    setShowShortMovies(!showShortMovies);
-    localStorage.setItem(
-      `${currentUser.email} - showShortMovies`,
-      showShortMovies
-    );
+    setShowShortMoviesSaved(!showShortMoviesSaved);
 
-    if (!searchString) {
-      setSearchError(true);
-      setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);
+    if (!searchStringSaved) {
+      setSearchErrorSavedMovies(true);
+      setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);
       return;
     }
     setDisplayMovies(
-      filterMovies(savedMoviesList, searchString, showShortMovies, true)
+      filterMovies(savedMoviesList, searchStringSaved, showShortMoviesSaved, true)
     );
   }
 
   //изменение записи в строке поиска
   function handleSearchStringChange(value) {
-    setSearchString(value);
+    setSearchStringSaved(value);
+    if (!value) {
+      setSearchErrorSavedMovies(true);
+      setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);      
+      setSearchButtonSavedMoviesState(false);
+      return;
+    } 
+    else {
+      setSearchErrorSavedMovies(false);
+      setSearchButtonSavedMoviesState(true);
+    }
   }
 
-  function handleSearchFormSubmit(searchStringValue) {
-   
-    console.log('вошли в handleSearchFormSubmit');  
-
+  function handleSearchFormSubmit(searchStringValue, showShortMoviesValue) {
+  
     if (!searchStringValue) {
-      setSearchError(true);
-      setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);
+      setSearchErrorSavedMovies(true);
+      setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);
       return;
     }
 
@@ -74,28 +81,23 @@ function SavedMovies({
     );
     localStorage.setItem(
       `${currentUser.email} - showShortMoviesSaved`,
-      showShortMovies
+      showShortMoviesValue
     );
-
-     console.log('значения перед фильтрацией в обработке формы сохраненных');  
-     console.log(savedMoviesList);  
-     console.log(searchStringValue); 
-     console.log(showShortMovies);  
-
+ 
     //фильтруем фильмы по короткометражкам и строке
     const moviesList = filterMovies(
       savedMoviesList,
       searchStringValue,
-      showShortMovies,
+      showShortMoviesValue,
       true
     );
 
     if (moviesList.length === 0) {
       //отображаем ошибку
-      setSearchError(true);
-      setSearchErrorMessage(NOT_FOUND_MESSAGE);
+      setSearchErrorSavedMovies(true);
+      setSearchErrorMessageSavedMovies(NOT_FOUND_MESSAGE);
     } else {
-      setSearchError(false);
+      setSearchErrorSavedMovies(false);
     }
     setFilteredMovies(moviesList);
     setDisplayMovies(moviesList);
@@ -116,39 +118,52 @@ function SavedMovies({
   useEffect(() => {
     const moviesList = filterMovies(
       savedMoviesList,
-      searchString,
-      showShortMovies,
+      searchStringSaved,
+      showShortMoviesSaved,
       true
     );
 
     if (moviesList.length === 0) {
       //отображаем ошибку
-      setSearchError(true);
-      setSearchErrorMessage(NOT_FOUND_MESSAGE);
+      setSearchErrorSavedMovies(true);
+      setSearchErrorMessageSavedMovies(NOT_FOUND_MESSAGE);
     } else {
-      setSearchError(false);
+      setSearchErrorSavedMovies(false);
     }
     setFilteredMovies(moviesList);
     setDisplayMovies(moviesList);
   }, [savedMoviesList.length]);
+
+  useEffect(() => {
+    if (!searchStringSaved) {
+      setSearchErrorSavedMovies(true);
+      setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);
+      setSearchButtonSavedMoviesState(false);
+      return;
+    } else {
+      setSearchErrorSavedMovies(false);
+      setSearchButtonSavedMoviesState(true);
+    }
+  }, []);
 
   return (
     <main className="saved-movies">
       <SearchForm
         handleSearchFormSubmit={handleSearchFormSubmit}
         handleShowShortMovies={handleShowShortMovies}
-        showShortMovies={showShortMovies}
-        searchString={searchString}
+        showShortMovies={showShortMoviesSaved}
+        searchString={searchStringSaved}
         handleSearchStringChange={handleSearchStringChange}
+        searchButtonEnabled={searchButtonSavedMoviesEnabled}
       />
-      {searchError && (
-        <SearchErrorMessage searchErrorMessage={searchErrorMessage} />
+      {searchErrorSavedMovies && (
+        <SearchErrorMessage searchErrorMessage={searchErrorMessageSavedMovies} />
       )}
       <MoviesCardList
         moviesList={displayMovies}
         onDeleteIconClick={onDeleteIconClick}
         savedMoviesList={savedMoviesList}
-      />{" "}
+      />
     </main>
   );
 }

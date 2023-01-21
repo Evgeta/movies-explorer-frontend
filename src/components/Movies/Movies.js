@@ -26,17 +26,20 @@ function Movies({
   onFilmLikeClick,
   onDeleteIconClick,
   savedMoviesList,
+  showShortMovies,
+  setShowShortMovies,
+  searchString,
+  setSearchString
 }) {
-  // const [isLoading, setIsLoading] = useState(false); //состояние прелоадера
-
+  
   //фильмы, которые пришли через запрос на публичный сервер
   const [publicServerMovies, setPublicServerMovies] = useState([]);
 
   // отфильтрованные фильмы (по чекбоксу короткометражек и строке поиска)
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  const [showShortMovies, setShowShortMovies] = useState(false);
-  const [searchString, setSearchString] = useState(""); //строка поиска
+  // const [showShortMovies, setShowShortMovies] = useState(false);
+  // const [searchString, setSearchString] = useState(""); //строка поиска
 
   const history = useHistory();
 
@@ -49,15 +52,12 @@ function Movies({
   
   //изменение состояния чекбокса
   function handleShowShortMovies() {
-    setShowShortMovies(!showShortMovies);
-    localStorage.setItem(
-      `${currentUser.email} - showShortMoviesPublic`,
-      showShortMovies
-    );
+    setShowShortMovies(!showShortMovies);    
   }
 
   //изменение записи в строке поиска
   function handleSearchStringChange(value) {
+
      setSearchString(value);
      if (!value) {
       setSearchError(true);
@@ -80,7 +80,6 @@ function Movies({
       //если не нашли фильмов - отображаем ошибку
       setSearchError(true);
       setSearchErrorMessage(NOT_FOUND_MESSAGE);
-
     } else {
       setSearchError(false);
     }
@@ -112,7 +111,6 @@ function Movies({
       `${currentUser.email} - showShortMoviesPublic`,
       showShortMovies
     );
-
     
     if (publicServerMovies.length === 0) {
       setIsLoading(true);
@@ -120,9 +118,7 @@ function Movies({
         .getMovies()
         .then((movies) => {
           setPublicServerMovies(movies);
-          handleFilterMovies(movies, searchStringValue, showShortMovies);
-          console.log('movies from public server');
-          console.log(movies);
+          handleFilterMovies(movies, searchStringValue, showShortMovies);          
           localStorage.setItem(
             "movies-from-public-server",
             JSON.stringify(movies)
@@ -149,32 +145,62 @@ function Movies({
     }
   }, [currentUser]);
 
-  // извлекаем состояние чекбокса короткометражек для списка фильмов из общедоступного сервиса из локального хранилища для текущего пользователя
   useEffect(() => {
-    if (
-      localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`) ===
-      "true"
-    ) {
-      setShowShortMovies(true);
+    if (!searchString) {
+      setSearchError(true);
+      setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);
+      setSearchButtonState(false);
+      return;
     } else {
-      setShowShortMovies(false);
+      setSearchError(false);
+      setSearchButtonState(true);
     }
-  }, [currentUser]);
+  }, []);
+
+
+  // извлекаем состояние чекбокса короткометражек для списка фильмов из общедоступного сервиса из локального хранилища для текущего пользователя
+  // useEffect(() => {
+  //   if (localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`)) {
+  //     if (
+  //       localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`) ===
+  //       "true"
+  //     ) {
+  //       setShowShortMovies(true);
+  //     } else {
+  //       setShowShortMovies(false);
+  //     }
+  //   }
+  // }, []);
+
+  
+  // useEffect(() => {
+  //    if (localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`)) {
+  //     if (
+  //       localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`) ===
+  //       "true"
+  //     ) {
+  //       setShowShortMovies(true);
+  //     } else {
+  //       setShowShortMovies(false);
+  //     }
+  //   }
+  // }, []);
+
 
   // извлекаем значение строки поиска из локального хранилища для текущего пользователя
-  useEffect(() => {
-    if (
-      localStorage.getItem(
-        `${currentUser.email} - moviesSearchStringPublic`
-      ) === "true"
-    ) {
-      setSearchString(
-        localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`)
-      );
-    } else {
-      setSearchString("");
-    }
-  }, [currentUser, history]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem(
+  //       `${currentUser.email} - moviesSearchStringPublic`
+  //     ) === "true"
+  //   ) {
+  //     setSearchString(
+  //       localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`)
+  //     );
+  //   } else {
+  //     setSearchString("");
+  //   }
+  // }, [currentUser, history]);
 
   // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
   useEffect(() => {
@@ -194,7 +220,7 @@ function Movies({
         showShortMovies={showShortMovies}
         searchString={searchString}        
         handleSearchStringChange={handleSearchStringChange}
-        searchButtonEnabled={searchButtonEnabled}
+        searchButtonEnabled={searchButtonEnabled}        
       />
 
       {searchError && (

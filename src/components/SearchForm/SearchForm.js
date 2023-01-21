@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import "./SearchForm.css";
 
@@ -19,6 +19,16 @@ function SearchForm({
     e.preventDefault();
     handleSearchFormSubmit(searchString);
   }
+
+  useEffect(() => {
+    
+  console.log('эффект внутри формы поиска');
+  console.log('searchString');
+  console.log(searchString);
+
+    
+  }, []);
+
 
   return (
     <section className="search-form">

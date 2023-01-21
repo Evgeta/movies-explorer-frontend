@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import { Route, Switch, Redirect, useHistory, useLocation } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  Redirect,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
 
 import "./App.css";
 
@@ -23,6 +29,7 @@ import {
   footerShowRoutes,
   ERROR_MESSAGES,
 } from "../../utils/constants.js";
+
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.js";
 
 function App() {
@@ -39,6 +46,14 @@ function App() {
   const [savedMoviesList, setSavedMoviesList] = useState([]);
 
   const [formErrorMessage, setFormErrorMessage] = React.useState("");
+  
+  //состояние компонентов формы поиска на странице фильмы
+  const [showShortMovies, setShowShortMovies] = useState(false);
+  const [searchString, setSearchString] = useState(""); //строка поиска фильмо из общего репозитория
+
+  //состояние компонентов формы поиска на странице схраненные фильмы
+  const [showShortMoviesSaved, setShowShortMoviesSaved] = useState(false);
+  const [searchStringSaved, setSearchStringSaved] = useState("");
 
   // нажатие на иконку бургер-меню
   function handleBurgerMenuClick() {
@@ -72,8 +87,6 @@ function App() {
         history.push("/movies");
       })
       .catch((err) => {
-        console.log("err внутри handleLogin");
-        console.log(err);
         handleErrorMessage(err);
       });
   }
@@ -89,7 +102,7 @@ function App() {
           if (res) {
             setLoggedIn(true);
             setCurrentUser({ _id: res._id, name: res.name, email: res.email });
-            history.push(currentPath);            
+            history.push(currentPath);
           }
         })
         .catch((err) => console.log(err));
@@ -110,13 +123,12 @@ function App() {
   // нажатие на иконку удаления
   function handleDeleteIconClick(movie, fromSaved) {
     let idToDeleteOnServer = 0;
-   
+
     if (fromSaved) {
       const movieToDelete = savedMoviesList.find((item) => {
         return item.movie.movieId === movie.movie.movieId;
       });
       idToDeleteOnServer = movieToDelete.movie._id;
-     
     } else {
       const movieToDelete = savedMoviesList.find((item) => {
         return (
@@ -124,7 +136,7 @@ function App() {
           item.movie.movieId === movie.movieId
         );
       });
-        idToDeleteOnServer = movieToDelete.movie._id;   
+      idToDeleteOnServer = movieToDelete.movie._id;
     }
     mainApi
       .deleteMovie(idToDeleteOnServer)
@@ -137,10 +149,7 @@ function App() {
           }
         });
         setSavedMoviesList(newMoviesList);
-        localStorage.setItem(
-          `${currentUser.email} - savedMovies`,
-          savedMoviesList
-        );
+        localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList );
       })
       .catch((err) => {
         handleErrorMessage(err);
@@ -162,8 +171,8 @@ function App() {
         .finally(() => setIsLoading(false));
     }
   }, [loggedIn]);
-  
-    function handleUpdateProfile(name, email) {
+
+  function handleUpdateProfile(name, email) {
     setIsLoading(true);
     mainApi
       .setUserInfo(name, email)
@@ -199,8 +208,8 @@ function App() {
 
   // получение сохраненных фильмоы с сервера и сохранение их в локальном хранилище
   function getSavedMovies() {
-      if (loggedIn && currentUser) {
-     if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
+    if (loggedIn && currentUser.email) {
+      if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
         const movies = JSON.parse(
           localStorage.getItem(`${currentUser.email}  - savedMovies`)
         );
@@ -222,10 +231,7 @@ function App() {
           .catch((err) => {
             handleErrorMessage(err);
           });
-        localStorage.setItem(
-          `${currentUser.email} - savedMovies`,
-          savedMoviesList
-        );
+        localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);
       }
     }
   }
@@ -248,24 +254,24 @@ function App() {
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/signup">
-             {!loggedIn ? ( 
-            <Register
-              handleRegistration={handleRegistration}
-              formErrorMessage={formErrorMessage}
-            />
+            {!loggedIn ? (
+              <Register
+                handleRegistration={handleRegistration}
+                formErrorMessage={formErrorMessage}
+              />
             ) : (
               <Redirect to="/" />
-            ) } 
+            )}
           </Route>
           <Route exact path="/signin">
-             {!loggedIn ? ( 
-            <Login
-              handleLogin={handleLogin}
-              formErrorMessage={formErrorMessage}
-            />
-             ) : (
+            {!loggedIn ? (
+              <Login
+                handleLogin={handleLogin}
+                formErrorMessage={formErrorMessage}
+              />
+            ) : (
               <Redirect to="/" />
-            )} 
+            )}
           </Route>
 
           <ProtectedRoute
@@ -286,6 +292,10 @@ function App() {
             onFilmLikeClick={handleFilmLike}
             onDeleteIconClick={handleDeleteIconClick}
             savedMoviesList={savedMoviesList}
+            showShortMovies={showShortMovies}
+            setShowShortMovies={setShowShortMovies}
+            searchString={searchString}
+            setSearchString={setSearchString}
           />
 
           <ProtectedRoute
@@ -294,6 +304,10 @@ function App() {
             loggedIn={loggedIn}
             onDeleteIconClick={handleDeleteIconClick}
             savedMoviesList={savedMoviesList}
+            showShortMoviesSaved={showShortMoviesSaved}
+            setShowShortMoviesSaved={setShowShortMoviesSaved}
+            searchStringSaved={searchStringSaved}
+            setSearchStringSaved={setSearchStringSaved}
           />
           <Route path="*">
             <NotFoundPage handleGoBack={handleGoBack} />
