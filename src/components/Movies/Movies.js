@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { useHistory } from "react-router-dom";
-
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
@@ -37,11 +35,6 @@ function Movies({
 
   // отфильтрованные фильмы (по чекбоксу короткометражек и строке поиска)
   const [filteredMovies, setFilteredMovies] = useState([]);
-
-  // const [showShortMovies, setShowShortMovies] = useState(false);
-  // const [searchString, setSearchString] = useState(""); //строка поиска
-
-  const history = useHistory();
 
   const currentUser = useContext(CurrentUserContext);
       
@@ -135,15 +128,25 @@ function Movies({
      }   
   }
 
-  // данные по фильмам из общего хранилища, сохраненные в local storage
-  useEffect(() => {
-    if (localStorage.getItem("movies-from-public-server")) {
-      const movies = JSON.parse(
-        localStorage.getItem("movies-from-public-server")
-      );
-      setPublicServerMovies(movies);
-    }
-  }, [currentUser]);
+// данные по фильмам из общего хранилища, сохраненные в local storage
+useEffect(() => {
+  if (localStorage.getItem("movies-from-public-server")) {
+    const movies = JSON.parse(
+      localStorage.getItem("movies-from-public-server")
+    );
+    setPublicServerMovies(movies);
+  }
+
+  // извлекаем состояние чек-бокса и строки поиска
+  if (localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`)) {
+    setSearchString(localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`));
+  }
+
+  if (localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`)) {
+    setShowShortMovies(localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`));
+  }
+}, [currentUser]);
+
 
   useEffect(() => {
     if (!searchString) {
@@ -157,58 +160,13 @@ function Movies({
     }
   }, []);
 
-
-  // извлекаем состояние чекбокса короткометражек для списка фильмов из общедоступного сервиса из локального хранилища для текущего пользователя
-  // useEffect(() => {
-  //   if (localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`)) {
-  //     if (
-  //       localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`) ===
-  //       "true"
-  //     ) {
-  //       setShowShortMovies(true);
-  //     } else {
-  //       setShowShortMovies(false);
-  //     }
-  //   }
-  // }, []);
-
-  
-  // useEffect(() => {
-  //    if (localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`)) {
-  //     if (
-  //       localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`) ===
-  //       "true"
-  //     ) {
-  //       setShowShortMovies(true);
-  //     } else {
-  //       setShowShortMovies(false);
-  //     }
-  //   }
-  // }, []);
-
-
-  // извлекаем значение строки поиска из локального хранилища для текущего пользователя
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem(
-  //       `${currentUser.email} - moviesSearchStringPublic`
-  //     ) === "true"
-  //   ) {
-  //     setSearchString(
-  //       localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`)
-  //     );
-  //   } else {
-  //     setSearchString("");
-  //   }
-  // }, [currentUser, history]);
-
   // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
   useEffect(() => {
     if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
       const movies = JSON.parse(
         localStorage.getItem(`${currentUser.email} - filtered_movies`)
       );
-      setFilteredMovies(movies);
+      handleFilterMovies(movies, searchString, showShortMovies);           
     }
   }, [currentUser]);
 

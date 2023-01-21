@@ -6,7 +6,7 @@ import "./Navigation.css";
 
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
-function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
+function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding, setIsBurgerOpened }) {
   // вид активной ссылки отличается, в зависимости от того, открыто
   //бургер меню или нет
 
@@ -48,6 +48,7 @@ function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
                 to="/"
                 className="navigation__link"
                 activeClassName={activeLink}
+                onClick={() => {setIsBurgerOpened(false);}}
               >
                 Главная
               </NavLink>
@@ -59,6 +60,7 @@ function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
               to="/movies"
               className="navigation__link"
               activeClassName={activeLink}
+              onClick={() => {setIsBurgerOpened(false);}}
             >
               Фильмы
             </NavLink>
@@ -69,6 +71,7 @@ function Navigation({ isBurgerMenuOpened, onClickBurger, isLanding }) {
               to="/saved-movies"
               className="navigation__link"
               activeClassName={activeLink}
+              onClick={() => {setIsBurgerOpened(false);}}
             >
               Cохранённые фильмы
             </NavLink>

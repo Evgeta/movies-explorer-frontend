@@ -209,9 +209,9 @@ function App() {
   // получение сохраненных фильмоы с сервера и сохранение их в локальном хранилище
   function getSavedMovies() {
     if (loggedIn && currentUser.email) {
-      if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
+      if (localStorage.getItem(`${currentUser.email} - savedMovies`)) {
         const movies = JSON.parse(
-          localStorage.getItem(`${currentUser.email}  - savedMovies`)
+          localStorage.getItem(`${currentUser.email} - savedMovies`)
         );
         setSavedMoviesList(movies);
       } else {
@@ -249,6 +249,7 @@ function App() {
             loggedIn={loggedIn}
             onClickBurger={handleBurgerMenuClick}
             isBurgerMenuOpened={isBurgerMenuOpened}
+            setIsBurgerOpened={setIsBurgerOpened}
           />
         </Route>
         <Switch>

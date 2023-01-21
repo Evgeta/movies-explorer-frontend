@@ -7,7 +7,7 @@ import Navigation from "../Navigation/Navigation";
 
 import logo from "../../images/logo.svg";
 
-function Header({ loggedIn, onClickBurger, isBurgerMenuOpened }) {
+function Header({ loggedIn, onClickBurger, isBurgerMenuOpened, setIsBurgerOpened }) {
   const location = useLocation().pathname;
   return (
     <header className="header">
@@ -33,6 +33,7 @@ function Header({ loggedIn, onClickBurger, isBurgerMenuOpened }) {
             onClickBurger={onClickBurger}
             isBurgerMenuOpened={isBurgerMenuOpened}
             isLanding={location === "/"}
+            setIsBurgerOpened={setIsBurgerOpened}
           />
         )}
 

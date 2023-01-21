@@ -102,17 +102,26 @@ function SavedMovies({
     setFilteredMovies(moviesList);
     setDisplayMovies(moviesList);
   }
-  
-  // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
+    
+  //эффект при изменении пользователя
   useEffect(() => {
-    if (localStorage.getItem(`${currentUser.email}  - savedMovies`)) {
-      const movies = JSON.parse(
-        localStorage.getItem(`${currentUser.email}  - savedMovies`)
-      );
-      setDisplayMovies(movies);
-      setFilteredMovies(movies);
-    }
-  }, [currentUser]);
+// извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
+   if (localStorage.getItem(`${currentUser.email} - savedMovies`)) {
+     const movies = JSON.parse(
+       localStorage.getItem(`${currentUser.email} - savedMovies`)
+     );
+     setDisplayMovies(movies);
+     setFilteredMovies(movies);
+   }
+   // извлекаем состояние чек-бокса и строки поиска
+   if (localStorage.getItem(`${currentUser.email} - searchStringSaved`)) {
+     setSearchStringSaved(localStorage.getItem(`${currentUser.email} - searchStringSaved`));
+   }
+
+   if (localStorage.getItem(`${currentUser.email} - showShortMoviesSaved`)) {
+     setShowShortMoviesSaved(localStorage.getItem(`${currentUser.email} - searchStringSaved`));
+   }
+  }, [currentUser]); 
 
   // обновление списка фильмов после удаления из сохраненных
   useEffect(() => {
