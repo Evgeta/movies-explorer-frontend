@@ -116,9 +116,7 @@ function App() {
       .then((newMovie) => setSavedMoviesList([newMovie, ...savedMoviesList]))
       .catch((err) => {
         handleErrorMessage(err);
-      });
-    console.log('savedMoviesList');  
-    console.log(savedMoviesList);  
+      });    
     localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);
   }
 
@@ -151,8 +149,6 @@ function App() {
           }
         });
         setSavedMoviesList(newMoviesList);
-        console.log('newMoviesList in deleteMovie');
-        console.log(newMoviesList);
         localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList );
       })
       .catch((err) => {
@@ -222,9 +218,7 @@ function App() {
         if (localStorage.getItem(`${currentUser.email} - savedMovies`)) {
           const movies = JSON.parse(
             localStorage.getItem(`${currentUser.email} - savedMovies`)
-          );
-          console.log('movies in getSavedMovies');  
-          console.log(movies);  
+          );          
           setSavedMoviesList(movies);
         } else {
           mainApi
@@ -239,20 +233,17 @@ function App() {
                 return {
                   movie: item
                 };
-              });
-              console.log('(compatibleMovies in getSavedMovies');  
-              console.log(compatibleMovies);  
+              });              
               setSavedMoviesList(compatibleMovies);
             })
             .catch((err) => {
               handleErrorMessage(err);
             });
-          console.log('savedMoviesList in GetSavedMovies');  
-          console.log(savedMoviesList);  
+          
           localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);
         }
       } catch (err) {
-        console.log("Ошибка при попытке преобразовать JSON в массив сохраненных фильмов")
+          console.log("Ошибка при попытке преобразовать JSON в массив сохраненных фильмов")
       }
     }
   }

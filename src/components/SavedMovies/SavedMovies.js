@@ -41,14 +41,14 @@ function SavedMovies({
   function handleShowShortMovies() {
     setShowShortMoviesSaved(!showShortMoviesSaved);
 
-    if (!searchStringSaved) {
-      setSearchErrorSavedMovies(true);
-      setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);
-      return;
-    }
-    setDisplayMovies(
-      filterMovies(savedMoviesList, searchStringSaved, showShortMoviesSaved, true)
-    );
+    // if (!searchStringSaved) {
+    //   setSearchErrorSavedMovies(true);
+    //   setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);
+    //   return;
+    // }
+    // setDisplayMovies(
+    //   filterMovies(savedMoviesList, searchStringSaved, showShortMoviesSaved, true)
+    // );
   }
 
   //изменение записи в строке поиска
@@ -103,31 +103,6 @@ function SavedMovies({
     setDisplayMovies(moviesList);
   }
     
-  //эффект при изменении пользователя - только что закооментироано
-  // useEffect(() => {
-  //   // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
-  //   if (loggedIn && currentUser.email) {
-  //     if (localStorage.getItem(`${currentUser.email} - savedMovies`)) {
-  //       try {
-  //         const movies = JSON.parse(
-  //           localStorage.getItem(`${currentUser.email} - savedMovies`));
-  //         setDisplayMovies(movies);
-  //         setFilteredMovies(movies);
-  //       } catch (err) {
-  //         console.log("Ошибка при попытке преобразовать JSON в массив сохраненных фильмов")
-  //       }
-  //     }
-  //     // извлекаем состояние чек-бокса и строки поиска
-  //     if (localStorage.getItem(`${currentUser.email} - searchStringSaved`)) {
-  //       setSearchStringSaved(localStorage.getItem(`${currentUser.email} - searchStringSaved`));
-  //     }
-
-  //     if (localStorage.getItem(`${currentUser.email} - showShortMoviesSaved`)) {
-  //       setShowShortMoviesSaved(localStorage.getItem(`${currentUser.email} - searchStringSaved`));
-  //     }
-  //   }
-  // }, [currentUser]);
-
   // обновление списка фильмов после удаления из сохраненных
   useEffect(() => {
     const moviesList = filterMovies(
