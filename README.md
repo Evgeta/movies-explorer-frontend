@@ -1,8 +1,7 @@
 # movies-explorer-frontend
 
 ссылка на пул-реквест: 
-
-
+https://github.com/Evgeta/movies-explorer-frontend/pull/2
 
 Домен с фронтендом: https://moviesexplorer.evgeta.nomoredomains.sbs/
 Домен с бэкэндом: https://api.moviesexplorer.evgeta.nomoredomains.sbs/
