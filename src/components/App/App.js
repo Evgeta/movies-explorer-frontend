@@ -117,6 +117,8 @@ function App() {
       .catch((err) => {
         handleErrorMessage(err);
       });
+    console.log('savedMoviesList');  
+    console.log(savedMoviesList);  
     localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);
   }
 
@@ -149,6 +151,8 @@ function App() {
           }
         });
         setSavedMoviesList(newMoviesList);
+        console.log('newMoviesList in deleteMovie');
+        console.log(newMoviesList);
         localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList );
       })
       .catch((err) => {
@@ -187,10 +191,15 @@ function App() {
   }
 
   function handleLogOut() {
+    localStorage.clear();
     setCurrentUser({});
     setLoggedIn(false);
-    localStorage.clear();
     history.push("/");
+    setSavedMoviesList([]);
+    setShowShortMovies(false);
+    setShowShortMoviesSaved(false);
+    setSearchString("");
+    setSearchStringSaved("");
   }
 
   function handleErrorMessage(err) {
@@ -209,29 +218,41 @@ function App() {
   // получение сохраненных фильмоы с сервера и сохранение их в локальном хранилище
   function getSavedMovies() {
     if (loggedIn && currentUser.email) {
-      if (localStorage.getItem(`${currentUser.email} - savedMovies`)) {
-        const movies = JSON.parse(
-          localStorage.getItem(`${currentUser.email} - savedMovies`)
-        );
-        setSavedMoviesList(movies);
-      } else {
-        mainApi
-          .getSavedMovies()
-          .then((data) => {
-            const movies = data.movies;
-            const currentUserMoviesList = movies.filter((movie) => {
-              if (movie.owner === currentUser._id) return true;
-              else return false;
+      try {
+        if (localStorage.getItem(`${currentUser.email} - savedMovies`)) {
+          const movies = JSON.parse(
+            localStorage.getItem(`${currentUser.email} - savedMovies`)
+          );
+          console.log('movies in getSavedMovies');  
+          console.log(movies);  
+          setSavedMoviesList(movies);
+        } else {
+          mainApi
+            .getSavedMovies()
+            .then((data) => {
+              const movies = data.movies;
+              const currentUserMoviesList = movies.filter((movie) => {
+                if (movie.owner === currentUser._id) return true;
+                else return false;
+              });
+              const compatibleMovies = currentUserMoviesList.map((item) => {
+                return {
+                  movie: item
+                };
+              });
+              console.log('(compatibleMovies in getSavedMovies');  
+              console.log(compatibleMovies);  
+              setSavedMoviesList(compatibleMovies);
+            })
+            .catch((err) => {
+              handleErrorMessage(err);
             });
-            const compatibleMovies = currentUserMoviesList.map((item) => {
-              return { movie: item };
-            });
-            setSavedMoviesList(compatibleMovies);
-          })
-          .catch((err) => {
-            handleErrorMessage(err);
-          });
-        localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);
+          console.log('savedMoviesList in GetSavedMovies');  
+          console.log(savedMoviesList);  
+          localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);
+        }
+      } catch (err) {
+        console.log("Ошибка при попытке преобразовать JSON в массив сохраненных фильмов")
       }
     }
   }

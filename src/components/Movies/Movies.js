@@ -135,18 +135,8 @@ useEffect(() => {
       localStorage.getItem("movies-from-public-server")
     );
     setPublicServerMovies(movies);
-  }
-
-  // извлекаем состояние чек-бокса и строки поиска
-  if (localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`)) {
-    setSearchString(localStorage.getItem(`${currentUser.email} - moviesSearchStringPublic`));
-  }
-
-  if (localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`)) {
-    setShowShortMovies(localStorage.getItem(`${currentUser.email} - showShortMoviesPublic`));
-  }
+  }  
 }, [currentUser]);
-
 
   useEffect(() => {
     if (!searchString) {

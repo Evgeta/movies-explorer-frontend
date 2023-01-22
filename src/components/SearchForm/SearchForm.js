@@ -17,19 +17,9 @@ function SearchForm({
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleSearchFormSubmit(searchString);
+    handleSearchFormSubmit(searchString, showShortMovies);
   }
-
-  useEffect(() => {
-    
-  console.log('эффект внутри формы поиска');
-  console.log('searchString');
-  console.log(searchString);
-
-    
-  }, []);
-
-
+  
   return (
     <section className="search-form">
       <div className="search-form__container">
