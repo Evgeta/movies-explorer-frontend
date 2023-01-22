@@ -41,14 +41,14 @@ function SavedMovies({
   function handleShowShortMovies() {
     setShowShortMoviesSaved(!showShortMoviesSaved);
 
-    // if (!searchStringSaved) {
-    //   setSearchErrorSavedMovies(true);
-    //   setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);
-    //   return;
-    // }
-    // setDisplayMovies(
-    //   filterMovies(savedMoviesList, searchStringSaved, showShortMoviesSaved, true)
-    // );
+    if (!searchStringSaved) {
+      setSearchErrorSavedMovies(true);
+      setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);
+      return;
+    }
+    setDisplayMovies(
+      filterMovies(savedMoviesList, searchStringSaved, showShortMoviesSaved, true)
+    );
   }
 
   //изменение записи в строке поиска
@@ -123,6 +123,8 @@ function SavedMovies({
     setDisplayMovies(moviesList);
   }, [savedMoviesList.length]);
 
+
+  //отображение ошибки если строка поиска пустая
   useEffect(() => {
     if (!searchStringSaved) {
       setSearchErrorSavedMovies(true);

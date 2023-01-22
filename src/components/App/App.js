@@ -113,11 +113,15 @@ function App() {
   function handleFilmLike(movie) {
     mainApi
       .addNewMovie(movie)
-      .then((newMovie) => setSavedMoviesList([newMovie, ...savedMoviesList]))
+      .then(
+        (newMovie) => {
+          setSavedMoviesList([...savedMoviesList, newMovie]);
+        }
+      )
       .catch((err) => {
         handleErrorMessage(err);
-      });    
-    localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);
+      });
+    localStorage.setItem(`${currentUser.email} - savedMovies`, JSON.stringify(savedMoviesList));
   }
 
   // нажатие на иконку удаления
@@ -146,10 +150,10 @@ function App() {
             return false;
           } else {
             return true;
-          }
+          }        
         });
         setSavedMoviesList(newMoviesList);
-        localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList );
+        localStorage.setItem(`${currentUser.email} - savedMovies`, JSON.stringify(savedMoviesList));
       })
       .catch((err) => {
         handleErrorMessage(err);
@@ -217,8 +221,8 @@ function App() {
       try {
         if (localStorage.getItem(`${currentUser.email} - savedMovies`)) {
           const movies = JSON.parse(
-            localStorage.getItem(`${currentUser.email} - savedMovies`)
-          );          
+            localStorage.getItem(`${currentUser.email} - savedMovies`)          
+            );                    
           setSavedMoviesList(movies);
         } else {
           mainApi
@@ -233,17 +237,17 @@ function App() {
                 return {
                   movie: item
                 };
-              });              
+              });                   
               setSavedMoviesList(compatibleMovies);
             })
             .catch((err) => {
               handleErrorMessage(err);
             });
           
-          localStorage.setItem(`${currentUser.email} - savedMovies`, savedMoviesList);
+          localStorage.setItem(`${currentUser.email} - savedMovies`, JSON.stringify(savedMoviesList));
         }
       } catch (err) {
-          console.log("Ошибка при попытке преобразовать JSON в массив сохраненных фильмов")
+         // console.log("Ошибка при попытке преобразовать JSON в массив сохраненных фильмов")
       }
     }
   }

@@ -18,9 +18,7 @@ class MoviesApi {
   }
 
   //получение списка фильмов с сервера
-  getMovies() {
-    console.log("getMovies");
-    console.log(this._baseUrl);
+  getMovies() {   
     return fetch(`${this._baseUrl}`, {
         method: 'GET',
         headers: {

@@ -45,10 +45,6 @@ class MainApi {
 
   //запрос на авторизацию
   authorize(email, password) {
-    console.log('email, password - в авторизации');
-    console.log(email);
-    console.log(password);
-
     return fetch(`${this._baseUrl}/signin`, {
         method: 'POST',
         headers: {
