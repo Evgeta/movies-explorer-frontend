@@ -121,7 +121,7 @@ function App() {
       .catch((err) => {
         handleErrorMessage(err);
       });
-    localStorage.setItem(`${currentUser.email} - savedMovies`, JSON.stringify(savedMoviesList));
+    localStorage.setItem('savedMovies', JSON.stringify(savedMoviesList));
   }
 
   // нажатие на иконку удаления
@@ -153,7 +153,7 @@ function App() {
           }        
         });
         setSavedMoviesList(newMoviesList);
-        localStorage.setItem(`${currentUser.email} - savedMovies`, JSON.stringify(savedMoviesList));
+        localStorage.setItem('savedMovies', JSON.stringify(savedMoviesList));
       })
       .catch((err) => {
         handleErrorMessage(err);
@@ -219,9 +219,9 @@ function App() {
   function getSavedMovies() {
     if (loggedIn && currentUser.email) {
       try {
-        if (localStorage.getItem(`${currentUser.email} - savedMovies`)) {
+        if (localStorage.getItem('savedMovies')) {
           const movies = JSON.parse(
-            localStorage.getItem(`${currentUser.email} - savedMovies`)          
+            localStorage.getItem('savedMovies')          
             );                    
           setSavedMoviesList(movies);
         } else {
@@ -244,7 +244,7 @@ function App() {
               handleErrorMessage(err);
             });
           
-          localStorage.setItem(`${currentUser.email} - savedMovies`, JSON.stringify(savedMoviesList));
+          localStorage.setItem('savedMovies', JSON.stringify(savedMoviesList));
         }
       } catch (err) {
          // console.log("Ошибка при попытке преобразовать JSON в массив сохраненных фильмов")

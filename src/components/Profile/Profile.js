@@ -19,8 +19,6 @@ function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("values.name, values.email");
-    console.log(values.name, values.email);
     handleUpdateProfile(values.name, values.email);
   }
 

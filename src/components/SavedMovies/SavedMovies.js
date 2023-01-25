@@ -76,11 +76,11 @@ function SavedMovies({
 
     //сохраняем текущие значения строки поиска и положение чек-бокса
     localStorage.setItem(
-      `${currentUser.email} - searchStringSaved`,
+      'searchStringSaved',
       searchStringValue
     );
     localStorage.setItem(
-      `${currentUser.email} - showShortMoviesSaved`,
+      'showShortMoviesSaved',
       showShortMoviesValue
     );
  

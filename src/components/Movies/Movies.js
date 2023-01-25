@@ -80,7 +80,7 @@ function Movies({
 
     //сохранаяем отфильтрованные фильмы в локальном хранилище
     localStorage.setItem(
-      `${currentUser.email} - filtered_movies`,
+      'filtered_movies',
       JSON.stringify(moviesList)
     );
   }
@@ -97,11 +97,11 @@ function Movies({
 
     //сохряняем состояния чекбокса и строки поиска
     localStorage.setItem(
-      `${currentUser.email} - moviesSearchStringPublic`,
+      'moviesSearchStringPublic',
       searchStringValue
     );
     localStorage.setItem(
-      `${currentUser.email} - showShortMoviesPublic`,
+      'showShortMoviesPublic',
       showShortMovies
     );
     
@@ -152,9 +152,9 @@ useEffect(() => {
 
   // извлекаем список выбранных фильмов из локального хранилища для текущего пользователя
   useEffect(() => {
-    if (localStorage.getItem(`${currentUser.email} - filtered_movies`)) {
+    if (localStorage.getItem('filtered_movies')) {
       const movies = JSON.parse(
-        localStorage.getItem(`${currentUser.email} - filtered_movies`)
+        localStorage.getItem('filtered_movies')
       );
       handleFilterMovies(movies, searchString, showShortMovies);           
     }
