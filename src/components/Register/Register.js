@@ -76,7 +76,7 @@ function Register({ handleRegistration, formErrorMessage }) {
           <input
             className="register__form-input"
             name="password"
-            type="text"
+            type="password"
             required
             value={values.password || ""}
             onChange={handleChange}
