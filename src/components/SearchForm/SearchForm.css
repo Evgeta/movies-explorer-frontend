@@ -91,6 +91,11 @@
   opacity: .8;
 }
 
+.search-form__button_disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
  .search-form__button:focus {
    outline: #2BE080 solid 1px;;
 } 
