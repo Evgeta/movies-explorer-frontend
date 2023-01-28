@@ -6,7 +6,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 
-function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage }) {
+function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage, setFormErrorMessage }) {
   const {
     values,
     handleChange,
@@ -16,6 +16,11 @@ function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage
   } = useFormWithValidation();
 
   const currentUser = useContext(CurrentUserContext);
+
+  function handleCleanAndChange(e) {
+    setFormErrorMessage("");
+    handleChange(e);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -55,7 +60,7 @@ function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage
             name="name"
             type="text"
             value={values.name || ""}
-            onChange={handleChange}
+            onChange={handleCleanAndChange}
             minLength="2"
             maxLength="30"
             required
@@ -72,7 +77,7 @@ function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage
             name="email"
             type="text"
             value={values.email || ""}
-            onChange={handleChange}
+            onChange={handleCleanAndChange}
             pattern="[a-z0-9-]+@[a-z]+\.[a-z]{2,3}"
             required
           />

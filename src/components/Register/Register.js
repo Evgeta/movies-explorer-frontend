@@ -6,7 +6,7 @@ import "./Register.css";
 import logo from "../../images/logo.svg";
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 
-function Register({ handleRegistration, formErrorMessage }) {
+function Register({ handleRegistration, formErrorMessage, setFormErrorMessage }) {
   const {
     values,
     handleChange,
@@ -18,6 +18,11 @@ function Register({ handleRegistration, formErrorMessage }) {
   function handleSubmit(e) {
     e.preventDefault();
     handleRegistration(values.username, values.password, values.email);
+  }
+
+  function handleCleanAndChange(e) {
+    setFormErrorMessage("");
+    handleChange(e);
   }
 
   useEffect(() => {
@@ -46,7 +51,7 @@ function Register({ handleRegistration, formErrorMessage }) {
             type="text"
             required
             value={values.username || ""}
-            onChange={handleChange}
+            onChange={handleCleanAndChange}
             minLength="2"
             maxLength="30"
             pattern="^[A-Za-zа-яА-ЯёЁ0-9\s-]+$"
@@ -64,7 +69,7 @@ function Register({ handleRegistration, formErrorMessage }) {
             type="text"
             required
             value={values.email || ""}
-            onChange={handleChange}
+            onChange={handleCleanAndChange}
             pattern="[a-z0-9-]+@[a-z]+\.[a-z]{2,3}"
           />
           <span className="register__error">{errors.email || ""}</span>
@@ -79,7 +84,7 @@ function Register({ handleRegistration, formErrorMessage }) {
             type="password"
             required
             value={values.password || ""}
-            onChange={handleChange}
+            onChange={handleCleanAndChange}
           />
           <span className="register__error">{errors.passsword || ""}</span>
         </div>

@@ -278,6 +278,7 @@ function App() {
               <Register
                 handleRegistration={handleRegistration}
                 formErrorMessage={formErrorMessage}
+                setFormErrorMessage={setFormErrorMessage}
               />
             ) : (
               <Redirect to="/" />
@@ -288,6 +289,7 @@ function App() {
               <Login
                 handleLogin={handleLogin}
                 formErrorMessage={formErrorMessage}
+                setFormErrorMessage={setFormErrorMessage}
               />
             ) : (
               <Redirect to="/" />
@@ -301,6 +303,7 @@ function App() {
             handleUpdateProfile={handleUpdateProfile}
             handleLogOut={handleLogOut}
             formErrorMessage={formErrorMessage}
+            setFormErrorMessage={setFormErrorMessage}
           />
 
           <ProtectedRoute

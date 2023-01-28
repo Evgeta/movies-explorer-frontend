@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchErrorMessage from "../SearchErrorMessage/SearchErrorMessage";
-
-import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 import "./SavedMovies.css";
 
@@ -22,7 +20,6 @@ function SavedMovies({
   setShowShortMoviesSaved,
   searchStringSaved,
   setSearchStringSaved}) {
-
 
   // отфильтрованные сохраненные фильмы (по чекбоксу короткометражек и строке поиска)
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -130,7 +127,6 @@ function SavedMovies({
     setFilteredMovies(moviesList);
     setDisplayMovies(moviesList);
   }, [savedMoviesList.length]);
-
   
   useEffect(() => {
 

@@ -6,7 +6,7 @@ import "./Login.css";
 import logo from "../../images/logo.svg";
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 
-function Login({ handleLogin, formErrorMessage }) {
+function Login({ handleLogin, formErrorMessage, setFormErrorMessage }) {
   const {
     values,
     handleChange,
@@ -18,6 +18,11 @@ function Login({ handleLogin, formErrorMessage }) {
   function handleSubmit(e) {
     e.preventDefault();
     handleLogin(values.email, values.password);
+  }
+
+  function handleCleanAndChange(e) {
+    setFormErrorMessage("");
+    handleChange(e);
   }
 
   useEffect(() => {
@@ -46,7 +51,7 @@ function Login({ handleLogin, formErrorMessage }) {
             type="email"
             required
             value={values.email || ""}
-            onChange={handleChange}
+            onChange={handleCleanAndChange}
             pattern="[a-z0-9-]+@[a-z]+\.[a-z]{2,3}"
           />
           <span className="register__error">{errors.email || ""}</span>
@@ -62,7 +67,7 @@ function Login({ handleLogin, formErrorMessage }) {
             type="password"
             required
             value={values.password || ""}
-            onChange={handleChange}
+            onChange={handleCleanAndChange}
           />
           <span className="login__error">{errors.passsword || ""}</span>
         </div>
