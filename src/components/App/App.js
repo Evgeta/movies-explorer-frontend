@@ -206,6 +206,9 @@ function App() {
     if (err.status !== 200) {
       setFormErrorMessage(ERROR_MESSAGES[err.status]);
     }
+    else {
+      setFormErrorMessage("");
+    }
   }
 
   //получение сохраненных фильмов при монтировании приложения
