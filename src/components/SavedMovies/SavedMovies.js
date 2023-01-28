@@ -22,7 +22,7 @@ function SavedMovies({
   setShowShortMoviesSaved,
   searchStringSaved,
   setSearchStringSaved}) {
-  const currentUser = useContext(CurrentUserContext);
+
 
   // отфильтрованные сохраненные фильмы (по чекбоксу короткометражек и строке поиска)
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -40,7 +40,11 @@ function SavedMovies({
   //изменение состояния чекбокса
   function handleShowShortMovies() {
     setShowShortMoviesSaved(!showShortMoviesSaved);
-
+    localStorage.setItem(
+      'showShortMoviesSaved',
+      !showShortMoviesSaved
+    );
+    
     if (!searchStringSaved) {
       setSearchErrorSavedMovies(true);
       setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);
@@ -63,6 +67,10 @@ function SavedMovies({
     else {
       setSearchErrorSavedMovies(false);
       setSearchButtonSavedMoviesState(true);
+      localStorage.setItem(
+        'searchStringSaved',
+        value
+      );
     }
   }
 
@@ -123,17 +131,48 @@ function SavedMovies({
     setDisplayMovies(moviesList);
   }, [savedMoviesList.length]);
 
-
-  //отображение ошибки если строка поиска пустая
+  
   useEffect(() => {
-    if (!searchStringSaved) {
-      setSearchErrorSavedMovies(true);
-      setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);
-      setSearchButtonSavedMoviesState(false);
-      return;
-    } else {
-      setSearchErrorSavedMovies(false);
-      setSearchButtonSavedMoviesState(true);
+
+    let showMoviesFromStorage = false;
+    let stringFromStorage = '';
+    
+    if (localStorage.getItem('showShortMoviesSaved')) {
+      showMoviesFromStorage = JSON.parse(localStorage.getItem('showShortMoviesSaved'));
+      setShowShortMoviesSaved(showMoviesFromStorage);
+    }
+
+    if (localStorage.getItem('searchStringSaved')) {
+      stringFromStorage = localStorage.getItem('searchStringSaved');
+      setSearchStringSaved(stringFromStorage);
+
+      if (!stringFromStorage) {
+        setSearchErrorSavedMovies(true);
+        setSearchErrorMessageSavedMovies(ERROR_MESSAGES["NEED_KEYWORD"]);
+        setSearchButtonSavedMoviesState(false);
+        return;
+      } else {
+        setSearchErrorSavedMovies(false);
+        setSearchButtonSavedMoviesState(true);
+      }
+
+      //фильтруем фильмы по короткометражкам и строке
+      const moviesList = filterMovies(
+        savedMoviesList,
+        stringFromStorage,
+        showMoviesFromStorage,
+        true
+      );
+
+      if (moviesList.length === 0) {
+        //отображаем ошибку
+        setSearchErrorSavedMovies(true);
+        setSearchErrorMessageSavedMovies(NOT_FOUND_MESSAGE);
+      } else {
+        setSearchErrorSavedMovies(false);
+      }
+      setFilteredMovies(moviesList);
+      setDisplayMovies(moviesList);
     }
   }, []);
 

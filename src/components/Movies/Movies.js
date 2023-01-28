@@ -46,6 +46,10 @@ function Movies({
   //изменение состояния чекбокса
   function handleShowShortMovies() {
     setShowShortMovies(!showShortMovies);    
+    localStorage.setItem(
+      'showShortMoviesPublic',
+      !showShortMovies
+    );
   }
 
   //изменение записи в строке поиска
@@ -61,11 +65,16 @@ function Movies({
     else {
       setSearchError(false);
       setSearchButtonState(true);
+      localStorage.setItem(
+        'moviesSearchStringPublic',
+         value
+      );
     }
   }
 
   // поиск по массиву и установка состояния
   function handleFilterMovies(movies, searchString, showShortMovies) {
+      
     //фильтруем фильмы по короткометражкам и строке
     const moviesList = filterMovies(movies, searchString, showShortMovies, false) ;
 
@@ -138,15 +147,51 @@ useEffect(() => {
   }  
 }, [currentUser]);
 
+
+//при обновлении страницы
   useEffect(() => {
-    if (!searchString) {
-      setSearchError(true);
-      setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);
-      setSearchButtonState(false);
-      return;
-    } else {
-      setSearchError(false);
-      setSearchButtonState(true);
+
+    let showMoviesFromStorage = false;
+    let stringFromStorage = '';
+
+    if (localStorage.getItem('showShortMoviesPublic')) {
+      showMoviesFromStorage = JSON.parse(localStorage.getItem('showShortMoviesPublic'));
+      setShowShortMovies(showMoviesFromStorage);
+    }
+
+    if (localStorage.getItem('moviesSearchStringPublic')) {
+      stringFromStorage = localStorage.getItem('moviesSearchStringPublic');
+      setSearchString(stringFromStorage);
+      if (!stringFromStorage) {
+        setSearchError(true);
+        setSearchErrorMessage(ERROR_MESSAGES["NEED_KEYWORD"]);
+        setSearchButtonState(false);
+        return;
+      } else {
+        setSearchError(false);
+        setSearchButtonState(true);
+      }
+
+      if (publicServerMovies.length === 0) {
+        setIsLoading(true);
+        moviesApi
+          .getMovies()
+          .then((movies) => {
+            setPublicServerMovies(movies);
+            handleFilterMovies(movies, stringFromStorage, showMoviesFromStorage);
+            localStorage.setItem(
+              "movies-from-public-server",
+              JSON.stringify(movies)
+            );
+          })
+          .catch(() => {
+            setSearchError(true);
+            setSearchErrorMessage(ERROR_MESSAGES["ERROR_DURING_REQUEST"]);
+          })
+          .finally(setIsLoading(false));
+      } else {
+        handleFilterMovies(publicServerMovies, stringFromStorage, showMoviesFromStorage);
+      }
     }
   }, []);
 
