@@ -59,7 +59,7 @@ function Login({ handleLogin, formErrorMessage }) {
             className={`login__form-input ${errors.email &&
               "login__form-input_error"}`}
             name="password"
-            type="text"
+            type="password"
             required
             value={values.password || ""}
             onChange={handleChange}
