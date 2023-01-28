@@ -47,7 +47,7 @@ function Login({ handleLogin, formErrorMessage }) {
             required
             value={values.email || ""}
             onChange={handleChange}
-            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+            pattern="[a-z0-9-]+@[a-z]+\.[a-z]{2,3}"
           />
           <span className="register__error">{errors.email || ""}</span>
         </div>
