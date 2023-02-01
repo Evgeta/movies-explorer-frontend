@@ -98,6 +98,7 @@ class MainApi {
       })
       .then((res) => this.checkResponse(res))
   }
+  
   addNewMovie(data) {
     const thumbnail = 'https://api.nomoreparties.co' + data.image.formats.thumbnail.url;
     const image = 'https://api.nomoreparties.co' + data.image.url;

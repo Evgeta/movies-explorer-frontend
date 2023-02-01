@@ -151,24 +151,16 @@ function SavedMovies({
         setSearchErrorSavedMovies(false);
         setSearchButtonSavedMoviesState(true);
       }
-
-      //фильтруем фильмы по короткометражкам и строке
-      const moviesList = filterMovies(
-        savedMoviesList,
-        stringFromStorage,
-        showMoviesFromStorage,
-        true
-      );
-
-      if (moviesList.length === 0) {
+            
+      if (savedMoviesList.length === 0) {
         //отображаем ошибку
         setSearchErrorSavedMovies(true);
         setSearchErrorMessageSavedMovies(NOT_FOUND_MESSAGE);
       } else {
         setSearchErrorSavedMovies(false);
       }
-      setFilteredMovies(moviesList);
-      setDisplayMovies(moviesList);
+      setFilteredMovies(savedMoviesList);
+      setDisplayMovies(savedMoviesList);
     }
   }, []);
 
