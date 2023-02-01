@@ -27,7 +27,7 @@ function Movies({
   showShortMovies,
   setShowShortMovies,
   searchString,
-  setSearchString
+  setSearchString,  
 }) {
   
   //фильмы, которые пришли через запрос на публичный сервер

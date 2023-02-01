@@ -115,14 +115,19 @@ function App() {
       .addNewMovie(movie)
       .then(
         (newMovie) => {
-          setSavedMoviesList([...savedMoviesList, newMovie]);
+          setSavedMoviesList([...savedMoviesList, newMovie]);  
         }
       )
       .catch((err) => {
         handleErrorMessage(err);
-      });
-    localStorage.setItem('savedMovies', JSON.stringify(savedMoviesList));
+      })      
   }
+
+  useEffect(() => {
+    if (loggedIn && currentUser) { 
+      localStorage.setItem('savedMovies', JSON.stringify(savedMoviesList));
+    }
+  }, [savedMoviesList]);
 
   // нажатие на иконку удаления
   function handleDeleteIconClick(movie, fromSaved) {
@@ -318,7 +323,7 @@ function App() {
             showShortMovies={showShortMovies}
             setShowShortMovies={setShowShortMovies}
             searchString={searchString}
-            setSearchString={setSearchString}
+            setSearchString={setSearchString}            
           />
 
           <ProtectedRoute
@@ -330,7 +335,7 @@ function App() {
             showShortMoviesSaved={showShortMoviesSaved}
             setShowShortMoviesSaved={setShowShortMoviesSaved}
             searchStringSaved={searchStringSaved}
-            setSearchStringSaved={setSearchStringSaved}
+            setSearchStringSaved={setSearchStringSaved}            
           />
           <Route path="*">
             <NotFoundPage handleGoBack={handleGoBack} />
