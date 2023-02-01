@@ -45,7 +45,9 @@ function App() {
   //массив для сохранения фильмов
   const [savedMoviesList, setSavedMoviesList] = useState([]);
 
-  const [formErrorMessage, setFormErrorMessage] = React.useState("");
+  const [registerFormErrorMessage, setRegisterFormErrorMessage] = React.useState("");
+  const [loginFormErrorMessage, setLoginFormErrorMessage] = React.useState("");
+  const [profileFormErrorMessage, setProfileFormErrorMessage] = React.useState("");
   
   //состояние компонентов формы поиска на странице фильмы
   const [showShortMovies, setShowShortMovies] = useState(false);
@@ -69,12 +71,12 @@ function App() {
       .then((res) => {
         if (res._id) {
           handleLogin(email, password);
-          setFormErrorMessage("");
+          setRegisterFormErrorMessage("");
           history.push("/movies");
         }
       })
       .catch((err) => {
-        handleErrorMessage(err);
+        handleErrorMessage(err, 'REGISTER');
       })
       .finally(() => setIsLoading(false));
   }
@@ -85,11 +87,11 @@ function App() {
       .then((data) => {
         localStorage.setItem("jwt", data.token);
         setLoggedIn(true);
-        setFormErrorMessage("");
+        setLoginFormErrorMessage("");
         history.push("/movies");
       })
       .catch((err) => {
-        handleErrorMessage(err);
+        handleErrorMessage(err, 'LOGIN');
       });
   }
 
@@ -121,7 +123,7 @@ function App() {
         }
       )
       .catch((err) => {
-        handleErrorMessage(err);
+        handleErrorMessage(err, 'ADD_FILM');
       })      
   }
 
@@ -163,7 +165,7 @@ function App() {
         localStorage.setItem('savedMovies', JSON.stringify(savedMoviesList));
       })
       .catch((err) => {
-        handleErrorMessage(err);
+        handleErrorMessage(err, 'DELETE_FILM');
       });
   }
 
@@ -177,7 +179,7 @@ function App() {
           setCurrentUser(res);
         })
         .catch((err) => {
-          handleErrorMessage(err);
+          handleErrorMessage(err, 'GET_PUBLIC_FILMS');
         })
         .finally(() => setIsLoading(false));
     }
@@ -189,11 +191,11 @@ function App() {
       .setUserInfo(name, email)
       .then((newUser) => {
         setCurrentUser(newUser.data);
-        setFormErrorMessage("");
+        setProfileFormErrorMessage("");
         setProfileUpdatedMessage("Профиль успешно изменен");
       })
       .catch((err) => {
-        handleErrorMessage(err);
+        handleErrorMessage(err, 'PROFILE');
       })
       .finally(() => setIsLoading(false));
   }
@@ -210,14 +212,35 @@ function App() {
     setSearchStringSaved("");
   }
 
-  function handleErrorMessage(err) {
-    if (err.status !== 200) {
-      setFormErrorMessage(ERROR_MESSAGES[err.status]);
+function handleErrorMessage(err, formType) {
+  if (err.status !== 200) {
+    switch (formType) {
+      case 'PROFILE':
+        setProfileFormErrorMessage(ERROR_MESSAGES[err.status]);
+        break;
+      case 'LOGIN':
+        setLoginFormErrorMessage(ERROR_MESSAGES[err.status]);
+        break;
+      case 'REGISTER':
+        setRegisterFormErrorMessage(ERROR_MESSAGES[err.status]);
+        break;
+      default:
+        console.log(`Ошибка: ${ERROR_MESSAGES[err.status]}.`);
     }
-    else {
-      setFormErrorMessage("");
+  } else {
+    switch (formType) {
+      case 'PROFILE':
+        setProfileFormErrorMessage("");
+        break;
+      case 'LOGIN':
+        setLoginFormErrorMessage("");
+        break;
+      case 'REGISTER':
+        setRegisterFormErrorMessage("");
+        break;
     }
   }
+}
 
   //получение сохраненных фильмов при монтировании приложения
   useEffect(() => {
@@ -252,7 +275,7 @@ function App() {
               setSavedMoviesList(compatibleMovies);
             })
             .catch((err) => {
-              handleErrorMessage(err);
+              handleErrorMessage(err, 'GET_SAVED_FILMS');
             });
           
           localStorage.setItem('savedMovies', JSON.stringify(savedMoviesList));
@@ -285,8 +308,8 @@ function App() {
             {!loggedIn ? (
               <Register
                 handleRegistration={handleRegistration}
-                formErrorMessage={formErrorMessage}
-                setFormErrorMessage={setFormErrorMessage}
+                registerFormErrorMessage={registerFormErrorMessage}
+                setRegisterFormErrorMessage={setRegisterFormErrorMessage}
               />
             ) : (
               <Redirect to="/" />
@@ -296,8 +319,8 @@ function App() {
             {!loggedIn ? (
               <Login
                 handleLogin={handleLogin}
-                formErrorMessage={formErrorMessage}
-                setFormErrorMessage={setFormErrorMessage}
+                loginFormErrorMessage={loginFormErrorMessage}
+                setLoginFormErrorMessage={setLoginFormErrorMessage}
               />
             ) : (
               <Redirect to="/" />
@@ -310,8 +333,8 @@ function App() {
             loggedIn={loggedIn}
             handleUpdateProfile={handleUpdateProfile}
             handleLogOut={handleLogOut}
-            formErrorMessage={formErrorMessage}
-            setFormErrorMessage={setFormErrorMessage}
+            profileFormErrorMessage={profileFormErrorMessage}
+            setProfileFormErrorMessage={setProfileFormErrorMessage}
             profileUpdatedMessage={profileUpdatedMessage}
             setProfileUpdatedMessage={setProfileUpdatedMessage}
           />

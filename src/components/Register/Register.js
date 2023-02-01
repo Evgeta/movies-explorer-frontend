@@ -6,7 +6,7 @@ import "./Register.css";
 import logo from "../../images/logo.svg";
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 
-function Register({ handleRegistration, formErrorMessage, setFormErrorMessage }) {
+function Register({ handleRegistration, registerFormErrorMessage, setRegisterFormErrorMessage }) {
   const {
     values,
     handleChange,
@@ -21,12 +21,13 @@ function Register({ handleRegistration, formErrorMessage, setFormErrorMessage })
   }
 
   function handleCleanAndChange(e) {
-    setFormErrorMessage("");
+    setRegisterFormErrorMessage("");
     handleChange(e);
   }
 
   useEffect(() => {
     resetForm();
+    setRegisterFormErrorMessage("");
   }, [resetForm]);
 
   return (
@@ -88,7 +89,7 @@ function Register({ handleRegistration, formErrorMessage, setFormErrorMessage })
           />
           <span className="register__error">{errors.passsword || ""}</span>
         </div>
-        <span className="register__error">{formErrorMessage}</span>
+        <span className="register__error">{registerFormErrorMessage}</span>
         <div className="register__form-footer">
           <button
             type="submit"

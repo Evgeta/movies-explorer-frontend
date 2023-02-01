@@ -6,7 +6,7 @@ import "./Login.css";
 import logo from "../../images/logo.svg";
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 
-function Login({ handleLogin, formErrorMessage, setFormErrorMessage }) {
+function Login({ handleLogin, loginFormErrorMessage, setLoginFormErrorMessage }) {
   const {
     values,
     handleChange,
@@ -21,12 +21,13 @@ function Login({ handleLogin, formErrorMessage, setFormErrorMessage }) {
   }
 
   function handleCleanAndChange(e) {
-    setFormErrorMessage("");
+    setLoginFormErrorMessage("");
     handleChange(e);
   }
 
   useEffect(() => {
     resetForm();
+    setLoginFormErrorMessage("");
   }, [resetForm]);
 
   return (
@@ -71,7 +72,7 @@ function Login({ handleLogin, formErrorMessage, setFormErrorMessage }) {
           />
           <span className="login__error">{errors.passsword || ""}</span>
         </div>
-        <span className="login__error">{formErrorMessage}</span>
+        <span className="login__error">{loginFormErrorMessage}</span>
         <div className="login__form-footer">
           <button
             type="submit"

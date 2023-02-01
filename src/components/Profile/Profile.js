@@ -10,8 +10,8 @@ function Profile({
   loggedIn,
   handleUpdateProfile,
   handleLogOut,
-  formErrorMessage,
-  setFormErrorMessage,
+  profileFormErrorMessage,
+  setProfileFormErrorMessage,
   profileUpdatedMessage,
   setProfileUpdatedMessage  
 }) {
@@ -26,7 +26,7 @@ function Profile({
   const currentUser = useContext(CurrentUserContext);
 
   function handleCleanAndChange(e) {
-    setFormErrorMessage("");
+    setProfileFormErrorMessage("");
     setProfileUpdatedMessage("");    
     handleChange(e);
   }
@@ -39,6 +39,8 @@ function Profile({
   useEffect(() => {
     if (currentUser) {
       resetForm(currentUser, {}, true);
+      setProfileFormErrorMessage("");
+      setProfileUpdatedMessage("");    
     }
   }, [currentUser, resetForm]);
 
@@ -91,7 +93,7 @@ function Profile({
           />
         </div>
         <span className="profile__error">{errors.email || ""}</span>
-        <span className="profile__error">{formErrorMessage}</span>
+        <span className="profile__error">{profileFormErrorMessage}</span>
         <span className="profile__success-message">{profileUpdatedMessage}</span>      
         <div className="profile__form-footer">
           <button
