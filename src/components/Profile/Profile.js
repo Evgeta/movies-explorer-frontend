@@ -6,7 +6,15 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 
-function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage, setFormErrorMessage }) {
+function Profile({
+  loggedIn,
+  handleUpdateProfile,
+  handleLogOut,
+  formErrorMessage,
+  setFormErrorMessage,
+  profileUpdatedMessage,
+  setProfileUpdatedMessage  
+}) {
   const {
     values,
     handleChange,
@@ -19,6 +27,7 @@ function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage
 
   function handleCleanAndChange(e) {
     setFormErrorMessage("");
+    setProfileUpdatedMessage("");    
     handleChange(e);
   }
 
@@ -34,8 +43,7 @@ function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage
   }, [currentUser, resetForm]);
 
   //данные не валидны или совпадают со старыми
-  const dataBadToSave =
-    !isValid ||
+  const dataBadToSave = !isValid ||
     (currentUser.name === values.name && currentUser.email === values.email);
 
   return (
@@ -84,6 +92,7 @@ function Profile({ loggedIn, handleUpdateProfile, handleLogOut, formErrorMessage
         </div>
         <span className="profile__error">{errors.email || ""}</span>
         <span className="profile__error">{formErrorMessage}</span>
+        <span className="profile__success-message">{profileUpdatedMessage}</span>      
         <div className="profile__form-footer">
           <button
             type="submit"

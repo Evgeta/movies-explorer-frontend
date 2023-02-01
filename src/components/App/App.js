@@ -55,6 +55,8 @@ function App() {
   const [showShortMoviesSaved, setShowShortMoviesSaved] = useState(false);
   const [searchStringSaved, setSearchStringSaved] = useState("");
 
+  const [profileUpdatedMessage, setProfileUpdatedMessage] = useState("");
+
   // нажатие на иконку бургер-меню
   function handleBurgerMenuClick() {
     setIsBurgerOpened(!isBurgerMenuOpened);
@@ -188,6 +190,7 @@ function App() {
       .then((newUser) => {
         setCurrentUser(newUser.data);
         setFormErrorMessage("");
+        setProfileUpdatedMessage("Профиль успешно изменен");
       })
       .catch((err) => {
         handleErrorMessage(err);
@@ -309,6 +312,8 @@ function App() {
             handleLogOut={handleLogOut}
             formErrorMessage={formErrorMessage}
             setFormErrorMessage={setFormErrorMessage}
+            profileUpdatedMessage={profileUpdatedMessage}
+            setProfileUpdatedMessage={setProfileUpdatedMessage}
           />
 
           <ProtectedRoute
