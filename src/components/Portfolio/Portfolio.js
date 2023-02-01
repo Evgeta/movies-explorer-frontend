@@ -10,7 +10,7 @@ function Portfolio() {
         <ul className="portfolio__projects-list">
           <li className="portfolio__project">
             <a
-              href="https://github.com/evgeta/how-to-learn"
+              href="https://evgeta.github.io/how-to-learn/"
               target="_blank"
               rel="noopener noreferrer"
               className="portfolio__link"
@@ -20,7 +20,7 @@ function Portfolio() {
           </li>
           <li className="portfolio__project">
             <a
-              href="https://github.com/evgeta/russian-travel"
+              href="https://evgeta.github.io/russian-travel/"
               target="_blank"
               rel="noopener noreferrer"
               className="portfolio__link"
@@ -30,7 +30,7 @@ function Portfolio() {
           </li>
           <li className="portfolio__project">
             <a
-              href="https://github.com/evgeta/react-mesto-api-full"
+              href="https://mesto.evgeta.nomoredomains.sbs/"
               target="_blank"
               rel="noopener noreferrer"
               className="portfolio__link"

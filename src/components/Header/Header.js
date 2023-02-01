@@ -7,57 +7,52 @@ import Navigation from "../Navigation/Navigation";
 
 import logo from "../../images/logo.svg";
 
-function Header({ loggedIn, onClickBurger, isBurgerMenuOpened }) {
-
+function Header({ loggedIn, onClickBurger, isBurgerMenuOpened, setIsBurgerOpened }) {
   const location = useLocation().pathname;
-  
-
   return (
     <header className="header">
       <div className="header__container">
         {location !== "/" ? (
-          <>
-            <Link to="/" className="header__logo-link">
-              <img
-                className="header__logo"
-                src={logo}
-                alt="Логотип Movies Explorer"
-              />
-            </Link>
-            <Navigation
-              onClickBurger={onClickBurger}
-              isBurgerMenuOpened={isBurgerMenuOpened}
-              isLanding={location === "/"}
-            />
-          </>
-        ) : (
-          <>
+          <Link to="/" className="header__logo-link">
             <img
               className="header__logo"
               src={logo}
               alt="Логотип Movies Explorer"
-            />            
-            {!loggedIn && (
-              <nav className="header__navigation">
-                <ul className="header__link-list">
-                  <li>
-                    <Link className="header__link" to="/signup">
-                      Регистрация
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="header__link header__link_signin"
-                      to="/signin"
-                    >
-                      Войти
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            )}
-          </>
-        )}        
+            />
+          </Link>
+        ) : (
+          <img
+            className="header__logo"
+            src={logo}
+            alt="Логотип Movies Explorer"
+          />
+        )}
+
+        {loggedIn && (
+          <Navigation
+            onClickBurger={onClickBurger}
+            isBurgerMenuOpened={isBurgerMenuOpened}
+            isLanding={location === "/"}
+            setIsBurgerOpened={setIsBurgerOpened}
+          />
+        )}
+
+        {!loggedIn && (
+          <nav className="header__navigation">
+            <ul className="header__link-list">
+              <li>
+                <Link className="header__link" to="/signup">
+                  Регистрация
+                </Link>
+              </li>
+              <li>
+                <Link className="header__link header__link_signin" to="/signin">
+                  Войти
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        )}
       </div>
     </header>
   );

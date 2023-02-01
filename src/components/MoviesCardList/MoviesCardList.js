@@ -1,66 +1,86 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./MoviesCardList.css";
 import "../MoviesCard/MoviesCard.css";
 
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList() {
+import { WIDTH_TO_COLUMS_NUMBER, CARDS_NUMBER } from "../../utils/constants";
+import { useScreenWidth } from "../../hooks/useScreenWidth";
+import { findSavedMovie } from "../../utils/utils.js";
+
+function MoviesCardList({
+  moviesList,
+  onFilmLikeClick,
+  onDeleteIconClick,
+  savedMoviesList,
+}) {
+
+  const [moviesCardsList, setMoviesCardsList] = React.useState([]);
+  const [showMoreButtonuttonVisible, setShowMoreButtonuttonVisible] = useState(
+    true
+  );
+  const [cardListLength, setCardListLength] = useState(null);
+  const [additionalCardsNumber, setAdditionalCardsNumber] = useState(null);
+
+  const screenWidth = useScreenWidth();
+
+  useEffect(() => {
+    if (screenWidth > WIDTH_TO_COLUMS_NUMBER.threeColunmsDelimeter) {
+      setCardListLength(CARDS_NUMBER.threeColunms.cards);
+      setAdditionalCardsNumber(CARDS_NUMBER.threeColunms.moreCards);
+    } else if (
+      screenWidth <= WIDTH_TO_COLUMS_NUMBER.threeColunmsDelimeter &&
+      screenWidth >= WIDTH_TO_COLUMS_NUMBER.twoColumnsDelimeter
+    ) {
+      setCardListLength(CARDS_NUMBER.twoColumns.cards);
+      setAdditionalCardsNumber(CARDS_NUMBER.twoColumns.moreCards);
+    } else if (screenWidth < WIDTH_TO_COLUMS_NUMBER.twoColumnsDelimeter) {
+      setCardListLength(CARDS_NUMBER.oneColumn.cards);
+      setAdditionalCardsNumber(CARDS_NUMBER.oneColumn.moreCards);
+    }
+  }, [screenWidth, cardListLength, additionalCardsNumber]);
+
+  useEffect(() => {
+    setMoviesCardsList(moviesList.slice(0, cardListLength));
+    if (moviesList.length <= cardListLength) {
+      setShowMoreButtonuttonVisible(false);
+    } else {
+      setShowMoreButtonuttonVisible(true);
+    }    
+  }, [moviesList, cardListLength]);
+
+  const handleShowMoreButtonClick = () => {
+    setMoviesCardsList(
+      moviesList.slice(0, moviesCardsList.length + additionalCardsNumber)
+    );
+    if (moviesCardsList.length >= moviesList.length - additionalCardsNumber) {
+      setShowMoreButtonuttonVisible(false);
+    }
+  };
+
   return (
     <div className="movies-cardlist">
-      <ul className="movies-cardlist__list">        
-      <MoviesCard
-        saved={true}
-        title={'Описание: Война искусств'}
-      />
-      <MoviesCard
-        saved={false}
-        title={'Киноальманах «100 лет дизайна»'}
-      />
-      <MoviesCard
-        saved={false}
-        title={'Gimme Danger: История Игги и The Stooges'}
-      />
-      <MoviesCard
-        saved={true}
-        title={'Описание: Война искусств'}
-      />
-      <MoviesCard
-        saved={false}
-        title={'Киноальманах «100 лет дизайна»'}
-      />
-      <MoviesCard
-        saved={false}
-        title={'Gimme Danger: История Игги и The Stooges'}
-      />
-      <MoviesCard
-        saved={true}
-        title={'Описание: Война искусств'}
-      />
-      <MoviesCard
-        saved={false}
-        title={'Киноальманах «100 лет дизайна»'}
-      />
-      <MoviesCard
-        saved={false}
-        title={'Gimme Danger: История Игги и The Stooges'}
-      />
-
-      <MoviesCard
-        saved={true}
-        title={'Описание: Война искусств'}
-      />
-      <MoviesCard
-        saved={false}
-        title={'Киноальманах «100 лет дизайна»'}
-      />
-      <MoviesCard
-        saved={false}
-        title={'Gimme Danger: История Игги и The Stooges'}
-      />
-        
+      <ul className="movies-cardlist__list">
+        {moviesCardsList.map((movie) => (
+          <MoviesCard
+            key={movie.id || movie._id || movie.movie._id }
+            movie={movie}
+            saved={findSavedMovie(savedMoviesList, movie)}
+            onFilmLikeClick={onFilmLikeClick}
+            onDeleteIconClick={onDeleteIconClick}
+          />
+        ))}
       </ul>
-      <button className="movies-cardlist__showmore">Ещё</button>
+      {showMoreButtonuttonVisible && (
+        <button
+          className="movies-cardlist__showmore"
+          type="button"
+          onClick={handleShowMoreButtonClick}
+        >
+          Ещё
+        </button>
+      )}
     </div>
   );
 }
